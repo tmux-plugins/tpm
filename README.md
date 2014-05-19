@@ -24,14 +24,14 @@ are required):
     set -g @tpm_plugins "              \
       bruno-/tpm                       \
       bruno-/tmux_battery_osx          \
-      # Examples:
-      # github_username/plugin_name    \
-      # git@github.com/user/plugin     \
-      # git@bitbucket.com/user/plugin  \
     "
+    # Other examples:
+    # github_username/plugin_name    \
+    # git@github.com/user/plugin     \
+    # git@bitbucket.com/user/plugin  \
 
     # initializes TMUX plugin manager
-    run-shell ~/.tmux/plugins/tpm/tpm.sh
+    run-shell ~/.tmux/plugins/tpm/tpm
 
 Reload TMUX environment so TPM is sourced:
 

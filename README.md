@@ -10,6 +10,8 @@ things with TMUX. See below for instructions how to create your own plugin.
 
 ### Installation
 
+Requirements: `git`
+
 Clone TPM:
 
     $ git clone https://github.com/bruno-/tpm ~/.tmux/plugins/tpm

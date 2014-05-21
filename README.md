@@ -2,12 +2,6 @@
 
 Installs and loads TMUX plugins.
 
-Truth be told, there aren't too many TMUX plugins out there. People mostly just
-copy code snippets from each others' `.tmux.conf` files.
-
-I hope TMUX plugin manager (TPM) inspires people to do better and more creative
-things with TMUX. See below for instructions how to create your own plugin.
-
 ### Installation
 
 Requirements: `git`
@@ -67,6 +61,14 @@ list.
 ### Creating plugins
 
 [How to create a plugin](HOW_TO_PLUGIN.md). It's easy.
+
+### About
+
+Truth be told, there aren't too many TMUX plugins out there. People mostly just
+copy code snippets from each others' `.tmux.conf` files.
+
+I hope TMUX plugin manager (TPM) inspires people to do better and more creative
+things with TMUX. See below for instructions how to create your own plugin.
 
 ### License
 

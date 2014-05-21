@@ -66,6 +66,8 @@ list.
 
 ### Creating plugins
 
+[How to create a plugin](HOW_TO_PLUGIN.md). It's easy.
+
 ### License
 
 [MIT](LICENSE.md)

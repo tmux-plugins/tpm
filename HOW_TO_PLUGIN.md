@@ -33,11 +33,11 @@ however, you'll need just one.
 
 We want the behavior of the plugin to trigger when a user hits `prefix + T`.
 
-Key `T` is chosen:
- - it's kind of a mnemonic for `TPM`
+Key `T` is chosen because:
+ - it's "kind of" a mnemonic for `TPM`
  - the key is not used by Tmux natively. Tmux man page, KEY BINDINGS section
-   contains a list of all the bindings Tmux uses. We don't want to override a
-   Tmux default, and there's plenty of unused keys.
+   contains a list of all the bindings Tmux uses. We don't want to override any
+   Tmux default binding, and there's plenty of unused keys.
 
 Open the plugin run file in your favorite text editor:
 
@@ -47,7 +47,7 @@ Open the plugin run file in your favorite text editor:
 
 Put the following content in the file:
 
-    #!/usr/env/bin bash
+    #!/usr/bin/env bash
 
     CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     tmux bind-key T run-shell "$CURRENT_DIR/scripts/tmux_list_plugins.sh"
@@ -59,7 +59,7 @@ When pressed, `prefix + T` will now execute another shell script:
 relative to the plugin run file.
 
 
-### 4. create a script that does the job
+### 4. listing plugins
 
 Now that we have the binding, let's create a script that's invoked on
 `prefix + T`.
@@ -70,13 +70,15 @@ Now that we have the binding, let's create a script that's invoked on
 
 And here's the script content:
 
-    #!/usr/env/bin bash
+    #!/usr/bin/env bash
 
     # fetching the value of "tpm_plugins" option
-    option_value=$(tmux show-option -gqv "@tpm_plugins")
+    plugins_list=$(tmux show-option -gqv "@tpm_plugins")
 
-    # displaying variable content
-    echo $option_value
+    # displaying variable content, line by line
+    for plugin in $plugins_list; do
+        echo $plugin
+    done
 
 ### 5. try it out
 
@@ -85,6 +87,9 @@ To try if this works, execute the plugin run file:
     $ ./my_plugin.tmux
 
 That should set up the key binding. Now hit `prefix + T` and see if it works.
+
+If you get stuck you can download and check this tutorial
+[plugin here](https://github.com/bruno-/tmux_example_plugin).
 
 ### 6. publish the plugin
 
@@ -100,6 +105,9 @@ If the plugin is on Github, your users will be able to use the shorthand of
 ### Conclusion
 
 Hopefully, that was easy. As you can see, it's mostly shell scripting.
+
+You can also check source code of other plugins from the
+[List of plugins](PLUGINS.md).
 
 You can use other scripting languages (ruby, phyton etc), but plain old shell
 is preferred because it will work almost anywhere.

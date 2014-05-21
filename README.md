@@ -23,7 +23,7 @@ are required):
     # Supports `github_username/repo` or full git URLs
     set -g @tpm_plugins "              \
       bruno-/tpm                       \
-      bruno-/tmux_battery_osx          \
+      bruno-/tmux_pain_control         \
     "
     # Other examples:
     # github_username/plugin_name    \

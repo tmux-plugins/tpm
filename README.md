@@ -59,6 +59,11 @@ After you press `prefix + I`, everything should be up to date.
 
 ### List of plugins
 
+[List of plugins](PLUGINS.md).
+
+If you create a plugin, feel free to create a pull request that adds it to the
+list.
+
 ### Creating plugins
 
 ### License

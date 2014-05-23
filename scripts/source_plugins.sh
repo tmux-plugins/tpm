@@ -12,7 +12,7 @@ silently_source_all_tmux_files() {
     local plugin_tmux_files="$plugin_path*.tmux"
     for tmux_file in $plugin_tmux_files; do
         # runs *.tmux file as an executable
-        $tmux_file 2>&1 1>&/dev/null
+        $tmux_file >/dev/null 2>&1
     done
 }
 

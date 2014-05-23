@@ -74,7 +74,7 @@ sync_plugins() {
 }
 
 reload_tmux_environment() {
-    tmux source-file ~/.tmux.conf 2>&1 1>&/dev/null
+    tmux source-file ~/.tmux.conf >/dev/null 2>&1
 }
 
 main() {

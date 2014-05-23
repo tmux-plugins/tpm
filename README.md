@@ -68,7 +68,8 @@ Truth be told, there aren't too many TMUX plugins out there. People mostly just
 copy code snippets from each others' `.tmux.conf` files.
 
 I hope TMUX plugin manager (TPM) inspires people to do better and more creative
-things with TMUX. See below for instructions how to create your own plugin.
+things with TMUX. See also
+[instructions how to create your own plugin](HOW_TO_PLUGIN.md).
 
 ### License
 

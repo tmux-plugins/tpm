@@ -8,29 +8,29 @@ source "$CURRENT_DIR/shared_functions.sh"
 # Files are ran as executables.
 # No errors if the plugin dir does not exist.
 silently_source_all_tmux_files() {
-    local plugin_path=$1
-    local plugin_tmux_files="$plugin_path*.tmux"
-    for tmux_file in $plugin_tmux_files; do
-        # runs *.tmux file as an executable
-        $tmux_file >/dev/null 2>&1
-    done
+	local plugin_path=$1
+	local plugin_tmux_files="$plugin_path*.tmux"
+	for tmux_file in $plugin_tmux_files; do
+		# runs *.tmux file as an executable
+		$tmux_file >/dev/null 2>&1
+	done
 }
 
 source_plugin() {
-    local plugin=$1
-    local plugin_path=$(shared_plugin_path "$plugin")
-    silently_source_all_tmux_files "$plugin_path"
+	local plugin=$1
+	local plugin_path=$(shared_plugin_path "$plugin")
+	silently_source_all_tmux_files "$plugin_path"
 }
 
 source_plugins() {
-    local plugins=$(shared_get_tpm_plugins_list)
-    for plugin in $plugins; do
-        source_plugin "$plugin"
-    done
+	local plugins=$(shared_get_tpm_plugins_list)
+	for plugin in $plugins; do
+		source_plugin "$plugin"
+	done
 }
 
 main() {
-    shared_set_tpm_path_constant
-    source_plugins
+	shared_set_tpm_path_constant
+	source_plugins
 }
 main

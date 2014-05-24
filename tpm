@@ -9,27 +9,27 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Put this in `.tmux.conf` to override the default:
 # `set-environment -g TMUX_PLUGIN_MANAGER_PATH "/some/other/path/"`
 set_tpm_path() {
-    $CURRENT_DIR/scripts/set_tpm_path.sh >/dev/null 2>&1
+	$CURRENT_DIR/scripts/set_tpm_path.sh >/dev/null 2>&1
 }
 
 # 1. Fetches plugin names from `@tpm_plugins` user variable.
 # 2. Creates full plugin path
 # 3. Sources all *.tmux files from each of the plugin directories
-#    - no errors raised if directory does not exist
+#	 - no errors raised if directory does not exist
 # Files are sourced as tmux config files, not as shell scripts!
 source_plugins() {
-    $CURRENT_DIR/scripts/source_plugins.sh >/dev/null 2>&1
+	$CURRENT_DIR/scripts/source_plugins.sh >/dev/null 2>&1
 }
 
 # Defines key binding:
 # prefix + I - downloads TPM plugins and reloads TMUX environment.
 set_tpm_key_binding() {
-    $CURRENT_DIR/scripts/key_binding.sh
+	$CURRENT_DIR/scripts/key_binding.sh
 }
 
 main() {
-    set_tpm_path
-    set_tpm_key_binding
-    source_plugins
+	set_tpm_path
+	set_tpm_key_binding
+	source_plugins
 }
 main

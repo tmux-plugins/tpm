@@ -73,6 +73,10 @@ sync_plugins() {
     done
 }
 
+ensure_tpm_path_exists() {
+    mkdir -p $SHARED_TPM_PATH
+}
+
 reload_tmux_environment() {
     tmux source-file ~/.tmux.conf >/dev/null 2>&1
 }
@@ -80,6 +84,7 @@ reload_tmux_environment() {
 main() {
     reload_tmux_environment
     shared_set_tpm_path_constant
+    ensure_tpm_path_exists
     sync_plugins
     reload_tmux_environment
     end_message

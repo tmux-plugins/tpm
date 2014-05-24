@@ -7,8 +7,8 @@ source $CURRENT_DIR/helpers.sh
 export FAIL=false
 
 check_binding_defined() {
-    local binding=$1
-    tmux list-keys | grep -q "$binding"
+	local binding=$1
+	tmux list-keys | grep -q "$binding"
 }
 
 test_plugin_sourcing() {
@@ -22,15 +22,15 @@ test_plugin_sourcing() {
 	tmux bind-key R run-shell foo_command
 	HERE
 
-  tmux new-session -d  # tmux starts detached
-  check_binding_defined 'R run-shell foo_command' ||
-      (echo "Plugin sourcing fails" >&2; FAIL=true)
+	tmux new-session -d  # tmux starts detached
+	check_binding_defined 'R run-shell foo_command' ||
+		(echo "Plugin sourcing fails" >&2; FAIL=true)
 
 	teardown_helper
 }
 
 main() {
-    test_plugin_sourcing
-    exit_value_helper
+	test_plugin_sourcing
+	exit_value_helper
 }
 main

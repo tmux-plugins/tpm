@@ -4,7 +4,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $CURRENT_DIR/helpers.sh
 
-FAIL=false
+export FAIL=false
 
 check_binding_defined() {
     local binding=$1

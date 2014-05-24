@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+run_vagrant() {
+    vagrant up --provider=docker
+}
+
+stop_vagrant() {
+    vagrant destroy -f
+}
+
+run_tests() {
+    # actually this test file should be run inside vagrant
+    $CURRENT_DIR/tests/test_plugin_installation.sh
+}
+
+main() {
+    run_vagrant
+    run_tests
+    stop_vagrant
+}
+main

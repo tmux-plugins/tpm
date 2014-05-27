@@ -9,5 +9,5 @@ list.
   switching.
 - [battery_osx](https://github.com/bruno-/tmux_battery_osx) - battery status
   for OSX in tmux `status-right`
-- [tmux proper pipe pane](https://github.com/bruno-/tmux_ppp) - improved
-  `pipe-pane` logging
+- [tmux logging](https://github.com/bruno-/tmux_logging) - easy logging and
+  screen capturing.

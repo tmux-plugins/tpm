@@ -53,14 +53,17 @@ After you press `prefix + I`, everything should be up to date.
 
 ### List of plugins
 
-- [pain control](https://github.com/bruno-/tmux_pain_control) - standard
-  bindings for controlling panes.
+- [pain control](https://github.com/bruno-/tmux_pain_control) - useful standard
+  bindings for controlling panes
 - [goto session](https://github.com/bruno-/tmux_goto_session) - faster session
-  switching.
+  switching
 - [battery osx](https://github.com/bruno-/tmux_battery_osx) - battery status
-  for OSX in tmux `status-right`
+  for OSX in Tmux `status-right`
 - [logging](https://github.com/bruno-/tmux_logging) - easy logging and
-  screen capturing.
+  screen capturing
+- [online status](https://github.com/bruno-/tmux_online_status) - online status
+  indicator in Tmux `status-right`. Useful when on flaky connection to see if
+  you're online.
 
 If you create a plugin, feel free to create a pull request that adds it to the
 list.

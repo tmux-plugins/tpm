@@ -2,9 +2,7 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-source $CURRENT_DIR/helpers.sh
-
-export FAIL=false
+source $CURRENT_DIR/test_helpers.sh
 
 check_binding_defined() {
 	local binding=$1
@@ -15,16 +13,17 @@ test_plugin_sourcing() {
 	set_tmux_conf_helper <<- HERE
 	set -g @tpm_plugins "doesnt_matter/tmux_test_plugin"
 	# change this
-	run-shell '~/tmux_plugin_manager/tpm'
+	run-shell '/root/tmux_plugin_manager/tpm'
 	HERE
 
+	# manually creates a local tmux plugin
 	create_test_plugin_helper <<- HERE
 	tmux bind-key R run-shell foo_command
 	HERE
 
 	tmux new-session -d  # tmux starts detached
-	check_binding_defined 'R run-shell foo_command' ||
-		(echo "Plugin sourcing fails" >&2; FAIL=true)
+	check_binding_defined "R run-shell foo_command" ||
+		(echo "Plugin sourcing fails" >&2; fail_test)
 
 	teardown_helper
 }

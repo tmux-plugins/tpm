@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export TEST_FAIL=false
+
 set_tmux_conf_helper() {
 	> ~/.tmux.conf	# empty filename
 	while read -r line; do
@@ -33,8 +35,12 @@ check_dir_exists_helper() {
 	fi
 }
 
+fail_test() {
+	TEST_FAIL=true
+}
+
 exit_value_helper() {
-	if $FAIL; then
+	if $TEST_FAIL; then
 		echo
 		echo "Test failed"
 		exit 1

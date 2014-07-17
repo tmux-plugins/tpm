@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     d.has_ssh = true
   end
 
-  # tpm is synced with `/root/tmux_plugin_manager` in vagrant
+  # tpm is synced to `/root/tmux_plugin_manager` in vagrant
   config.vm.synced_folder '../', '/root/tmux_plugin_manager'
 
   config.ssh.username = 'root'

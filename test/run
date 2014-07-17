@@ -7,7 +7,7 @@ run_vagrant() {
 }
 
 stop_vagrant() {
-	vagrant destroy -f
+	vagrant halt
 }
 
 run_tests() {

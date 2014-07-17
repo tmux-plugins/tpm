@@ -76,7 +76,7 @@ list.
 
 Requirements: [vagrant](https://www.vagrantup.com/)
 
-Running the test suite:
+To run a test suite:
 
     $ ./run-tests
 

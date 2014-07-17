@@ -12,8 +12,7 @@ check_binding_defined() {
 test_plugin_sourcing() {
 	set_tmux_conf_helper <<- HERE
 	set -g @tpm_plugins "doesnt_matter/tmux_test_plugin"
-	# change this
-	run-shell '/root/tmux_plugin_manager/tpm'
+	run-shell "~/tpm/tpm"
 	HERE
 
 	# manually creates a local tmux plugin
@@ -23,7 +22,7 @@ test_plugin_sourcing() {
 
 	tmux new-session -d  # tmux starts detached
 	check_binding_defined "R run-shell foo_command" ||
-		(echo "Plugin sourcing fails" >&2; fail_test)
+		fail_helper "Plugin sourcing fails"
 
 	teardown_helper
 }

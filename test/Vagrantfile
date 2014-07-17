@@ -1,16 +1,11 @@
-Vagrant.require_version '>= 1.6.0'
-
 VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.provider 'docker' do |d|
-    d.build_dir = '.'
-    d.has_ssh = true
-  end
+  config.vm.box = 'precise32'
+  config.vm.box_url = 'http://files.vagrantup.com/precise32.box'
 
   # tpm is synced to `/root/tmux_plugin_manager` in vagrant
-  config.vm.synced_folder '../', '/root/tmux_plugin_manager'
+  config.vm.synced_folder '../', '/home/vagrant/tpm'
 
-  config.ssh.username = 'root'
-  config.ssh.private_key_path = 'docker_ssh.key'
+  config.vm.provision 'shell', path: 'vagrant_provisioning.sh'
 end

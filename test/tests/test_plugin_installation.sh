@@ -7,16 +7,16 @@ source $CURRENT_DIR/test_helpers.sh
 test_plugin_installation() {
 	set_tmux_conf_helper <<- HERE
 	set -g @tpm_plugins "bruno-/tmux_example_plugin"
-	run-shell '/root/tmux_plugin_manager/tpm'
+	run-shell "~/tpm/tpm"
 	HERE
 
 	# opens tmux and test it with `expect`
 	$CURRENT_DIR/expect_successful_plugin_download ||
-		(echo "Tmux plugin installation fails" >&2; fail_test)
+		fail_helper "Tmux plugin installation fails"
 
 	# check plugin dir exists after download
-	check_dir_exists_helper "/root/.tmux/plugins/tmux_example_plugin/" ||
-		(echo "Plugin download fails" >&2; fail_test)
+	check_dir_exists_helper "$HOME/.tmux/plugins/tmux_example_plugin/" ||
+		fail_helper "Plugin download fails"
 
 	teardown_helper
 }

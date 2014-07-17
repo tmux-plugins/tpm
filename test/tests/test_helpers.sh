@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export TEST_FAIL=false
+FAIL="false"
 
 set_tmux_conf_helper() {
 	> ~/.tmux.conf	# empty filename
@@ -35,12 +35,15 @@ check_dir_exists_helper() {
 	fi
 }
 
-fail_test() {
-	TEST_FAIL=true
+fail_helper() {
+	local message="$1"
+	echo "Tmux plugin installation fails" >&2
+	FAIL="true"
 }
 
 exit_value_helper() {
-	if $TEST_FAIL; then
+	local fail="$1"
+	if [ "$FAIL" == "true" ]; then
 		echo
 		echo "Test failed"
 		exit 1

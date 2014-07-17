@@ -3,16 +3,30 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 run_vagrant() {
-	vagrant up --provider=docker
+	vagrant up
 }
 
+# Halt vagrant after tests are done running, unless KEEP_RUNNING environment
+# variable is set to 'true'.
 stop_vagrant() {
-	vagrant halt
+	if [ -z "$KEEP_RUNNING" ]; then
+		vagrant halt
+	fi
+}
+
+test_files() {
+	ls -1 ./tests/ |            # test files are in `./tests/` dir
+		grep -i '^test' |       # test file names start with 'test'
+		xargs				    # file names in one line
 }
 
 run_tests() {
-	# actually this test file should be run inside vagrant
-	$CURRENT_DIR/tests/test_plugin_installation.sh
+	local test_file
+	local test_dir_path="~/tpm/test/tests/"
+	for test_file in $(test_files); do
+		echo "Running test: $test_file"
+		vagrant ssh -c "${test_dir_path}${test_file}"
+	done
 }
 
 main() {

@@ -44,12 +44,12 @@ fail_helper() {
 exit_value_helper() {
 	local fail="$1"
 	if [ "$FAIL" == "true" ]; then
+		echo "FAIL!"
 		echo
-		echo "Test failed"
 		exit 1
 	else
+		echo "SUCCESS"
 		echo
-		echo "Test finished successfully"
 		exit 0
 	fi
 }

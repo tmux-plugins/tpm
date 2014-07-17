@@ -4,7 +4,7 @@ Installs and loads TMUX plugins.
 
 ### Installation
 
-Requirements: `git`
+Requirements: `tmux` version 1.9 (or higher), `git`
 
 Clone TPM:
 

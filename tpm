@@ -2,6 +2,8 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+SUPPORTED_TMUX_VERSION="1.9"
+
 # Ensures TMUX_PLUGIN_MANAGER_PATH global env variable is set.
 # Default tpm path is "$HOME/.tmux/plugins/". That's where all the plugins are
 # downloaded.
@@ -27,9 +29,15 @@ set_tpm_key_binding() {
 	$CURRENT_DIR/scripts/key_binding.sh
 }
 
+supported_tmux_version_ok() {
+	$CURRENT_DIR/scripts/check_tmux_version.sh "$SUPPORTED_TMUX_VERSION"
+}
+
 main() {
-	set_tpm_path
-	set_tpm_key_binding
-	source_plugins
+	if supported_tmux_version_ok; then
+		set_tpm_path
+		set_tpm_key_binding
+		source_plugins
+	fi
 }
 main

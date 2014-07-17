@@ -37,7 +37,7 @@ check_dir_exists_helper() {
 
 fail_helper() {
 	local message="$1"
-	echo "Tmux plugin installation fails" >&2
+	echo "$message" >&2
 	FAIL="true"
 }
 

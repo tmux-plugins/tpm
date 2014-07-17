@@ -22,7 +22,7 @@ test_files() {
 
 run_tests() {
 	local test_file
-	local test_dir_path="~/tpm/test/tests/"
+	local test_dir_path="~/tpm/tests/"
 	for test_file in $(test_files); do
 		echo "Running test: $test_file"
 		vagrant ssh -c "${test_dir_path}${test_file}"

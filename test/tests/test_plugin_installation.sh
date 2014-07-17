@@ -2,7 +2,7 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-source $CURRENT_DIR/test_helpers.sh
+source $CURRENT_DIR/helpers.sh
 
 test_plugin_installation() {
 	set_tmux_conf_helper <<- HERE

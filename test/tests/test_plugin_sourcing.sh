@@ -2,10 +2,10 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-source $CURRENT_DIR/test_helpers.sh
+source $CURRENT_DIR/helpers.sh
 
 check_binding_defined() {
-	local binding=$1
+	local binding="$1"
 	tmux list-keys | grep -q "$binding"
 }
 

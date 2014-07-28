@@ -15,7 +15,7 @@ test_plugin_installation() {
 		fail_helper "Tmux plugin installation fails"
 
 	# check plugin dir exists after download
-	check_dir_exists_helper "$HOME/.tmux/plugins/tmux_example_plugin/" ||
+	check_dir_exists_helper "$HOME/.tmux/plugins/tmux-example-plugin/" ||
 		fail_helper "Plugin download fails"
 
 	teardown_helper

@@ -8,7 +8,7 @@ Requirements: `tmux` version 1.9 (or higher), `git`
 
 Clone TPM:
 
-    $ git clone https://github.com/bruno-/tpm ~/.tmux/plugins/tpm
+    $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 Put this at the bottom of your `.tmux.conf` (backslashes at the end of the lines
 are required):
@@ -16,8 +16,8 @@ are required):
     # List of plugins
     # Supports `github_username/repo` or full git URLs
     set -g @tpm_plugins "              \
-      bruno-/tpm                       \
-      bruno-/tmux_pain_control         \
+      tmux-plugins/tpm                       \
+      tmux-plugins/tmux-pain-control         \
     "
     # Other examples:
     # github_username/plugin_name    \
@@ -53,15 +53,15 @@ After you press `prefix + I`, everything should be up to date.
 
 ### List of plugins
 
-- [pain control](https://github.com/bruno-/tmux_pain_control) - useful standard
+- [pain control](https://github.com/tmux-plugins/tmux-pain-control) - useful standard
   bindings for controlling panes
-- [goto session](https://github.com/bruno-/tmux_goto_session) - faster session
+- [goto session](https://github.com/tmux-plugins/tmux-goto-session) - faster session
   switching
-- [battery osx](https://github.com/bruno-/tmux_battery_osx) - battery status
+- [battery osx](https://github.com/tmux-plugins/tmux-battery-osx) - battery status
   for OSX in Tmux `status-right`
-- [logging](https://github.com/bruno-/tmux_logging) - easy logging and
+- [logging](https://github.com/tmux-plugins/tmux-logging) - easy logging and
   screen capturing
-- [online status](https://github.com/bruno-/tmux_online_status) - online status
+- [online status](https://github.com/tmux-plugins/tmux-online-status) - online status
   indicator in Tmux `status-right`. Useful when on flaky connection to see if
   you're online.
 

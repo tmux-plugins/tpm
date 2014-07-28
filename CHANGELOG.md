@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+- update readme because of github organization change to
+  [tmux-plugins](https://github.com/tmux-plugins)
 
 ### v0.0.2, 2014-07-17
 - run all *.tmux plugin files as executables

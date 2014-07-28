@@ -89,7 +89,7 @@ To try if this works, execute the plugin run file:
 That should set up the key binding. Now hit `prefix + T` and see if it works.
 
 If you get stuck you can download and check this tutorial
-[plugin here](https://github.com/bruno-/tmux_example_plugin).
+[plugin here](https://github.com/tmux-plugins/tmux-example-plugin).
 
 ### 6. publish the plugin
 

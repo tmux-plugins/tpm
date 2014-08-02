@@ -16,8 +16,8 @@ are required):
     # List of plugins
     # Supports `github_username/repo` or full git URLs
     set -g @tpm_plugins "              \
-      tmux-plugins/tpm                       \
-      tmux-plugins/tmux-pain-control         \
+      tmux-plugins/tpm                 \
+      tmux-plugins/tmux-sensible       \
     "
     # Other examples:
     # github_username/plugin_name    \

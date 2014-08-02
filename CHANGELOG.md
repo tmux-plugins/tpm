@@ -4,6 +4,7 @@
 - update readme because of github organization change to
   [tmux-plugins](https://github.com/tmux-plugins)
 - update tests to pass
+- update README to suggest different first plugin
 
 ### v0.0.2, 2014-07-17
 - run all *.tmux plugin files as executables

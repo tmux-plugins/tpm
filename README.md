@@ -53,20 +53,7 @@ After you press `prefix + I`, everything should be up to date.
 
 ### List of plugins
 
-- [pain control](https://github.com/tmux-plugins/tmux-pain-control) - useful standard
-  bindings for controlling panes
-- [goto session](https://github.com/tmux-plugins/tmux-goto-session) - faster session
-  switching
-- [battery osx](https://github.com/tmux-plugins/tmux-battery-osx) - battery status
-  for OSX in Tmux `status-right`
-- [logging](https://github.com/tmux-plugins/tmux-logging) - easy logging and
-  screen capturing
-- [online status](https://github.com/tmux-plugins/tmux-online-status) - online status
-  indicator in Tmux `status-right`. Useful when on flaky connection to see if
-  you're online.
-
-If you create a plugin, feel free to create a pull request that adds it to the
-list.
+For more plugins, check [here](https://github.com/tmux-plugins).
 
 ### Creating plugins
 

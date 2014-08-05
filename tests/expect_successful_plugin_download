@@ -21,7 +21,10 @@ expect {
     expect {
       "\"tmux-example-plugin\" download success" {
 
-        expect { "Done, press ENTER to continue" { exit } }
+        expect { "Done, press ENTER to continue" {
+            send ""
+          }
+        }
 
       }
     }
@@ -29,7 +32,23 @@ expect {
   }
 
   timeout {
-    puts "Plugin update timeout";
+    puts "Plugin installation timeout (1)";
+    exit 1
+  }
+}
+
+# this is tmux prefix + I
+send "I"
+
+expect {
+  "Already installed \"tmux-example-plugin\"" {
+
+    expect { "Done, press ENTER to continue" { exit 0 } }
+
+  }
+
+  timeout {
+    puts "Plugin installation timeout (2)";
     exit 1
   }
 }

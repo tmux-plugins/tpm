@@ -4,13 +4,6 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$CURRENT_DIR/shared_functions.sh"
 
-end_message() {
-	echo_message ""
-	echo_message "TMUX environment reloaded."
-	echo_message ""
-	echo_message "Done, press ENTER to continue."
-}
-
 clone() {
 	local plugin=$1
 	cd $SHARED_TPM_PATH &&
@@ -28,16 +21,18 @@ clone_plugin() {
 
 # pull new changes or clone plugin
 install_plugin() {
-	local plugin=$1
+	local plugin="$1"
+	local plugin_name="$(shared_plugin_name "$plugin")"
+
 	if plugin_already_installed "$plugin"; then
 		# plugin is already installed
-		echo_message "Already installed $plugin"
+		echo_message "Already installed \"$plugin_name\""
 	else
 		# plugin wasn't cloned so far - clone it
-		echo_message "Installing $plugin"
+		echo_message "Installing \"$plugin_name\""
 		clone_plugin "$plugin" &&
-			echo_message "  $plugin download success" ||
-			echo_message "  $plugin download fail"
+			echo_message "  \"$plugin_name\" download success" ||
+			echo_message "  \"$plugin_name\" download fail"
 	fi
 }
 

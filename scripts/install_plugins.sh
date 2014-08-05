@@ -26,14 +26,6 @@ clone_plugin() {
 		clone "https://github.com/$plugin"
 }
 
-pull_changes() {
-	local plugin=$1
-	local plugin_path=$(shared_plugin_path "$plugin")
-	cd $plugin_path &&
-		git pull &&
-		git submodule update --init --recursive
-}
-
 # pull new changes or clone plugin
 install_plugin() {
 	local plugin=$1

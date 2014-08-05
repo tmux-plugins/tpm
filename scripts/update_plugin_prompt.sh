@@ -16,13 +16,14 @@ display_plugin_update_list() {
 	for plugin in $plugins; do
 		# displaying only installed plugins
 		if plugin_already_installed "$plugin"; then
-			echo_message "  $plugin"
+			local plugin_name="$(shared_plugin_name "$plugin")"
+			echo_message "  $plugin_name"
 		fi
 	done
 
 	echo_message ""
 	echo_message "Type (full) plugin name to update it."
-	echo_message "* - updates all."
+	echo_message "Type \"all\" to update all plugins."
 	echo_message ""
 	echo_message "ENTER - cancels"
 }

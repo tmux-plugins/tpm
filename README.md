@@ -67,14 +67,6 @@ To run a test suite:
 
     $ ./run-tests
 
-### About
-
-Truth be told, there aren't too many TMUX plugins out there. People mostly just
-copy code snippets from each others' `.tmux.conf` files.
-
-I hope TMUX plugin manager (TPM) inspires people to do better and more creative
-things with TMUX.
-
 ### License
 
 [MIT](LICENSE.md)

@@ -6,6 +6,7 @@
 - update tests to pass
 - update README to suggest different first plugin
 - update list of plugins in the README
+- remove README 'about' section
 
 ### v0.0.2, 2014-07-17
 - run all *.tmux plugin files as executables

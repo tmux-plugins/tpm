@@ -16,10 +16,10 @@ send "I"
 set timeout 15
 
 expect {
-  "Downloading tmux-plugins/tmux-example-plugin" {
+  "Installing \"tmux-example-plugin\"" {
 
     expect {
-      "tmux-plugins/tmux-example-plugin download success" {
+      "\"tmux-example-plugin\" download success" {
 
         expect { "Done, press ENTER to continue" { exit } }
 

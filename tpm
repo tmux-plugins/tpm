@@ -26,7 +26,7 @@ source_plugins() {
 # Defines key binding:
 # prefix + I - downloads TPM plugins and reloads TMUX environment.
 set_tpm_key_binding() {
-	tmux bind-key I run-shell "$CURRENT_DIR/scripts/sync_plugins.sh >/dev/null 2>&1"
+	tmux bind-key I run-shell "$CURRENT_DIR/scripts/install_plugins.sh >/dev/null 2>&1"
 }
 
 supported_tmux_version_ok() {

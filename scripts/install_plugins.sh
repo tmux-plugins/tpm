@@ -49,7 +49,7 @@ pull_changes() {
 }
 
 # pull new changes or clone plugin
-sync_plugin() {
+install_plugin() {
 	local plugin=$1
 	if plugin_already_cloned "$plugin"; then
 		# plugin is already installed
@@ -63,10 +63,10 @@ sync_plugin() {
 	fi
 }
 
-sync_plugins() {
+install_plugins() {
 	local plugins=$(shared_get_tpm_plugins_list)
 	for plugin in $plugins; do
-		sync_plugin "$plugin"
+		install_plugin "$plugin"
 	done
 }
 
@@ -82,7 +82,7 @@ main() {
 	reload_tmux_environment
 	shared_set_tpm_path_constant
 	ensure_tpm_path_exists
-	sync_plugins
+	install_plugins
 	reload_tmux_environment
 	end_message
 }

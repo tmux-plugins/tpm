@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v1.0.0, 2014-08-05
 - update readme because of github organization change to
   [tmux-plugins](https://github.com/tmux-plugins)
 - update tests to pass

@@ -12,6 +12,7 @@
 - installing plugins installs just new plugins. Already installed plugins aren't
   updated.
 - add 'update plugin' binding and functionality
+- add test for updating a plugin
 
 ### v0.0.2, 2014-07-17
 - run all *.tmux plugin files as executables

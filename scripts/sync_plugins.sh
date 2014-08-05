@@ -6,16 +6,16 @@ source "$CURRENT_DIR/shared_functions.sh"
 
 # TMUX messaging is weird. You only get a nice clean pane if you do it with
 # `run-shell` command.
-display_message() {
+echo_message() {
 	local message=$1
 	tmux run-shell "echo '$message'"
 }
 
 end_message() {
-	display_message ""
-	display_message "TMUX environment reloaded."
-	display_message ""
-	display_message "Done, press ENTER to continue."
+	echo_message ""
+	echo_message "TMUX environment reloaded."
+	echo_message ""
+	echo_message "Done, press ENTER to continue."
 }
 
 clone() {
@@ -53,16 +53,16 @@ sync_plugin() {
 	local plugin=$1
 	if plugin_already_cloned "$plugin"; then
 		# plugin is already cloned - update it
-		display_message "Updating $plugin"
+		echo_message "Updating $plugin"
 		pull_changes "$plugin" &&
-			display_message "  $plugin update success" ||
-			display_message "  $plugin update fail"
+			echo_message "  $plugin update success" ||
+			echo_message "  $plugin update fail"
 	else
 		# plugin wasn't cloned so far - clone it
-		display_message "Downloading $plugin"
+		echo_message "Downloading $plugin"
 		clone_plugin "$plugin" &&
-			display_message "  $plugin download success" ||
-			display_message "  $plugin download fail"
+			echo_message "  $plugin download success" ||
+			echo_message "  $plugin download fail"
 	fi
 }
 

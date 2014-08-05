@@ -43,13 +43,12 @@ You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 
 ### Key bindings
 
-TPM provides only 1 key binding: `prefix + I`. Here's what it does:
-
-- clones new plugins from github or any other git repo
-- pulls updates for already installed plugins
+`prefix + I`
+- installs new plugins from github or any other git repo
 - refreshes TMUX environment
 
-After you press `prefix + I`, everything should be up to date.
+`prefix + U`
+- updates plugin(s)
 
 ### List of plugins
 

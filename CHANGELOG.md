@@ -9,6 +9,8 @@
 - remove README 'about' section
 - move key binding to the main file. Delete `key_binding.sh`.
 - rename `display_message` -> `echo_message`
+- installing plugins installs just new plugins. Already installed plugins aren't
+  updated.
 
 ### v0.0.2, 2014-07-17
 - run all *.tmux plugin files as executables

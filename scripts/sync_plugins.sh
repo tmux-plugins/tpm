@@ -52,14 +52,11 @@ pull_changes() {
 sync_plugin() {
 	local plugin=$1
 	if plugin_already_cloned "$plugin"; then
-		# plugin is already cloned - update it
-		echo_message "Updating $plugin"
-		pull_changes "$plugin" &&
-			echo_message "  $plugin update success" ||
-			echo_message "  $plugin update fail"
+		# plugin is already installed
+		echo_message "Already installed $plugin"
 	else
 		# plugin wasn't cloned so far - clone it
-		echo_message "Downloading $plugin"
+		echo_message "Installing $plugin"
 		clone_plugin "$plugin" &&
 			echo_message "  $plugin download success" ||
 			echo_message "  $plugin download fail"

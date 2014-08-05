@@ -22,10 +22,10 @@ display_plugin_update_list() {
 	done
 
 	echo_message ""
-	echo_message "Type (full) plugin name to update it."
-	echo_message "Type \"all\" to update all plugins."
+	echo_message "Type plugin name to update it."
 	echo_message ""
-	echo_message "ENTER - cancels"
+	echo_message "- \"all\" - updates all plugins"
+	echo_message "- ENTER - cancels"
 }
 
 update_plugin_prompt() {

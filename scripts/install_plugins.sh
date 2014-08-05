@@ -4,13 +4,6 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$CURRENT_DIR/shared_functions.sh"
 
-# TMUX messaging is weird. You only get a nice clean pane if you do it with
-# `run-shell` command.
-echo_message() {
-	local message=$1
-	tmux run-shell "echo '$message'"
-}
-
 end_message() {
 	echo_message ""
 	echo_message "TMUX environment reloaded."
@@ -33,13 +26,6 @@ clone_plugin() {
 		clone "https://github.com/$plugin"
 }
 
-plugin_already_cloned() {
-	local plugin=$1
-	local plugin_path=$(shared_plugin_path "$plugin")
-	cd $plugin_path &&
-		git remote
-}
-
 pull_changes() {
 	local plugin=$1
 	local plugin_path=$(shared_plugin_path "$plugin")
@@ -51,7 +37,7 @@ pull_changes() {
 # pull new changes or clone plugin
 install_plugin() {
 	local plugin=$1
-	if plugin_already_cloned "$plugin"; then
+	if plugin_already_installed "$plugin"; then
 		# plugin is already installed
 		echo_message "Already installed $plugin"
 	else

@@ -29,3 +29,21 @@ shared_plugin_path() {
 	local plugin_name=$(shared_plugin_name "$plugin")
 	echo "$SHARED_TPM_PATH$plugin_name/"
 }
+
+# TMUX messaging is weird. You only get a nice clean pane if you do it with
+# `run-shell` command.
+echo_message() {
+	local message="$1"
+	tmux run-shell "echo '$message'"
+}
+
+reload_tmux_environment() {
+	tmux source-file ~/.tmux.conf >/dev/null 2>&1
+}
+
+plugin_already_installed() {
+	local plugin=$1
+	local plugin_path=$(shared_plugin_path "$plugin")
+	cd $plugin_path &&
+		git remote >/dev/null 2>&1
+}

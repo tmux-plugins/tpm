@@ -2,6 +2,7 @@
 
 ### master
 - if the plugin is not downloaded do not source it
+- remove `PLUGINS.md`, an obsolete list of plugins
 
 ### v1.0.0, 2014-08-05
 - update readme because of github organization change to

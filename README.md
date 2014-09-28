@@ -41,6 +41,12 @@ That's it!
 
 You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 
+### Uninstalling plugins
+
+1. remove the plugin from the `@tpm_plugins` list
+2. All the plugins are installed to `~/.tmux/plugins/`. Find plugin
+  directory there and just remove it.
+
 ### Key bindings
 
 `prefix + I`

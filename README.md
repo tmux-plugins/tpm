@@ -24,7 +24,8 @@ are required):
     # git@github.com/user/plugin     \
     # git@bitbucket.com/user/plugin  \
 
-    # initializes TMUX plugin manager
+    # Initializes TMUX plugin manager.
+    # Keep this line at the very bottom of tmux.conf.
     run-shell ~/.tmux/plugins/tpm/tpm
 
 Reload TMUX environment so TPM is sourced:

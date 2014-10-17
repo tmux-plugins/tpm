@@ -61,6 +61,13 @@ You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 
 For more plugins, check [here](https://github.com/tmux-plugins).
 
+### Wiki pages
+
+More advanced features, regular users probably do not need this:
+
+- [installing plugins via the command line](https://github.com/tmux-plugins/tpm/wiki/Installing-plugins-via-the-command-line-only)
+- [changing plugins install dir](https://github.com/tmux-plugins/tpm/wiki/Changing-plugins-install-dir)
+
 ### Creating plugins
 
 [How to create a plugin](HOW_TO_PLUGIN.md). It's easy.

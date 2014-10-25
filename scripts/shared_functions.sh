@@ -5,7 +5,10 @@ SHARED_TPM_PATH=""
 
 # sets a "global variable" for the current file
 shared_set_tpm_path_constant() {
-	SHARED_TPM_PATH=$(tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)
+	local string_path="$(tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)"
+	# NOTE: manually expanding tilde or `$HOME` variable. Avoids using `eval` as
+	# described here http://stackoverflow.com/a/5748307/777337
+	SHARED_TPM_PATH="$(echo "$string_path" | sed "s,^\$HOME,$HOME," | sed "s,^~,$HOME,")"
 }
 
 shared_get_tpm_plugins_list() {

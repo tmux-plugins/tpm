@@ -7,7 +7,7 @@ source $CURRENT_DIR/helpers.sh
 test_plugin_installation() {
 	set_tmux_conf_helper <<- HERE
 	set -g @tpm_plugins "tmux-plugins/tmux-example-plugin"
-	run-shell "~/tpm/tpm"
+	run-shell "$PWD/tpm"
 	HERE
 
 	# opens tmux and test it with `expect`

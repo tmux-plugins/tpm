@@ -12,7 +12,7 @@ check_binding_defined() {
 test_plugin_sourcing() {
 	set_tmux_conf_helper <<- HERE
 	set -g @tpm_plugins "doesnt_matter/tmux_test_plugin"
-	run-shell "~/tpm/tpm"
+	run-shell "$PWD/tpm"
 	HERE
 
 	# manually creates a local tmux plugin

@@ -13,7 +13,7 @@ manually_install_the_plugin() {
 test_plugin_installation() {
 	set_tmux_conf_helper <<- HERE
 	set -g @tpm_plugins "tmux-plugins/tmux-example-plugin"
-	run-shell "~/tpm/tpm"
+	run-shell "$PWD/tpm"
 	HERE
 
 	manually_install_the_plugin

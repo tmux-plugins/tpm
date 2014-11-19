@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- refactor tests so they can be used on travis
 
 ### v1.1.0, 2014-11-19
 - if the plugin is not downloaded do not source it

@@ -1,11 +1,14 @@
 # Changelog
 
 ### master
+
+### v1.1.0, 2014-11-19
 - if the plugin is not downloaded do not source it
 - remove `PLUGINS.md`, an obsolete list of plugins
 - update readme with instructions about uninstalling plugins
 - tilde char and `$HOME` in `TMUX_SHARED_MANAGER_PATH` couldn't be used because
   they are just plain strings. Fixing the problem by manually expanding them.
+- bugfix: fragile `*.tmux` file globbing (@majutsushi)
 
 ### v1.0.0, 2014-08-05
 - update readme because of github organization change to

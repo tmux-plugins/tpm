@@ -2,6 +2,7 @@
 
 ### master
 - refactor tests so they can be used on travis
+- add travis.yml, add travis badge to the readme
 
 ### v1.1.0, 2014-11-19
 - if the plugin is not downloaded do not source it

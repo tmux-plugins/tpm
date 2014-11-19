@@ -1,5 +1,7 @@
 # Tmux Plugin Manager
 
+![Build Status](https://travis-ci.org/tmux-plugins/tpm.png?branch=master)
+
 Installs and loads TMUX plugins.
 
 ### Installation
@@ -74,10 +76,12 @@ More advanced features, regular users probably do not need this:
 
 ### Tests
 
-Requirements: [vagrant](https://www.vagrantup.com/)
+Tests run on [travis](https://travis-ci.org/tmux-plugins/tpm).
 
-To run a test suite:
+When run locally, [vagrant](https://www.vagrantup.com/) is required.
+Run tests with:
 
+    # within project directory
     $ ./run-tests
 
 ### License

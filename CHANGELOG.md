@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v1.2.0, 2014-11-20
 - refactor tests so they can be used on travis
 - add travis.yml, add travis badge to the readme
 

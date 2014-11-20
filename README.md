@@ -16,11 +16,11 @@ Put this at the bottom of your `.tmux.conf` (backslashes at the end of the lines
 are required):
 
     # List of plugins
-    # Supports `github_username/repo` or full git URLs
-    set -g @tpm_plugins "              \
+    # Supports `github_username/repo` or full git repo URLs
+    set -g @tpm_plugins '              \
       tmux-plugins/tpm                 \
       tmux-plugins/tmux-sensible       \
-    "
+    '
     # Other examples:
     # github_username/plugin_name    \
     # git@github.com/user/plugin     \
@@ -28,7 +28,7 @@ are required):
 
     # Initializes TMUX plugin manager.
     # Keep this line at the very bottom of tmux.conf.
-    run-shell ~/.tmux/plugins/tpm/tpm
+    run-shell '~/.tmux/plugins/tpm/tpm'
 
 Reload TMUX environment so TPM is sourced:
 

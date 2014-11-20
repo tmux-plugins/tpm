@@ -1,6 +1,6 @@
 # Tmux Plugin Manager
 
-![Build Status](https://travis-ci.org/tmux-plugins/tpm.png?branch=master)
+[![Build Status](https://travis-ci.org/tmux-plugins/tpm.png?branch=master)](https://travis-ci.org/tmux-plugins/tpm)
 
 Installs and loads TMUX plugins.
 

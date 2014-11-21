@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v1.2.1, 2014-11-21
 - change the way plugin name is expanded. It now uses the http username
   and password by default, like this: `https://git::@github.com/`. This prevents
   username and password prompt (and subsequently tmux install hanging) with old

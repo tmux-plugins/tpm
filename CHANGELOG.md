@@ -1,6 +1,10 @@
 # Changelog
 
 ### master
+- change the way plugin name is expanded. It now uses the http username
+  and password by default, like this: `https://git::@github.com/`. This prevents
+  username and password prompt (and subsequently tmux install hanging) with old
+  git versions. Fixes #7.
 
 ### v1.2.0, 2014-11-20
 - refactor tests so they can be used on travis

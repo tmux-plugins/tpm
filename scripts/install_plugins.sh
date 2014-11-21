@@ -16,7 +16,7 @@ clone() {
 clone_plugin() {
 	local plugin=$1
 	clone "$plugin" ||
-		clone "https://github.com/$plugin"
+		clone "https://git::@github.com/$plugin"
 }
 
 # pull new changes or clone plugin

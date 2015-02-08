@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v1.2.2, 2015-02-08
 - set GIT_TERMINAL_PROMPT=0 when doing `git clone`, `pull` or `submodule update`
   to ensure git does not prompt for username/password in any case
 

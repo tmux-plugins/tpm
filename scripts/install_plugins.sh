@@ -7,7 +7,7 @@ source "$CURRENT_DIR/shared_functions.sh"
 clone() {
 	local plugin=$1
 	cd $SHARED_TPM_PATH &&
-		git clone --recursive $plugin
+		GIT_TERMINAL_PROMPT=0 git clone --recursive $plugin
 }
 
 # tries cloning:

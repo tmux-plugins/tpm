@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+- set GIT_TERMINAL_PROMPT=0 when doing `git clone`, `pull` or `submodule update`
+  to ensure git does not prompt for username/password in any case
 
 ### v1.2.1, 2014-11-21
 - change the way plugin name is expanded. It now uses the http username

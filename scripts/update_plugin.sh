@@ -20,8 +20,8 @@ pull_changes() {
 	local plugin="$1"
 	local plugin_path=$(shared_plugin_path "$plugin")
 	cd $plugin_path &&
-		git pull &&
-		git submodule update --init --recursive
+		GIT_TERMINAL_PROMPT=0 git pull &&
+		GIT_TERMINAL_PROMPT=0 git submodule update --init --recursive
 }
 
 update() {

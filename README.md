@@ -84,6 +84,20 @@ Run tests with:
     # within project directory
     $ ./run-tests
 
+### Other goodies
+
+- [tmux-copycat](https://github.com/tmux-plugins/tmux-copycat) - a plugin for
+  regex searches in tmux and fast match selection
+- [tmux-yank](https://github.com/tmux-plugins/tmux-yank) - enables copying
+  highlighted text to system clipboard
+- [tmux-open](https://github.com/tmux-plugins/tmux-open) - a plugin for quickly
+  opening highlighted file or a url
+- [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) - automatic
+  restoring and continuous saving of tmux env
+
+You might want to follow [@brunosutic](https://twitter.com/brunosutic) on
+twitter if you want to hear about new tmux plugins or feature updates.
+
 ### License
 
 [MIT](LICENSE.md)

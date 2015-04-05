@@ -30,7 +30,7 @@ display_plugin_update_list() {
 
 update_plugin_prompt() {
 	tmux command-prompt -p 'plugin update:' " \
-		send-keys C-m; \
+		send-keys C-c; \
 		run-shell '$CURRENT_DIR/update_plugin.sh %1'"
 }
 

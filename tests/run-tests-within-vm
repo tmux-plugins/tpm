@@ -1,34 +1,47 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # A test runner file.
 # Intended to be run from `./run-tests` script *within* a virtual machine.
 # DO NOT run it locally as it might overwrite your `.tmux.conf` (that's what it
 # does during the tests).
 
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+_dirname()
+{   #portable dirname
+    [ -z "${1}" ] && return 1
+
+    #http://www.linuxselfhelp.com/gnu/autoconf/html_chapter/autoconf_10.html
+    case "${1}" in
+        /*|*/*) local dir; dir=$(expr "x${1}" : 'x\(.*\)/[^/]*' \| '.' : '.')
+                printf "%s\\n" "${dir}" ;;
+             *) printf "%s\\n" ".";;
+    esac
+}
+
+CURRENT_DIR="$( cd "$( _dirname "$0" )" && pwd )"
 
 # running test suite is successful by default
-tests_exit_value=0
+tests_exit_value="0"
 
 set_global_exit_val_to_false() {
-	tests_exit_value=1
+	tests_exit_value="1"
 }
 
 test_files() {
-	ls -1 "$CURRENT_DIR" |      # test files are in the current dir
+	ls -1 "$CURRENT_DIR"     |      # test files are in the current dir
 		grep -i '^test' |       # test file names start with 'test'
 		xargs                   # file names in one line
 }
 
 run_tests() {
 	local test_file
-	for test_file in $(test_files); do
-		echo "Running test: $test_file"
-		$CURRENT_DIR/$test_file
+	for test_file in "$CURRENT_DIR"/test*; do
+                [ -f "${test_file}" ] || continue
+		printf "%s\\n" "Running test: ${test_file##*/}"
+		"$test_file"
 
 		# handling exit value
 		local exit_value="$?"
-		if [ "$exit_value" != 0 ]; then
+		if [ "$exit_value" != "0" ]; then
 			set_global_exit_val_to_false
 		fi
 	done

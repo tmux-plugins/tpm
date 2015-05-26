@@ -5,7 +5,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$CURRENT_DIR/shared_functions.sh"
 
 clone() {
-	local plugin=$1
+	local plugin; plugin="$1"
 	cd $SHARED_TPM_PATH &&
 		GIT_TERMINAL_PROMPT=0 git clone --recursive $plugin
 }
@@ -39,7 +39,7 @@ install_plugin_github() {
 
 install_plugin_web() {
 	local plugin; plugin="$1"
-	local plugin_name="$(shared_plugin_name "$plugin")"
+	local plugin_name; plugin_name="$(shared_plugin_name "$plugin")"
 	(cd "$SHARED_TPM_PATH" && mkdir "${plugin_name}" &&
 	cd "${plugin_name}" && (wget --no-check-certificate "${plugin}" ||
 	curl -k -s -O "${plugin}"))
@@ -47,15 +47,15 @@ install_plugin_web() {
 
 install_plugin_local() {
 	local plugin; plugin="$1"
-	local plugin_name="$(shared_plugin_name "$plugin")"
+	local plugin_name; plugin_name="$(shared_plugin_name "$plugin")"
 	(cd "$SHARED_TPM_PATH" && mkdir "${plugin_name}" &&
 	cd "${plugin_name}" && cp -r "${plugin}" .)
 }
 
 # pull new changes or clone plugin
 install_plugin() {
-	local plugin="$1"
-	local plugin_name="$(shared_plugin_name "$plugin")"
+	local plugin; plugin="$1"
+	local plugin_name; plugin_name="$(shared_plugin_name "$plugin")"
 
 	if plugin_already_installed "$plugin"; then
 		# plugin is already installed
@@ -90,7 +90,7 @@ install_plugin() {
 }
 
 install_plugins() {
-	local plugins=$(shared_get_tpm_plugins_list)
+	local plugins plugin; plugins=$(shared_get_tpm_plugins_list)
 	for plugin in $plugins; do
 		install_plugin "$plugin"
 	done

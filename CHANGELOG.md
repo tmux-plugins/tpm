@@ -3,6 +3,7 @@
 ### master
 - enable overriding default key bindings
 - start using `C-c` to clear screen
+- add uninstall/clean procedure and keybinding (prefix+alt+u) (@chilicuil)
 
 ### v1.2.2, 2015-02-08
 - set GIT_TERMINAL_PROMPT=0 when doing `git clone`, `pull` or `submodule update`

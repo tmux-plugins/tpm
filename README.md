@@ -47,8 +47,7 @@ You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 ### Uninstalling plugins
 
 1. remove plugin from `@tpm_plugins` list
-2. All the plugins are installed to `~/.tmux/plugins/`. Find plugin
-  directory there and just remove it.
+2. hit `prefix + alt + u` (I as in *u*install) to remove the plugin
 
 ### Key bindings
 
@@ -58,6 +57,9 @@ You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 
 `prefix + U`
 - updates plugin(s)
+
+`prefix + alt + u`
+- uninstall unused plugin(s)
 
 ### List of plugins
 

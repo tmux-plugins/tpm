@@ -5,14 +5,24 @@ SHARED_TPM_PATH=""
 
 # sets a "global variable" for the current file
 shared_set_tpm_path_constant() {
-	local string_path="$(tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)"
+	#local string_path="$(tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)"
+	#pipes(due to fork) are expensive, the less the better
+	local string_path="$(tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH)"; string_path="${string_path##*=}"
 	# NOTE: manually expanding tilde or `$HOME` variable. Avoids using `eval` as
 	# described here http://stackoverflow.com/a/5748307/777337
-	SHARED_TPM_PATH="$(echo "$string_path" | sed "s,^\$HOME,$HOME," | sed "s,^~,$HOME,")"
+	SHARED_TPM_PATH="$(echo "$string_path" | sed "s,^\$HOME,$HOME,;s,^~,$HOME,;")"
 }
 
 shared_get_tpm_plugins_list() {
-	tmux show-option -gqv "$tpm_plugins_variable_name"
+	local plugins_list
+	plugins_list="$(tmux show-option -gqv "$tpm_plugins_variable_name")"
+	if [ -z "${plugins_list}" ]; then
+		#read set -g @bundle "tmux-plugins/tmux-example-plugin" entries
+		cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null | \
+		awk '/set.*-g.*@[bB][uU][nN][dD][lL][eE]/ {if($1!~"^#"){gsub(/'\''/,"");gsub(/'\"'/,"");print $4}}' #recover vim syntax'
+	else
+		printf "%s\\n" "${plugins_list}"
+	fi
 }
 
 # Allowed plugin name formats:

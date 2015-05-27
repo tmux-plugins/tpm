@@ -9,8 +9,8 @@ spawn tmux
 # not work properly.
 sleep 1
 
-# this is tmux prefix + U
-send "Y"
+# this is tmux prefix + alt + u
+send "u"
 
 set timeout 5
 

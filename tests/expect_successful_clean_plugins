@@ -1,0 +1,30 @@
+#!/usr/bin/env expect
+
+# disables script output
+log_user 0
+
+spawn tmux
+
+# Waiting for tmux to attach. If this is not done, next command, `send` will
+# not work properly.
+sleep 1
+
+# this is tmux prefix + U
+send "Y"
+
+set timeout 5
+
+expect {
+  "Removing \"tmux-example-plugin\"" {
+    expect {
+      "\"tmux-example-plugin\" clean success" {
+        expect { "Done, press ENTER to continue." { exit 0 } }
+        }
+      }
+    }
+
+  timeout {
+    puts "Plugin update prompt timeout";
+    exit 1
+  }
+}

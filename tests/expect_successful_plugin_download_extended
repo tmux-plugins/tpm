@@ -1,0 +1,92 @@
+#!/usr/bin/env expect
+
+# disables script output
+log_user 0
+
+spawn tmux
+
+# Waiting for tmux to attach. If this is not done, next command, `send` will
+# not work properly.
+sleep 1
+
+# this is tmux prefix + I
+send "I"
+
+# cloning might take a while
+set timeout 15
+
+expect {
+  "Installing \"tmux-example-plugin\"" {
+expect {
+  "\"tmux-example-plugin\" download success" {
+expect {
+  "Installing \"tmux-online-status\"" {
+expect {
+  "\"tmux-online-status\" download success" {
+expect {
+  "Installing \"tmux-battery\"" {
+expect {
+  "\"tmux-battery\" download success" {
+expect {
+  "Installing \"tmux-sidebar\"" {
+expect {
+  "\"tmux-sidebar\" download success" {
+expect {
+  "Installing \"tmux-sensible\"" {
+expect {
+  "\"tmux-sensible\" download success" {
+expect {
+  "Installing \"sha1sum.txt\"" {
+expect {
+  "\"sha1sum.txt\" download success" {
+expect {
+  "Installing \"meta-micro\"" {
+expect {
+  "\"meta-micro\" download success" {
+expect {
+  "Installing \"readme.txt\"" {
+expect {
+  "\"readme.txt\" download success" {
+expect {
+  "Installing \"run-tests-within-vm\"" {
+expect {
+  "\"run-tests-within-vm\" download success" {
+    expect { "Done, press ENTER to continue" {
+        send ""
+    }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+  timeout {
+    puts "Plugin installation timeout (1)";
+    exit 1
+  }
+}
+
+# this is tmux prefix + I
+send "I"
+
+expect {
+  "Already installed \"tmux-example-plugin\"" {
+expect {
+  "Already installed \"tmux-online-status\"" {
+expect {
+  "Already installed \"tmux-battery\"" {
+expect {
+  "Already installed \"tmux-sidebar\"" {
+expect {
+  "Already installed \"tmux-sensible\"" {
+expect {
+  "Already installed \"sha1sum.txt\"" {
+expect {
+  "Already installed \"meta-micro\"" {
+expect {
+  "Already installed \"readme.txt\"" {
+expect {
+  "Already installed \"run-tests-within-vm\"" {
+    expect { "Done, press ENTER to continue" { exit 0
+    }}}}}}}}}}}}}}}}}}}
+
+  timeout {
+    puts "Plugin installation timeout (2)";
+    exit 1
+  }
+}

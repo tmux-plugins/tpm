@@ -12,7 +12,15 @@ shared_set_tpm_path_constant() {
 }
 
 shared_get_tpm_plugins_list() {
-	tmux show-option -gqv "$tpm_plugins_variable_name"
+	local plugins_list
+	plugins_list="$(tmux show-option -gqv "$tpm_plugins_variable_name")"
+	if [ -z "${plugins_list}" ]; then
+		#read set @plugin "tmux-plugins/tmux-example-plugin" entries
+		cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null |
+			awk '/^set +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $3 }'
+	else
+		printf "%s\\n" "${plugins_list}"
+	fi
 }
 
 # Allowed plugin name formats:

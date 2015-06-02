@@ -17,7 +17,7 @@ shared_get_tpm_plugins_list() {
 	if [ -z "${plugins_list}" ]; then
 		#read set @plugin "tmux-plugins/tmux-example-plugin" entries
 		cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null |
-			awk '/^set +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $3 }'
+			awk '/^set +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
 	else
 		printf "%s\\n" "${plugins_list}"
 	fi

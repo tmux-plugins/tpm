@@ -6,7 +6,7 @@ source $CURRENT_DIR/helpers.sh
 
 test_plugin_installation() {
 	set_tmux_conf_helper <<- HERE
-	set @plugin "tmux-plugins/tmux-example-plugin"
+	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	run-shell "$PWD/tpm"
 	HERE
 
@@ -23,8 +23,8 @@ test_plugin_installation() {
 
 test_multiple_plugins_installation() {
 	set_tmux_conf_helper <<- HERE
-	set @plugin "tmux-plugins/tmux-example-plugin"
-	set   @plugin 'tmux-plugins/tmux-copycat'
+	set -g @plugin "tmux-plugins/tmux-example-plugin"
+	set  -g    @plugin 'tmux-plugins/tmux-copycat'
 	run-shell "$PWD/tpm"
 	HERE
 

@@ -6,12 +6,12 @@ source $CURRENT_DIR/helpers.sh
 
 test_plugin_installation() {
 	set_tmux_conf_helper <<- HERE
-	set @plugin "tmux-plugins/tmux-example-plugin"
+	set -g @tpm_plugins "tmux-plugins/tmux-example-plugin"
 	run-shell "$PWD/tpm"
 	HERE
 
 	# opens tmux and test it with `expect`
-	"$CURRENT_DIR"/expect_successful_plugin_download ||
+	$CURRENT_DIR/expect_successful_plugin_download ||
 		fail_helper "Tmux plugin installation fails"
 
 	# check plugin dir exists after download

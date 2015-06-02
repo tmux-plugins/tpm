@@ -1,0 +1,46 @@
+#!/usr/bin/env expect
+
+# disables script output
+log_user 0
+
+spawn tmux
+
+# Waiting for tmux to attach. If this is not done, next command, `send` will
+# not work properly.
+sleep 1
+
+# this is tmux prefix + I
+send "I"
+
+# cloning might take a while
+set timeout 15
+
+expect { "Installing \"tmux-example-plugin\"" {
+
+  expect { "\"tmux-example-plugin\" download success" {
+
+    expect { "Installing \"tmux-copycat\"" {
+
+      expect { "\"tmux-copycat\" download success" {
+
+        expect { "Done, press ENTER to continue" {
+            send ""
+          }
+        } # Done, press ENTER to continue
+
+        }
+      } # "tmux-copycat" download success
+
+      }
+    } # Installing "tmux-copycat"
+
+    }
+  } # "tmux-example-plugin" download success
+
+  }
+
+  timeout {
+    puts "Multiple plugins installation timeout";
+    exit 1
+  }
+}

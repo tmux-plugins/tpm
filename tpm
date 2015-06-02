@@ -28,7 +28,7 @@ source_plugins() {
 
 # prefix + I - downloads TPM plugins and reloads TMUX environment
 # prefix + U - updates a plugin (or all of them) and reloads TMUX environment
-# prefix + Y - remove unused TPM plugins and reloads TMUX environment
+# prefix + alt + u - remove unused TPM plugins and reloads TMUX environment
 set_tpm_key_bindings() {
 	local install_key=$(get_tmux_option "$install_key_option" "$default_install_key")
 	tmux bind-key "$install_key" run-shell "$CURRENT_DIR/scripts/install_plugins.sh >/dev/null 2>&1"

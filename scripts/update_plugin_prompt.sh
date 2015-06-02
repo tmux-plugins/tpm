@@ -9,14 +9,14 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$CURRENT_DIR/shared_functions.sh"
 
 display_plugin_update_list() {
-	local plugins="$(shared_get_tpm_plugins_list)"
+	local plugins plugin; plugins="$(shared_get_tpm_plugins_list)"
 	echo_message "Installed plugins:"
 	echo_message ""
 
 	for plugin in $plugins; do
 		# displaying only installed plugins
 		if plugin_already_installed "$plugin"; then
-			local plugin_name="$(shared_plugin_name "$plugin")"
+			local plugin_name; plugin_name="$(shared_plugin_name "$plugin")"
 			echo_message "  $plugin_name"
 		fi
 	done

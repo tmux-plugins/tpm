@@ -1,5 +1,6 @@
 # shared functions and constants
 
+# using @tpm_plugins is now deprecated in favor of using @plugin syntax
 tpm_plugins_variable_name="@tpm_plugins"
 SHARED_TPM_PATH=""
 
@@ -11,16 +12,17 @@ shared_set_tpm_path_constant() {
 	SHARED_TPM_PATH="$(echo "$string_path" | sed "s,^\$HOME,$HOME," | sed "s,^~,$HOME,")"
 }
 
+_tmux_conf_contents() {
+	cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null
+}
+
 shared_get_tpm_plugins_list() {
-	local plugins_list
-	plugins_list="$(tmux show-option -gqv "$tpm_plugins_variable_name")"
-	if [ -z "${plugins_list}" ]; then
-		#read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
-		cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null |
-			awk '/^ *set +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
-	else
-		printf "%s\\n" "${plugins_list}"
-	fi
+	# DEPRECATED: lists plugins from @tpm_plugins option
+	echo "$(tmux show-option -gqv "$tpm_plugins_variable_name")"
+
+	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
+	_tmux_conf_contents |
+		awk '/^ *set +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
 }
 
 # Allowed plugin name formats:

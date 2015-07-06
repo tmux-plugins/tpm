@@ -8,6 +8,8 @@
 - revert back to using `-g` flag in new plugin definition syntax
 - permit leading whitespace with new plugin definition syntax (thanks @chilicuil)
 - make sure `TMUX_PLUGIN_MANAGER_PATH` always has trailng slash
+- ensure old/deprecated plugin syntax `set -g @tpm_plugins` works alongside new
+  `set -g @plugin` syntax
 
 ### v1.2.2, 2015-02-08
 - set GIT_TERMINAL_PROMPT=0 when doing `git clone`, `pull` or `submodule update`

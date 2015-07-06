@@ -11,7 +11,7 @@ check_binding_defined() {
 
 test_plugin_sourcing() {
 	set_tmux_conf_helper <<- HERE
-	set -g @tpm_plugins "doesnt_matter/tmux_test_plugin"
+	set -g @plugin "doesnt_matter/tmux_test_plugin"
 	run-shell "$PWD/tpm"
 	HERE
 

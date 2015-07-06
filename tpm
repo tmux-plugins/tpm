@@ -17,7 +17,7 @@ set_tpm_path() {
 	$CURRENT_DIR/scripts/set_tpm_path.sh >/dev/null 2>&1
 }
 
-# 1. Fetches plugin names from `@tpm_plugins` user variable.
+# 1. Fetches plugin names from `@plugin` variables
 # 2. Creates full plugin path
 # 3. Sources all *.tmux files from each of the plugin directories
 #	 - no errors raised if directory does not exist

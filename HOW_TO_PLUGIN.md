@@ -6,6 +6,9 @@ For demonstration purposes we'll create a simple plugin that lists all
 installed TPM plugins. Yes, a plugin that lists plugins :) We'll bind that to
 `prefix + T`.
 
+The source code for this example plugin can be found
+[here](https://github.com/tmux-plugins/tmux-example-plugin).
+
 ### 1. create a new git project
 
 TPM depends on git for downloading and updating plugins.
@@ -85,9 +88,6 @@ To see if this works, execute the plugin run file:
     $ ./my_plugin.tmux
 
 That should set up the key binding. Now hit `prefix + T` and see if it works.
-
-If you get stuck you can download and check this tutorial
-[plugin here](https://github.com/tmux-plugins/tmux-example-plugin).
 
 ### 6. publish the plugin
 

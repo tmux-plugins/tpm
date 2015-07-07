@@ -40,7 +40,7 @@ Key `T` is chosen because:
  - it's "kind of" a mnemonic for `TPM`
  - the key is not used by Tmux natively. Tmux man page, KEY BINDINGS section
    contains a list of all the bindings Tmux uses. There's plenty of unused keys
-   and we don't want to override any Tmux default binding,
+   and we don't want to override any of Tmux default key bindings.
 
 Open the plugin run file in your favorite text editor:
 
@@ -55,7 +55,7 @@ Put the following content in the file:
     CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     tmux bind-key T run-shell "$CURRENT_DIR/scripts/tmux_list_plugins.sh"
 
-As you can see, plugin run file is a simple bash script that sets up binding.
+As you can see, plugin run file is a simple bash script that sets up the binding.
 
 When pressed, `prefix + T` will execute another shell script:
 `tmux_list_plugins.sh`. That script should be in `scripts/` directory -

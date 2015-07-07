@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v2.0.0, 2015-07-07
 - enable overriding default key bindings
 - start using `C-c` to clear screen
 - add uninstall/clean procedure and keybinding (prefix+alt+u) (@chilicuil)

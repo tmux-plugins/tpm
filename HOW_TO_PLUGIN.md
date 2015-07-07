@@ -26,8 +26,8 @@ Create a plugin run file in plugin directory:
     $ touch my_plugin.tmux
     $ chmod +x my_plugin.tmux
 
-You can have more than one `*.tmux` file, and all will get executed. Usually
-however, you'll need just one.
+You can have more than one `*.tmux` file, and all will get executed. However, usually
+you'll need just one.
 
 ### 3. create a plugin key binding
 
@@ -36,8 +36,8 @@ We want the behavior of the plugin to trigger when a user hits `prefix + T`.
 Key `T` is chosen because:
  - it's "kind of" a mnemonic for `TPM`
  - the key is not used by Tmux natively. Tmux man page, KEY BINDINGS section
-   contains a list of all the bindings Tmux uses. We don't want to override any
-   Tmux default binding, and there's plenty of unused keys.
+   contains a list of all the bindings Tmux uses. There's plenty of unused keys
+   and we don't want to override any Tmux default binding,
 
 Open the plugin run file in your favorite text editor:
 
@@ -54,14 +54,14 @@ Put the following content in the file:
 
 As you can see, plugin run file is a simple bash script that sets up binding.
 
-When pressed, `prefix + T` will now execute another shell script:
+When pressed, `prefix + T` will execute another shell script:
 `tmux_list_plugins.sh`. That script should be in `scripts/` directory -
 relative to the plugin run file.
 
 
 ### 4. listing plugins
 
-Now that we have the binding, let's create a script that's invoked on
+Now that we have the binding, let's create a script that's invoked with
 `prefix + T`.
 
     $ mkdir scripts
@@ -72,17 +72,15 @@ And here's the script content:
 
     #!/usr/bin/env bash
 
-    # fetching the value of "tpm_plugins" option
-    plugins_list=$(tmux show-option -gqv "@tpm_plugins")
+    # fetching the directory where plugins are installed
+    plugin_path="$(tmux show-env -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)"
 
-    # displaying variable content, line by line
-    for plugin in $plugins_list; do
-        echo $plugin
-    done
+    # listing installed plugins
+    ls -1 "$plugin_path"
 
 ### 5. try it out
 
-To try if this works, execute the plugin run file:
+To see if this works, execute the plugin run file:
 
     $ ./my_plugin.tmux
 
@@ -93,11 +91,11 @@ If you get stuck you can download and check this tutorial
 
 ### 6. publish the plugin
 
-When everything works, push the plugin to an online git repository, preferably
-Github.
+When everything is ready, push the plugin to an online git repository,
+preferably Github.
 
 Other users can install your plugin by just adding plugin git URL to the
-`@tpm_plugins` list in their `.tmux.conf`.
+`@plugin` list in their `.tmux.conf`.
 
 If the plugin is on Github, your users will be able to use the shorthand of
 `github_username/repository`.
@@ -106,8 +104,5 @@ If the plugin is on Github, your users will be able to use the shorthand of
 
 Hopefully, that was easy. As you can see, it's mostly shell scripting.
 
-You can also check source code of other plugins from the
-[List of plugins](PLUGINS.md).
-
-You can use other scripting languages (ruby, phyton etc), but plain old shell
-is preferred because it will work almost anywhere.
+You can use other scripting languages (ruby, phyton etc) but plain old shell
+is preferred because of portability.

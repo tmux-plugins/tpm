@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- refactor `shared_set_tpm_path_constant` function
 
 ### v2.0.0, 2015-07-07
 - enable overriding default key bindings

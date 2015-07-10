@@ -73,8 +73,9 @@ More advanced features and instructions, regular users probably do not need
 this:
 
 - [How to create a plugin](docs/how_to_create_plugin.md). It's easy.
-- [Installing plugins via the command line](https://github.com/tmux-plugins/tpm/wiki/Installing-plugins-via-the-command-line-only)
-- [Changing plugins install dir](https://github.com/tmux-plugins/tpm/wiki/Changing-plugins-install-dir)
+- [Installing plugins via the command line](docs/installing_plugins_via_cmd_line.md)
+- [Changing plugins install dir](docs/changing_plugins_install_dir.md)
+- [Automatic TPM installation](docs/automatic_tpm_installation.md)
 
 ### Tests
 

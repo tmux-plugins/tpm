@@ -67,16 +67,14 @@ find plugin directory there and remove it.
 
 For more plugins, check [here](https://github.com/tmux-plugins).
 
-### Wiki pages
+### Docs
 
-More advanced features, regular users probably do not need this:
+More advanced features and instructions, regular users probably do not need
+this:
 
-- [installing plugins via the command line](https://github.com/tmux-plugins/tpm/wiki/Installing-plugins-via-the-command-line-only)
-- [changing plugins install dir](https://github.com/tmux-plugins/tpm/wiki/Changing-plugins-install-dir)
-
-### Creating plugins
-
-[How to create a plugin](HOW_TO_PLUGIN.md). It's easy.
+- [How to create a plugin](docs/how_to_create_plugin.md). It's easy.
+- [Installing plugins via the command line](https://github.com/tmux-plugins/tpm/wiki/Installing-plugins-via-the-command-line-only)
+- [Changing plugins install dir](https://github.com/tmux-plugins/tpm/wiki/Changing-plugins-install-dir)
 
 ### Tests
 

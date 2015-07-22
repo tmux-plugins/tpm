@@ -47,10 +47,17 @@ ensure_tpm_path_exists() {
 	mkdir -p $SHARED_TPM_PATH
 }
 
+verify_tpm_path_permissions() {
+	# check the write permission flag for all users to ensure
+	# that we have proper access
+	[ -w $SHARED_TPM_PATH ] || echo_message "$SHARED_TPM_PATH does not seem to be writable!"
+}
+
 main() {
 	reload_tmux_environment
 	shared_set_tpm_path_constant
 	ensure_tpm_path_exists
+	verify_tpm_path_permissions
 	install_plugins
 	reload_tmux_environment
 	end_message

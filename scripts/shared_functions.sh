@@ -92,3 +92,7 @@ display_message() {
 	# restores original 'display-time' value
 	tmux set-option -gq display-time "$saved_display_time"
 }
+
+ensure_tpm_path_exists() {
+	mkdir -p "$SHARED_TPM_PATH"
+}

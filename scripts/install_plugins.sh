@@ -43,10 +43,6 @@ install_plugins() {
 	done
 }
 
-ensure_tpm_path_exists() {
-	mkdir -p $SHARED_TPM_PATH
-}
-
 verify_tpm_path_permissions() {
 	# check the write permission flag for all users to ensure
 	# that we have proper access

@@ -1,8 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+_dirname()
+{   #portable dirname
+    [ -z "${1}" ] && return 1
 
-source $CURRENT_DIR/helpers.sh
+    #http://www.linuxselfhelp.com/gnu/autoconf/html_chapter/autoconf_10.html
+    case "${1}" in
+        /*|*/*) local dir; dir=$(expr "x${1}" : 'x\(.*\)/[^/]*' \| '.' : '.')
+                printf "%s\\n" "${dir}" ;;
+             *) printf "%s\\n" ".";;
+    esac
+}
+
+CURRENT_DIR="$( cd "$( _dirname "$0" )" && pwd )"
+
+. "$CURRENT_DIR"/helpers.sh
 
 test_plugin_installation() {
 	set_tmux_conf_helper <<- HERE

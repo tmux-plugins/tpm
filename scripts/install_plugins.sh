@@ -4,9 +4,36 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$CURRENT_DIR/shared_functions.sh"
 
+TMUX_ECHO_FLAG="$1"
+
+# True if invoked as tmux mapping or tmux command,
+# false if invoked via command line wrapper from `bin/` directory.
+use_tmux_echo() {
+	[ "$TMUX_ECHO_FLAG" == "--tmux-echo" ]
+}
+
+if use_tmux_echo; then
+	# use tmux specific echo-ing
+	echo_ok() {
+		echo_message "$*"
+	}
+
+	echo_err() {
+		echo_message "$*"
+	}
+else
+	echo_ok() {
+		echo "$*"
+	}
+
+	echo_err() {
+		fail_helper "$*"
+	}
+fi
+
 clone() {
-	local plugin=$1
-	cd $SHARED_TPM_PATH &&
+	local plugin="$1"
+	cd "$SHARED_TPM_PATH" &&
 		GIT_TERMINAL_PROMPT=0 git clone --recursive $plugin
 }
 
@@ -14,25 +41,23 @@ clone() {
 # 1. plugin name directly - works if it's a valid git url
 # 2. expands the plugin name to point to a github repo and tries cloning again
 clone_plugin() {
-	local plugin=$1
+	local plugin="$1"
 	clone "$plugin" ||
 		clone "https://git::@github.com/$plugin"
 }
 
-# pull new changes or clone plugin
+# clone plugin and produce output
 install_plugin() {
 	local plugin="$1"
 	local plugin_name="$(shared_plugin_name "$plugin")"
 
 	if plugin_already_installed "$plugin"; then
-		# plugin is already installed
-		echo_message "Already installed \"$plugin_name\""
+		echo_ok "Already installed \"$plugin_name\""
 	else
-		# plugin wasn't cloned so far - clone it
-		echo_message "Installing \"$plugin_name\""
+		echo_ok "Installing \"$plugin_name\""
 		clone_plugin "$plugin" &&
-			echo_message "  \"$plugin_name\" download success" ||
-			echo_message "  \"$plugin_name\" download fail"
+			echo_ok "  \"$plugin_name\" download success" ||
+			echo_err "  \"$plugin_name\" download fail"
 	fi
 }
 
@@ -50,12 +75,10 @@ verify_tpm_path_permissions() {
 }
 
 main() {
-	reload_tmux_environment
 	shared_set_tpm_path_constant
 	ensure_tpm_path_exists
 	verify_tpm_path_permissions
 	install_plugins
-	reload_tmux_environment
-	end_message
+	exit_value_helper
 }
 main

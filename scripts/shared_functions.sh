@@ -6,7 +6,7 @@ SHARED_TPM_PATH=""
 
 # sets a "global variable" for the current file
 shared_set_tpm_path_constant() {
-	local string_path="$(tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
+	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
 	# manually expanding tilde or `$HOME` variable.
 	string_path="${string_path/#\~/$HOME}"
 	SHARED_TPM_PATH="${string_path/#\$HOME/$HOME}"
@@ -18,7 +18,7 @@ _tmux_conf_contents() {
 
 shared_get_tpm_plugins_list() {
 	# DEPRECATED: lists plugins from @tpm_plugins option
-	echo "$(tmux show-option -gqv "$tpm_plugins_variable_name")"
+	echo "$(tmux start-server\; show-option -gqv "$tpm_plugins_variable_name")"
 
 	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
 	_tmux_conf_contents |
@@ -95,4 +95,18 @@ display_message() {
 
 ensure_tpm_path_exists() {
 	mkdir -p "$SHARED_TPM_PATH"
+}
+
+fail_helper() {
+	local message="$1"
+	echo "$message" >&2
+	FAIL="true"
+}
+
+exit_value_helper() {
+	if [ "$FAIL" == "true" ]; then
+		exit 1
+	else
+		exit 0
+	fi
 }

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BINDINGS_DIR="$CURRENT_DIR/bindings"
 
 SUPPORTED_TMUX_VERSION="1.9"
 
@@ -31,7 +32,7 @@ source_plugins() {
 # prefix + alt + u - remove unused TPM plugins and reloads TMUX environment
 set_tpm_key_bindings() {
 	local install_key=$(get_tmux_option "$install_key_option" "$default_install_key")
-	tmux bind-key "$install_key" run-shell "$CURRENT_DIR/scripts/install_plugins.sh >/dev/null 2>&1"
+	tmux bind-key "$install_key" run-shell "$BINDINGS_DIR/install_plugins"
 
 	local update_key=$(get_tmux_option "$update_key_option" "$default_update_key")
 	tmux bind-key "$update_key" run-shell "$CURRENT_DIR/scripts/update_plugin_prompt.sh"

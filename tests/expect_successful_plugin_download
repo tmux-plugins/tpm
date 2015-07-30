@@ -21,7 +21,7 @@ expect {
     expect {
       "\"tmux-example-plugin\" download success" {
 
-        expect { "Done, press ENTER to continue" {
+        expect { "Done, press \"q\" to continue" {
             send ""
           }
         }
@@ -43,7 +43,7 @@ send "I"
 expect {
   "Already installed \"tmux-example-plugin\"" {
 
-    expect { "Done, press ENTER to continue" { exit 0 } }
+    expect { "Done, press \"q\" to continue" { exit 0 } }
 
   }
 

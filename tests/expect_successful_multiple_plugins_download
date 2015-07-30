@@ -23,10 +23,10 @@ expect { "Installing \"tmux-example-plugin\"" {
 
       expect { "\"tmux-copycat\" download success" {
 
-        expect { "Done, press ENTER to continue" {
+        expect { "Done, press \"q\" to continue" {
             send ""
           }
-        } # Done, press ENTER to continue
+        } # Done, press \"q\" to continue
 
         }
       } # "tmux-copycat" download success

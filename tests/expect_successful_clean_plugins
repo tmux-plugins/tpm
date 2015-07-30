@@ -18,7 +18,7 @@ expect {
   "Removing \"tmux-example-plugin\"" {
     expect {
       "\"tmux-example-plugin\" clean success" {
-        expect { "Done, press ENTER to continue." { exit 0 } }
+        expect { "Done, press \"q\" to continue." { exit 0 } }
         }
       }
     }

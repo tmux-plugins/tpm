@@ -23,7 +23,7 @@ expect {
         expect {
           "\"all\" - updates all plugins" {
 
-            expect { "ENTER - cancels" }
+            expect { "\"q\" - cancels" }
 
           }
         }
@@ -50,7 +50,7 @@ expect {
         expect {
           "\"tmux-example-plugin\" update success" {
 
-            expect { "Done, press ENTER to continue." { exit 0 } }
+            expect { "Done, press \"q\" to continue." { exit 0 } }
 
           }
         }

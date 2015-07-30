@@ -26,15 +26,31 @@ shared_get_tpm_plugins_list() {
 }
 
 # Allowed plugin name formats:
-# 1. "git://github.com/user/plugin_name.git"
-# 2. "user/plugin_name"
+# 1.  "user/plugin_name"
+# 2.  "user/plugin_name:branch"
+# 3.  "gh:user/plugin_name"
+# 4.  "gh:user/plugin_name:branch"
+# 5.  "github:user/plugin_name"
+# 6.  "github:user/plugin_name:branch"
+# 7.  "http://github.com/user/plugin_name"
+# 8.  "https://github.com/user/plugin_name:branch"
+# 9.  "git://github.com/user/plugin_name.git"
+# 10. "git://github.com/user/plugin_name.git:branch"
+# 11. "git://domain.tld/plugin_name"
+# 12. "git://domain.tld/plugin_name:branch"
+# 13. "http://domain.tld/plugin_name"
+# 14. "https://domain.tld/plugin_name"
+# 15. "ftp://domain.tld/plugin_name"
+# 16. "file://local/path/plugin_name"
 shared_plugin_name() {
-	local plugin="$1"
-	# get only the part after the last slash, e.g. "plugin_name.git"
-	local plugin_basename="$(basename "$plugin")"
+	local plugin; plugin="$1"
+	# get only the part after the last slash, e.g. "plugin_name.git:branch"
+	local plugin_basename; plugin_basename="$(basename "$plugin")"
+	# remove branch (if it exists) to get only "plugin_name.git"
+	local plugin_name; plugin_name="${plugin_basename%:*}"
 	# remove ".git" extension (if it exists) to get only "plugin_name"
-	local plugin_name="${plugin_basename%.git}"
-	echo "$plugin_name"
+	plugin_name="${plugin_name%.git}"
+	printf "%s\\n" "$plugin_name"
 }
 
 shared_plugin_path() {
@@ -57,8 +73,8 @@ reload_tmux_environment() {
 plugin_already_installed() {
 	local plugin="$1"
 	local plugin_path="$(shared_plugin_path "$plugin")"
-	cd "$plugin_path" &&
-		git remote >/dev/null 2>&1
+	cd "$plugin_path" #&& unmarry from git
+		#git remote >/dev/null 2>&1
 }
 
 end_message() {
@@ -66,6 +82,11 @@ end_message() {
 	echo_message "TMUX environment reloaded."
 	echo_message ""
 	echo_message "Done, press ENTER to continue."
+}
+
+set_false()
+{
+	return 1
 }
 
 # Ensures a message is displayed for 5 seconds in tmux prompt.

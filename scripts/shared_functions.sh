@@ -65,7 +65,7 @@ end_message() {
 	echo_message ""
 	echo_message "TMUX environment reloaded."
 	echo_message ""
-	echo_message "Done, press ENTER to continue."
+	echo_message "Done, press \"q\" to continue."
 }
 
 # Ensures a message is displayed for 5 seconds in tmux prompt.

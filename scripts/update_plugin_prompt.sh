@@ -25,7 +25,7 @@ display_plugin_update_list() {
 	echo_message "Type plugin name to update it."
 	echo_message ""
 	echo_message "- \"all\" - updates all plugins"
-	echo_message "- ENTER - cancels"
+	echo_message "- \"q\" - cancels"
 }
 
 update_plugin_prompt() {

@@ -34,7 +34,7 @@ fi
 clone() {
 	local plugin="$1"
 	cd "$SHARED_TPM_PATH" &&
-		GIT_TERMINAL_PROMPT=0 git clone --recursive $plugin
+		GIT_TERMINAL_PROMPT=0 git clone --recursive "$plugin" >/dev/null 2>&1
 }
 
 # tries cloning:

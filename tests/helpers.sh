@@ -4,8 +4,8 @@ FAIL="false"
 
 set_tmux_conf_helper() {
 	> ~/.tmux.conf	# empty filename
-	while read -r line; do
-		echo $line >> ~/.tmux.conf
+	while read line; do
+		echo "$line" >> ~/.tmux.conf
 	done
 }
 

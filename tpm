@@ -2,11 +2,12 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BINDINGS_DIR="$CURRENT_DIR/bindings"
+SCRIPTS_DIR="$CURRENT_DIR/scripts"
 
 SUPPORTED_TMUX_VERSION="1.9"
 
-source "$CURRENT_DIR/scripts/variables.sh"
-source "$CURRENT_DIR/scripts/helpers.sh"
+source "$SCRIPTS_DIR/variables.sh"
+source "$SCRIPTS_DIR/helpers.sh"
 
 # Ensures TMUX_PLUGIN_MANAGER_PATH global env variable is set.
 # Default tpm path is "$HOME/.tmux/plugins/". That's where all the plugins are
@@ -15,7 +16,7 @@ source "$CURRENT_DIR/scripts/helpers.sh"
 # Put this in `.tmux.conf` to override the default:
 # `set-environment -g TMUX_PLUGIN_MANAGER_PATH "/some/other/path/"`
 set_tpm_path() {
-	$CURRENT_DIR/scripts/set_tpm_path.sh >/dev/null 2>&1
+	"$SCRIPTS_DIR/set_tpm_path.sh" >/dev/null 2>&1
 }
 
 # 1. Fetches plugin names from `@plugin` variables
@@ -24,7 +25,7 @@ set_tpm_path() {
 #	 - no errors raised if directory does not exist
 # Files are sourced as tmux config files, not as shell scripts!
 source_plugins() {
-	$CURRENT_DIR/scripts/source_plugins.sh >/dev/null 2>&1
+	"$SCRIPTS_DIR/source_plugins.sh" >/dev/null 2>&1
 }
 
 # prefix + I - downloads TPM plugins and reloads TMUX environment
@@ -35,14 +36,14 @@ set_tpm_key_bindings() {
 	tmux bind-key "$install_key" run-shell "$BINDINGS_DIR/install_plugins"
 
 	local update_key=$(get_tmux_option "$update_key_option" "$default_update_key")
-	tmux bind-key "$update_key" run-shell "$CURRENT_DIR/scripts/update_plugin_prompt.sh"
+	tmux bind-key "$update_key" run-shell "$SCRIPTS_DIR/update_plugin_prompt.sh"
 
 	local clean_key=$(get_tmux_option "$clean_key_option" "$default_clean_key")
-	tmux bind-key "$clean_key" run-shell "$CURRENT_DIR/scripts/clean_plugins.sh"
+	tmux bind-key "$clean_key" run-shell "$SCRIPTS_DIR/clean_plugins.sh"
 }
 
 supported_tmux_version_ok() {
-	$CURRENT_DIR/scripts/check_tmux_version.sh "$SUPPORTED_TMUX_VERSION"
+	"$SCRIPTS_DIR/check_tmux_version.sh" "$SUPPORTED_TMUX_VERSION"
 }
 
 main() {

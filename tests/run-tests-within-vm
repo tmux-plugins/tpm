@@ -24,7 +24,7 @@ run_tests() {
 	local test_file
 	for test_file in $(test_files); do
 		echo "Running test: $test_file"
-		$CURRENT_DIR/$test_file
+		"$CURRENT_DIR/$test_file"
 
 		# handling exit value
 		local exit_value="$?"

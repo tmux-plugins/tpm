@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+TPM_DIR="$PWD"
 
-source $CURRENT_DIR/helpers.sh
+source "$CURRENT_DIR/helpers.sh"
 
 check_binding_defined() {
 	local binding="$1"
@@ -12,7 +13,7 @@ check_binding_defined() {
 test_plugin_sourcing() {
 	set_tmux_conf_helper <<- HERE
 	set -g @plugin "doesnt_matter/tmux_test_plugin"
-	run-shell "$PWD/tpm"
+	run-shell "$TPM_DIR/tpm"
 	HERE
 
 	# manually creates a local tmux plugin

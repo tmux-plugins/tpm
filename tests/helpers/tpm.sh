@@ -1,10 +1,5 @@
 check_dir_exists_helper() {
-	local dir_path=$1
-	if [ -d "$dir_path" ]; then
-		return 0
-	else
-		return 1
-	fi
+	[ -d "$1" ]
 }
 
 # runs the scripts and asserts it has the correct output and exit code

@@ -6,7 +6,8 @@ TPM_DIR="$PWD"
 
 CUSTOM_PLUGINS_DIR="$HOME/foo/plugins"
 
-source "$CURRENT_DIR/helpers.sh"
+source "$CURRENT_DIR/helpers/helpers.sh"
+source "$CURRENT_DIR/helpers/tpm.sh"
 
 # TMUX KEY-BINDING TESTS
 

@@ -5,6 +5,8 @@
 - move all instructions to `docs/` dir
 - add `bin/install_plugins` cli executable script
 - improved test runner function
+- switch to using [tmux-test](https://github.com/tmux-plugins/tmux-test)
+  framework
 
 ### v2.0.0, 2015-07-07
 - enable overriding default key bindings

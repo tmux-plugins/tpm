@@ -4,7 +4,8 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PLUGINS_DIR="$HOME/.tmux/plugins"
 TPM_DIR="$PWD"
 
-source "$CURRENT_DIR/helpers.sh"
+source "$CURRENT_DIR/helpers/helpers.sh"
+source "$CURRENT_DIR/helpers/tpm.sh"
 
 # TMUX KEY-BINDING TESTS
 

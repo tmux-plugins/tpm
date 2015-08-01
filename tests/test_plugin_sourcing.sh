@@ -3,11 +3,23 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TPM_DIR="$PWD"
 
-source "$CURRENT_DIR/helpers.sh"
+source "$CURRENT_DIR/helpers/helpers.sh"
+source "$CURRENT_DIR/helpers/tpm.sh"
 
 check_binding_defined() {
 	local binding="$1"
 	tmux list-keys | grep -q "$binding"
+}
+
+create_test_plugin_helper() {
+	local plugin_path="$HOME/.tmux/plugins/tmux_test_plugin/"
+	rm -rf $plugin_path
+	mkdir -p $plugin_path
+
+	while read -r line; do
+		echo $line >> "$plugin_path/test_plugin.tmux"
+	done
+	chmod +x "$plugin_path/test_plugin.tmux"
 }
 
 test_plugin_sourcing() {

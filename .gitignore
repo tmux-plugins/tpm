@@ -1,1 +1,4 @@
 **/.vagrant/
+run_tests
+tests/run_tests_in_isolation
+tests/helpers/helpers.sh

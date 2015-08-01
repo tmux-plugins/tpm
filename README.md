@@ -85,7 +85,7 @@ When run locally, [vagrant](https://www.vagrantup.com/) is required.
 Run tests with:
 
     # within project directory
-    $ ./run-tests
+    $ ./run_tests
 
 ### Other goodies
 

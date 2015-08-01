@@ -1,0 +1,3 @@
+[submodule "lib/tmux-test"]
+	path = lib/tmux-test
+	url = https://github.com/tmux-plugins/tmux-test.git

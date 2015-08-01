@@ -71,7 +71,8 @@ install_plugins() {
 verify_tpm_path_permissions() {
 	# check the write permission flag for all users to ensure
 	# that we have proper access
-	[ -w $SHARED_TPM_PATH ] || echo_message "$SHARED_TPM_PATH does not seem to be writable!"
+	[ -w "$SHARED_TPM_PATH" ] ||
+		echo_err "$SHARED_TPM_PATH is not writable!"
 }
 
 main() {

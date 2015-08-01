@@ -8,7 +8,9 @@ before_install:
   - sudo apt-get install -y tmux=1.9a-1~ppa1~p
 
 install:
-  - git clone https://github.com/tmux-plugins/tmux-test lib/tmux-test
+  - git fetch --unshallow --recurse-submodules || git fetch --recurse-submodules
+  # manual `git clone` required for testing `tmux-test` plugin itself
+  - git clone https://github.com/tmux-plugins/tmux-test lib/tmux-test; true
   - lib/tmux-test/setup
 
 script: ./tests/run_tests_in_isolation

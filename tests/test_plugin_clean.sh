@@ -27,8 +27,4 @@ test_plugin_installation() {
 	teardown_helper
 }
 
-main() {
-	test_plugin_installation
-	exit_value_helper
-}
-main
+run_tests

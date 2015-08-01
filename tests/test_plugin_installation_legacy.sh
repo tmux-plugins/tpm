@@ -92,13 +92,4 @@ test_legacy_and_new_syntax_for_plugin_installation_work_via_script() {
 	teardown_helper
 }
 
-main() {
-	test_plugin_installation_via_tmux_key_binding
-	test_legacy_and_new_syntax_for_plugin_installation_work_via_tmux_key_binding
-
-	test_plugin_installation_via_script
-	test_legacy_and_new_syntax_for_plugin_installation_work_via_script
-
-	exit_value_helper
-}
-main
+run_tests

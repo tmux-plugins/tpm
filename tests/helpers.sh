@@ -63,3 +63,11 @@ exit_value_helper() {
 		exit 0
 	fi
 }
+
+run_tests() {
+	# get all the functions starting with 'test_' and invoke them
+	for test in $(compgen -A function | grep "^test_"); do
+		"$test"
+	done
+	exit_value_helper
+}

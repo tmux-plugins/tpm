@@ -28,8 +28,4 @@ test_plugin_sourcing() {
 	teardown_helper
 }
 
-main() {
-	test_plugin_sourcing
-	exit_value_helper
-}
-main
+run_tests

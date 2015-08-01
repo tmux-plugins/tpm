@@ -4,6 +4,8 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PLUGINS_DIR="$HOME/.tmux/plugins"
 TPM_DIR="$PWD"
 
+CUSTOM_PLUGINS_DIR="$HOME/foo/plugins"
+
 source "$CURRENT_DIR/helpers.sh"
 
 # TMUX KEY-BINDING TESTS
@@ -14,15 +16,31 @@ test_plugin_installation_via_tmux_key_binding() {
 	run-shell "$TPM_DIR/tpm"
 	HERE
 
-	# opens tmux and test it with `expect`
-	"$CURRENT_DIR"/expect_successful_plugin_download ||
+	"$CURRENT_DIR/expect_successful_plugin_download" ||
 		fail_helper "[key-binding] plugin installation fails"
 
-	# check plugin dir exists after download
 	check_dir_exists_helper "$PLUGINS_DIR/tmux-example-plugin/" ||
 		fail_helper "[key-binding] plugin download fails"
 
 	teardown_helper
+}
+
+test_plugin_installation_custom_dir_via_tmux_key_binding() {
+	set_tmux_conf_helper <<- HERE
+	set-environment -g TMUX_PLUGIN_MANAGER_PATH '$CUSTOM_PLUGINS_DIR'
+
+	set -g @plugin "tmux-plugins/tmux-example-plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	"$CURRENT_DIR/expect_successful_plugin_download" ||
+		fail_helper "[key-binding][custom dir] plugin installation fails"
+
+	check_dir_exists_helper "$CUSTOM_PLUGINS_DIR/tmux-example-plugin/" ||
+		fail_helper "[key-binding][custom dir] plugin download fails"
+
+	teardown_helper
+	rm -rf "$CUSTOM_PLUGINS_DIR"
 }
 
 test_multiple_plugins_installation_via_tmux_key_binding() {
@@ -33,7 +51,7 @@ test_multiple_plugins_installation_via_tmux_key_binding() {
 	HERE
 
 	# opens tmux and test it with `expect`
-	"$CURRENT_DIR"/expect_successful_multiple_plugins_download ||
+	"$CURRENT_DIR/expect_successful_multiple_plugins_download" ||
 		fail_helper "[key-binding] multiple plugins installation fails"
 
 	check_dir_exists_helper "$PLUGINS_DIR/tmux-example-plugin/" ||
@@ -65,6 +83,27 @@ test_plugin_installation_via_script() {
 	teardown_helper
 }
 
+test_plugin_installation_custom_dir_via_script() {
+	set_tmux_conf_helper <<- HERE
+	set-environment -g TMUX_PLUGIN_MANAGER_PATH '$CUSTOM_PLUGINS_DIR'
+
+	set -g @plugin "tmux-plugins/tmux-example-plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	script_run_helper "$TPM_DIR/bin/install_plugins" '"tmux-example-plugin" download success' ||
+		fail_helper "[script][custom dir] plugin installation fails"
+
+	check_dir_exists_helper "$CUSTOM_PLUGINS_DIR/tmux-example-plugin/" ||
+		fail_helper "[script][custom dir] plugin download fails"
+
+	script_run_helper "$TPM_DIR/bin/install_plugins" 'Already installed "tmux-example-plugin"' ||
+		fail_helper "[script][custom dir] plugin already installed message fail"
+
+	teardown_helper
+	rm -rf "$CUSTOM_PLUGINS_DIR"
+}
+
 test_multiple_plugins_installation_via_script() {
 	set_tmux_conf_helper <<- HERE
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
@@ -87,13 +126,4 @@ test_multiple_plugins_installation_via_script() {
 	teardown_helper
 }
 
-main() {
-	test_plugin_installation_via_tmux_key_binding
-	test_multiple_plugins_installation_via_tmux_key_binding
-
-	test_plugin_installation_via_script
-	test_multiple_plugins_installation_via_script
-
-	exit_value_helper
-}
-main
+run_tests

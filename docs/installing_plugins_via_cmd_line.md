@@ -1,20 +1,16 @@
 # Installing plugins via the command line only
 
-### From inside tmux
+Run the following command to install plugins:
 
-When you have `tmux` running, plugins can be installed with the following command:
+    ~/.tmux/plugins/tpm/bin/install_plugins
 
-    ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+Tmux does not need to be started in order to run the script (but it's okay if it
+is).
 
-This is the equivalent of pressing `prefix + I`.
+If you [changed tpm install dir](docs/changing_plugins_install_dir.md) in
+`.tmux.conf` that should work fine too.
 
-### From outside tmux
+Prerequisites:
 
-To install the plugins when `tmux` is not even started (for example in a provisioning script):
-
-    # start tmux and create a session but don't attach to it
-    tmux new-session -d
-    # install the plugins
-    tmux run "~/.tmux/plugins/tpm/scripts/install_plugins.sh"
-    # killing the session is not required
-    tmux kill-session
+- tmux installed on the system (doh)
+- `.tmux.conf` set for TPM

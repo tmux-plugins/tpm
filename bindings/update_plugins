@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-# when invoked with `prefix + U` this script:
+# Tmux key-binding script.
+# Scripts intended to be used via the command line are in `bin/` directory.
+
+# This script:
 # - shows a list of installed plugins
 # - starts a prompt to enter the name of the plugin that will be updated
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTS_DIR="$CURRENT_DIR/../scripts"
 
-source "$CURRENT_DIR/shared_functions.sh"
+source "$SCRIPTS_DIR/shared_functions.sh"
 
 display_plugin_update_list() {
 	local plugins="$(shared_get_tpm_plugins_list)"
@@ -31,9 +35,8 @@ display_plugin_update_list() {
 update_plugin_prompt() {
 	tmux command-prompt -p 'plugin update:' " \
 		send-keys C-c; \
-		run-shell '$CURRENT_DIR/update_plugin.sh %1'"
+		run-shell '$SCRIPTS_DIR/update_plugin_prompt_handler.sh %1'"
 }
-
 
 main() {
 	reload_tmux_environment

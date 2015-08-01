@@ -13,7 +13,9 @@ manually_install_the_plugin() {
 	git clone --quiet https://github.com/tmux-plugins/tmux-example-plugin
 }
 
-test_plugin_installation() {
+# TMUX KEY-BINDING TESTS
+
+test_plugin_installation_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	run-shell "$TPM_DIR/tpm"
@@ -21,12 +23,33 @@ test_plugin_installation() {
 
 	manually_install_the_plugin
 
-	# opens tmux and test it with `expect`
 	"$CURRENT_DIR/expect_successful_update_of_all_plugins" ||
-		fail_helper "Tmux 'update all plugins' fails"
+		fail_helper "[key-binding] 'update all plugins' fails"
 
 	"$CURRENT_DIR/expect_successful_update_of_a_single_plugin" ||
-		fail_helper "Tmux 'update single plugin' fails"
+		fail_helper "[key-binding] 'update single plugin' fails"
+
+	teardown_helper
+}
+
+# SCRIPT TESTS
+
+test_plugin_installation_via_script() {
+	set_tmux_conf_helper <<- HERE
+	set -g @plugin "tmux-plugins/tmux-example-plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	manually_install_the_plugin
+
+	script_run_helper "$TPM_DIR/bin/update_plugins" 'usage' 1 ||
+		fail_helper "[script] running update plugins without args should fail"
+
+	script_run_helper "$TPM_DIR/bin/update_plugins tmux-example-plugin" '"tmux-example-plugin" update success' ||
+		fail_helper "[script] plugin update fails"
+
+	script_run_helper "$TPM_DIR/bin/update_plugins all" '"tmux-example-plugin" update success' ||
+		fail_helper "[script] update all plugins fails"
 
 	teardown_helper
 }

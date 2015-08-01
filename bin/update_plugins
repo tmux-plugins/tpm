@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Script intended for use via the command line.
+#
+# `.tmux.conf` needs to be set for TPM. Tmux has to be installed on the system,
+# but does not need to be started in order to run this script.
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTS_DIR="$CURRENT_DIR/../scripts"
+PROGRAM_NAME="$0"
+
+if [ $# -eq 0 ]; then
+	echo "usage:"
+	echo "  $PROGRAM_NAME all                   update all plugins"
+	echo "  $PROGRAM_NAME tmux-foo              update plugin 'tmux-foo'"
+	echo "  $PROGRAM_NAME tmux-bar tmux-baz     update multiple plugins"
+	exit 1
+fi
+
+main() {
+	"$SCRIPTS_DIR/update_plugin.sh" --shell-echo "$*" # has correct exit code
+}
+main "$*"
+

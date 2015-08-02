@@ -39,8 +39,8 @@ shared_plugin_name() {
 
 shared_plugin_path() {
 	local plugin=$1
-	local plugin_name=$(shared_plugin_name "$plugin")
-	echo "$SHARED_TPM_PATH$plugin_name/"
+	local plugin_name="$(shared_plugin_name "$plugin")"
+	echo "${SHARED_TPM_PATH}${plugin_name}/"
 }
 
 # TMUX messaging is weird. You only get a nice clean pane if you do it with
@@ -82,7 +82,7 @@ display_message() {
 	fi
 
 	# saves user-set 'display-time' option
-	local saved_display_time=$(get_tmux_option "display-time" "750")
+	local saved_display_time="$(get_tmux_option "display-time" "750")"
 
 	# sets message display time to 5 seconds
 	tmux set-option -gq display-time "$display_duration"

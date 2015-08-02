@@ -27,12 +27,12 @@ silently_source_all_tmux_files() {
 
 source_plugin() {
 	local plugin=$1
-	local plugin_path=$(shared_plugin_path "$plugin")
+	local plugin_path="$(shared_plugin_path "$plugin")"
 	silently_source_all_tmux_files "$plugin_path"
 }
 
 source_plugins() {
-	local plugins=$(shared_get_tpm_plugins_list)
+	local plugins="$(shared_get_tpm_plugins_list)"
 	for plugin in $plugins; do
 		source_plugin "$plugin"
 	done

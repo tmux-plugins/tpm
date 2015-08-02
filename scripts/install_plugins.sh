@@ -62,7 +62,7 @@ install_plugin() {
 }
 
 install_plugins() {
-	local plugins=$(shared_get_tpm_plugins_list)
+	local plugins="$(shared_get_tpm_plugins_list)"
 	for plugin in $plugins; do
 		install_plugin "$plugin"
 	done

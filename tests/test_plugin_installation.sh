@@ -44,6 +44,18 @@ test_plugin_installation_custom_dir_via_tmux_key_binding() {
 	rm -rf "$CUSTOM_PLUGINS_DIR"
 }
 
+test_non_existing_plugin_installation_via_tmux_key_binding() {
+	set_tmux_conf_helper <<- HERE
+	set -g @plugin "tmux-plugins/non-existing-plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	"$CURRENT_DIR/expect_failed_plugin_download" ||
+		fail_helper "[key-binding] non existing plugin installation doesn't fail"
+
+	teardown_helper
+}
+
 test_multiple_plugins_installation_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
@@ -103,6 +115,19 @@ test_plugin_installation_custom_dir_via_script() {
 
 	teardown_helper
 	rm -rf "$CUSTOM_PLUGINS_DIR"
+}
+
+test_non_existing_plugin_installation_via_script() {
+	set_tmux_conf_helper <<- HERE
+	set -g @plugin "tmux-plugins/non-existing-plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	local expected_exit_code=1
+	script_run_helper "$TPM_DIR/bin/install_plugins" '"non-existing-plugin" download fail' "$expected_exit_code" ||
+		fail_helper "[script] non existing plugin installation doesn't fail"
+
+	teardown_helper
 }
 
 test_multiple_plugins_installation_via_script() {

@@ -7,7 +7,7 @@ script_run_helper() {
 	local script="$1"
 	local expected_output="$2"
 	local expected_exit_code="${3:-0}"
-	$script |
+	$script 2>&1 |
 		grep "$expected_output" >/dev/null 2>&1 && # grep -q flag quits the script early
 		[ "${PIPESTATUS[0]}" -eq "$expected_exit_code" ]
 }

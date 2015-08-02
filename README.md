@@ -61,7 +61,7 @@ find plugin directory there and remove it.
 - updates plugin(s)
 
 `prefix + alt + u`
-- uninstall plugins that are not on the plugin list
+- remove/uninstall plugins not on the plugin list
 
 ### More plugins
 

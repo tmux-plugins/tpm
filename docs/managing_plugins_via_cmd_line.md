@@ -28,3 +28,9 @@ To update all installed plugins:
 or update a single plugin:
 
     ~/.tmux/plugins/tpm/bin/install_plugins tmux-sensible
+
+### Removing plugins
+
+To remove plugins not on the plugin list:
+
+    ~/.tmux/plugins/tpm/bin/clean_plugins

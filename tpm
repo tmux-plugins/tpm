@@ -39,7 +39,7 @@ set_tpm_key_bindings() {
 	tmux bind-key "$update_key" run-shell "$BINDINGS_DIR/update_plugins"
 
 	local clean_key=$(get_tmux_option "$clean_key_option" "$default_clean_key")
-	tmux bind-key "$clean_key" run-shell "$SCRIPTS_DIR/clean_plugins.sh"
+	tmux bind-key "$clean_key" run-shell "$BINDINGS_DIR/clean_plugins"
 }
 
 supported_tmux_version_ok() {

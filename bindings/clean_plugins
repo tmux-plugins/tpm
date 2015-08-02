@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Tmux key-binding script.
+# Scripts intended to be used via the command line are in `bin/` directory.
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTS_DIR="$CURRENT_DIR/../scripts"
+
+source "$SCRIPTS_DIR/shared_functions.sh"
+
+main() {
+	reload_tmux_environment
+	"$SCRIPTS_DIR/clean_plugins.sh" --tmux-echo >/dev/null 2>&1
+	reload_tmux_environment
+	end_message
+}
+main

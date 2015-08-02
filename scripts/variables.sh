@@ -6,3 +6,5 @@ default_update_key="U"
 
 clean_key_option="@tpm-clean"
 default_clean_key="M-u"
+
+SUPPORTED_TMUX_VERSION="1.9"

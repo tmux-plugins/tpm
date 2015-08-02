@@ -73,7 +73,7 @@ More advanced features and instructions, regular users probably do not need
 this:
 
 - [How to create a plugin](docs/how_to_create_plugin.md). It's easy.
-- [Installing plugins via the command line](docs/installing_plugins_via_cmd_line.md)
+- [Managing plugins via the command line](docs/managing_plugins_via_cmd_line.md)
 - [Changing plugins install dir](docs/changing_plugins_install_dir.md)
 - [Automatic TPM installation on a new machine](docs/automatic_tpm_installation.md)
 

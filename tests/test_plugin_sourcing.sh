@@ -54,7 +54,7 @@ test_default_tpm_path() {
 	run-shell "$TPM_DIR/tpm"
 	HERE
 
-	check_tpm_path "$PLUGINS_DIR" ||
+	check_tpm_path "${PLUGINS_DIR}/" ||
 		fail_helper "Default TPM path not correct"
 
 	teardown_helper

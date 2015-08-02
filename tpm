@@ -7,14 +7,22 @@ SCRIPTS_DIR="$CURRENT_DIR/scripts"
 source "$SCRIPTS_DIR/variables.sh"
 source "$SCRIPTS_DIR/helpers.sh"
 
+tpm_path_set() {
+	tmux show-environment -g "$DEFAULT_TPM_ENV_VAR_NAME" >/dev/null 2>&1
+}
+
+set_default_tpm_path() {
+	tmux set-environment -g "$DEFAULT_TPM_ENV_VAR_NAME" "$DEFAULT_TPM_PATH"
+}
+
 # Ensures TMUX_PLUGIN_MANAGER_PATH global env variable is set.
-# Default tpm path is "$HOME/.tmux/plugins/". That's where all the plugins are
-# downloaded.
 #
 # Put this in `.tmux.conf` to override the default:
 # `set-environment -g TMUX_PLUGIN_MANAGER_PATH "/some/other/path/"`
 set_tpm_path() {
-	"$SCRIPTS_DIR/set_tpm_path.sh" >/dev/null 2>&1
+	if ! tpm_path_set; then
+		set_default_tpm_path
+	fi
 }
 
 # 1. Fetches plugin names from `@plugin` variables

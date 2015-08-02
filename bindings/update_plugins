@@ -14,22 +14,22 @@ source "$SCRIPTS_DIR/shared_functions.sh"
 
 display_plugin_update_list() {
 	local plugins="$(shared_get_tpm_plugins_list)"
-	echo_message "Installed plugins:"
-	echo_message ""
+	tmux_echo "Installed plugins:"
+	tmux_echo ""
 
 	for plugin in $plugins; do
 		# displaying only installed plugins
 		if plugin_already_installed "$plugin"; then
 			local plugin_name="$(shared_plugin_name "$plugin")"
-			echo_message "  $plugin_name"
+			tmux_echo "  $plugin_name"
 		fi
 	done
 
-	echo_message ""
-	echo_message "Type plugin name to update it."
-	echo_message ""
-	echo_message "- \"all\" - updates all plugins"
-	echo_message "- ENTER - cancels"
+	tmux_echo ""
+	tmux_echo "Type plugin name to update it."
+	tmux_echo ""
+	tmux_echo "- \"all\" - updates all plugins"
+	tmux_echo "- ENTER - cancels"
 }
 
 update_plugin_prompt() {

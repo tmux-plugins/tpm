@@ -18,11 +18,11 @@ use_tmux_echo() {
 if use_tmux_echo; then
 	# use tmux specific echo-ing
 	echo_ok() {
-		echo_message "$*"
+		tmux_echo "$*"
 	}
 
 	echo_err() {
-		echo_message "$*"
+		tmux_echo "$*"
 	}
 else
 	echo_ok() {

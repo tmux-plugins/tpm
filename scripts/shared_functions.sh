@@ -45,7 +45,7 @@ shared_plugin_path() {
 
 # TMUX messaging is weird. You only get a nice clean pane if you do it with
 # `run-shell` command.
-echo_message() {
+tmux_echo() {
 	local message="$1"
 	tmux run-shell "echo '$message'"
 }
@@ -63,10 +63,10 @@ plugin_already_installed() {
 }
 
 end_message() {
-	echo_message ""
-	echo_message "TMUX environment reloaded."
-	echo_message ""
-	echo_message "Done, press ENTER to continue."
+	tmux_echo ""
+	tmux_echo "TMUX environment reloaded."
+	tmux_echo ""
+	tmux_echo "Done, press ENTER to continue."
 }
 
 ensure_tpm_path_exists() {

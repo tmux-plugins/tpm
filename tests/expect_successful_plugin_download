@@ -15,40 +15,36 @@ send "I"
 # cloning might take a while
 set timeout 15
 
+expect_after {
+  timeout { exit 1 }
+}
+
 expect {
-  "Installing \"tmux-example-plugin\"" {
+  "Installing \"tmux-example-plugin\""
+}
 
-    expect {
-      "\"tmux-example-plugin\" download success" {
+expect {
+  "\"tmux-example-plugin\" download success"
+}
 
-        expect { "Done, press ENTER to continue" {
-            send ""
-          }
-        }
-
-      }
-    }
-
-  }
-
-  timeout {
-    puts "Plugin installation timeout (1)";
-    exit 1
+expect {
+  "Done, press ENTER to continue" {
+    send ""
   }
 }
 
+sleep 1
 # this is tmux prefix + I
 send "I"
 
 expect {
-  "Already installed \"tmux-example-plugin\"" {
+  "Already installed \"tmux-example-plugin\""
+}
 
-    expect { "Done, press ENTER to continue" { exit 0 } }
-
-  }
-
-  timeout {
-    puts "Plugin installation timeout (2)";
-    exit 1
+expect {
+  "Done, press ENTER to continue" {
+    exit 0
   }
 }
+
+exit 1

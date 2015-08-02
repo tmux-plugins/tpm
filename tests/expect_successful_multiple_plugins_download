@@ -15,32 +15,30 @@ send "I"
 # cloning might take a while
 set timeout 15
 
-expect { "Installing \"tmux-example-plugin\"" {
+expect_after {
+  timeout { exit 1 }
+}
 
-  expect { "\"tmux-example-plugin\" download success" {
+expect {
+  "Installing \"tmux-example-plugin\""
+}
 
-    expect { "Installing \"tmux-copycat\"" {
+expect {
+  "\"tmux-example-plugin\" download success"
+}
 
-      expect { "\"tmux-copycat\" download success" {
+expect {
+  "Installing \"tmux-copycat\""
+}
 
-        expect { "Done, press ENTER to continue" {
-            send ""
-          }
-        } # Done, press ENTER to continue
+expect {
+  "\"tmux-copycat\" download success"
+}
 
-        }
-      } # "tmux-copycat" download success
-
-      }
-    } # Installing "tmux-copycat"
-
-    }
-  } # "tmux-example-plugin" download success
-
-  }
-
-  timeout {
-    puts "Multiple plugins installation timeout";
-    exit 1
+expect {
+  "Done, press ENTER to continue." {
+    exit 0
   }
 }
+
+exit 1

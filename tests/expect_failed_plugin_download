@@ -16,26 +16,21 @@ send "I"
 set timeout 20
 
 expect_after {
-  timeout {
-    puts "Plugin installation timeout"
-    exit 1
-  }
+  timeout { exit 1 }
 }
 
 expect {
-  "Installing \"non-existing-plugin\"" {
+  "Installing \"non-existing-plugin\""
+}
 
-    expect {
-      "\"non-existing-plugin\" download fail" {
+expect {
+  "\"non-existing-plugin\" download fail"
+}
 
-        expect {
-          "Done, press ENTER to continue" {
-            exit
-          }
-        }
-
-      }
-    }
-
+expect {
+  "Done, press ENTER to continue" {
+    exit 0
   }
 }
+
+exit 1

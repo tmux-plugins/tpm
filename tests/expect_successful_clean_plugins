@@ -14,17 +14,22 @@ send "u"
 
 set timeout 5
 
-expect {
-  "Removing \"tmux-example-plugin\"" {
-    expect {
-      "\"tmux-example-plugin\" clean success" {
-        expect { "Done, press ENTER to continue." { exit 0 } }
-        }
-      }
-    }
+expect_after {
+  timeout { exit 1 }
+}
 
-  timeout {
-    puts "Plugin update prompt timeout";
-    exit 1
+expect {
+  "Removing \"tmux-example-plugin\""
+}
+
+expect {
+  "\"tmux-example-plugin\" clean success"
+}
+
+expect {
+  "Done, press ENTER to continue." {
+    exit 0
   }
 }
+
+exit 1

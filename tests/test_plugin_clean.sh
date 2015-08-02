@@ -14,7 +14,7 @@ manually_install_the_plugin() {
 	git clone --quiet https://github.com/tmux-plugins/tmux-example-plugin
 }
 
-test_plugin_installation() {
+test_plugin_uninstallation() {
 	set_tmux_conf_helper <<- HERE
 	run-shell "$TPM_DIR/tpm"
 	HERE

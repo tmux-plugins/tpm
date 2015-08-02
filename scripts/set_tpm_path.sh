@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-default_tpm_path="$HOME/.tmux/plugins/"
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$CURRENT_DIR/variables.sh"
 
 tpm_path_set() {
-	tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH
+	tmux show-environment -g "$DEFAULT_TPM_ENV_VAR_NAME"
 }
 
 set_default_tpm_path() {
-	tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH "$default_tpm_path"
+	tmux set-environment -g "$DEFAULT_TPM_ENV_VAR_NAME" "$DEFAULT_TPM_PATH"
 }
 
 main() {

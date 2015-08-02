@@ -38,7 +38,7 @@ shared_plugin_name() {
 }
 
 shared_plugin_path() {
-	local plugin=$1
+	local plugin="$1"
 	local plugin_name="$(shared_plugin_name "$plugin")"
 	echo "${SHARED_TPM_PATH}${plugin_name}/"
 }

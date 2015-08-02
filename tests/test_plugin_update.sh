@@ -42,7 +42,8 @@ test_plugin_installation_via_script() {
 
 	manually_install_the_plugin
 
-	script_run_helper "$TPM_DIR/bin/update_plugins" 'usage' 1 ||
+	local expected_exit_code=1
+	script_run_helper "$TPM_DIR/bin/update_plugins" 'usage' "$expected_exit_code" ||
 		fail_helper "[script] running update plugins without args should fail"
 
 	script_run_helper "$TPM_DIR/bin/update_plugins tmux-example-plugin" '"tmux-example-plugin" update success' ||

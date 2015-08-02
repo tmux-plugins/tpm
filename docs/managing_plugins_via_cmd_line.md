@@ -23,11 +23,11 @@ command to install plugins:
 
 To update all installed plugins:
 
-    ~/.tmux/plugins/tpm/bin/install_plugins all
+    ~/.tmux/plugins/tpm/bin/update_plugins all
 
 or update a single plugin:
 
-    ~/.tmux/plugins/tpm/bin/install_plugins tmux-sensible
+    ~/.tmux/plugins/tpm/bin/update_plugins tmux-sensible
 
 ### Removing plugins
 

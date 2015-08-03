@@ -1,21 +1,40 @@
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
 tpm_plugins_variable_name="@tpm_plugins"
 
+# manually expanding tilde char or `$HOME` variable.
+_manual_expansion() {
+	local path="$1"
+	local expanded_tilde="${path/#\~/$HOME}"
+	echo "${expanded_tilde/#\$HOME/$HOME}"
+}
+
 _tpm_path() {
 	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
-	# manually expanding tilde or `$HOME` variable.
-	string_path="${string_path/#\~/$HOME}"
-	echo "${string_path/#\$HOME/$HOME}"
+	_manual_expansion "$string_path"
 }
 
 _CACHED_TPM_PATH="$(_tpm_path)"
 
-tpm_path() {
-	echo "$_CACHED_TPM_PATH"
-}
-
 _tmux_conf_contents() {
 	cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null
+	if [ "$1" == "full" ]; then # also output content from sourced files
+		local file
+		for file in $(_sourced_files); do
+			cat $(_manual_expansion "$file") 2>/dev/null
+		done
+	fi
+}
+
+# return files sourced from tmux config files
+_sourced_files() {
+	_tmux_conf_contents |
+		awk '/^ *source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
+}
+
+# PUBLIC FUNCTIONS BELOW
+
+tpm_path() {
+	echo "$_CACHED_TPM_PATH"
 }
 
 tpm_plugins_list_helper() {
@@ -23,7 +42,7 @@ tpm_plugins_list_helper() {
 	echo "$(tmux start-server\; show-option -gqv "$tpm_plugins_variable_name")"
 
 	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
-	_tmux_conf_contents |
+	_tmux_conf_contents "full" |
 		awk '/^ *set +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
 }
 

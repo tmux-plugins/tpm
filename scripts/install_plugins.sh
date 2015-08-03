@@ -13,7 +13,7 @@ fi
 
 clone() {
 	local plugin="$1"
-	cd "$SHARED_TPM_PATH" &&
+	cd "$(tpm_path)" &&
 		GIT_TERMINAL_PROMPT=0 git clone --recursive "$plugin" >/dev/null 2>&1
 }
 
@@ -49,14 +49,14 @@ install_plugins() {
 }
 
 verify_tpm_path_permissions() {
+	local path="$(tpm_path)"
 	# check the write permission flag for all users to ensure
 	# that we have proper access
-	[ -w "$SHARED_TPM_PATH" ] ||
-		echo_err "$SHARED_TPM_PATH is not writable!"
+	[ -w "$path" ] ||
+		echo_err "$path is not writable!"
 }
 
 main() {
-	shared_set_tpm_path_constant
 	ensure_tpm_path_exists
 	verify_tpm_path_permissions
 	install_plugins

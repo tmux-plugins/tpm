@@ -2,14 +2,18 @@
 
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
 tpm_plugins_variable_name="@tpm_plugins"
-SHARED_TPM_PATH=""
 
-# sets a "global variable" for the current file
-shared_set_tpm_path_constant() {
+_tpm_path() {
 	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
 	# manually expanding tilde or `$HOME` variable.
 	string_path="${string_path/#\~/$HOME}"
-	SHARED_TPM_PATH="${string_path/#\$HOME/$HOME}"
+	echo "${string_path/#\$HOME/$HOME}"
+}
+
+_CACHED_TPM_PATH="$(_tpm_path)"
+
+tpm_path() {
+	echo "$_CACHED_TPM_PATH"
 }
 
 _tmux_conf_contents() {
@@ -40,7 +44,7 @@ shared_plugin_name() {
 shared_plugin_path() {
 	local plugin="$1"
 	local plugin_name="$(shared_plugin_name "$plugin")"
-	echo "${SHARED_TPM_PATH}${plugin_name}/"
+	echo "$(tpm_path)${plugin_name}/"
 }
 
 plugin_already_installed() {
@@ -52,7 +56,7 @@ plugin_already_installed() {
 }
 
 ensure_tpm_path_exists() {
-	mkdir -p "$SHARED_TPM_PATH"
+	mkdir -p "$(tpm_path)"
 }
 
 fail_helper() {

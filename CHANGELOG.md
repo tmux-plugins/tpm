@@ -11,6 +11,7 @@
 - refactor test `expect` scripts, make them simpler and ensure they properly
   assert expectations
 - refactor code that sets 'TMUX_PLUGIN_MANAGER_PATH' global env var
+- stop using global variable for 'tpm path'
 
 ### v2.0.0, 2015-07-07
 - enable overriding default key bindings

@@ -35,7 +35,6 @@ source_plugins() {
 }
 
 main() {
-	shared_set_tpm_path_constant
 	source_plugins
 }
 main

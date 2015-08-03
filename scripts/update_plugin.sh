@@ -58,7 +58,6 @@ update_plugins() {
 }
 
 main() {
-	shared_set_tpm_path_constant
 	if [ "$1" == "all" ]; then
 		update_all
 	else

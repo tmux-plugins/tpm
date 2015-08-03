@@ -15,7 +15,7 @@ clean_plugins() {
 	local plugins plugin plugin_directory
 	plugins="$(shared_get_tpm_plugins_list)"
 
-	for plugin_directory in "$SHARED_TPM_PATH"/*; do
+	for plugin_directory in "$(tpm_path)"/*; do
 		[ -d "${plugin_directory}" ] || continue
 		plugin="$(shared_plugin_name "${plugin_directory}")"
 		case "${plugins}" in
@@ -33,7 +33,6 @@ clean_plugins() {
 }
 
 main() {
-	shared_set_tpm_path_constant
 	ensure_tpm_path_exists
 	clean_plugins
 	exit_value_helper

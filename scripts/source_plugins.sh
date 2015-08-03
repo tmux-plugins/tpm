@@ -12,7 +12,7 @@ plugin_dir_exists() {
 # Files are ran as executables.
 # No errors if the plugin dir does not exist.
 silently_source_all_tmux_files() {
-	local plugin_path=$1
+	local plugin_path="$1"
 	local plugin_tmux_files="$plugin_path*.tmux"
 	if plugin_dir_exists "$plugin_path"; then
 		for tmux_file in $plugin_tmux_files; do
@@ -25,16 +25,12 @@ silently_source_all_tmux_files() {
 	fi
 }
 
-source_plugin() {
-	local plugin=$1
-	local plugin_path="$(shared_plugin_path "$plugin")"
-	silently_source_all_tmux_files "$plugin_path"
-}
-
 source_plugins() {
+	local plugin plugin_path
 	local plugins="$(shared_get_tpm_plugins_list)"
 	for plugin in $plugins; do
-		source_plugin "$plugin"
+		plugin_path="$(shared_plugin_path "$plugin")"
+		silently_source_all_tmux_files "$plugin_path"
 	done
 }
 

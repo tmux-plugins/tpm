@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v3.0.0, 2015-08-03
 - refactor `shared_set_tpm_path_constant` function
 - move all instructions to `docs/` dir
 - add `bin/install_plugins` cli executable script

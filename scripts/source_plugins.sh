@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+HELPERS_DIR="$CURRENT_DIR/helpers"
 
-source "$CURRENT_DIR/shared_functions.sh"
+source "$HELPERS_DIR/plugin_functions.sh"
 
 plugin_dir_exists() {
 	[ -d "$1" ]
@@ -27,9 +28,9 @@ silently_source_all_tmux_files() {
 
 source_plugins() {
 	local plugin plugin_path
-	local plugins="$(shared_get_tpm_plugins_list)"
+	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
-		plugin_path="$(shared_plugin_path "$plugin")"
+		plugin_path="$(plugin_path_helper "$plugin")"
 		silently_source_all_tmux_files "$plugin_path"
 	done
 }

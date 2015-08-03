@@ -3,7 +3,8 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 HELPERS_DIR="$CURRENT_DIR/helpers"
 
-source "$CURRENT_DIR/shared_functions.sh"
+source "$HELPERS_DIR/plugin_functions.sh"
+source "$HELPERS_DIR/utility.sh"
 
 if [ "$1" == "--tmux-echo" ]; then # tmux-specific echo functions
 	source "$HELPERS_DIR/tmux_echo_functions.sh"
@@ -29,7 +30,7 @@ clone_plugin() {
 # clone plugin and produce output
 install_plugin() {
 	local plugin="$1"
-	local plugin_name="$(shared_plugin_name "$plugin")"
+	local plugin_name="$(plugin_name_helper "$plugin")"
 
 	if plugin_already_installed "$plugin"; then
 		echo_ok "Already installed \"$plugin_name\""
@@ -42,7 +43,7 @@ install_plugin() {
 }
 
 install_plugins() {
-	local plugins="$(shared_get_tpm_plugins_list)"
+	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
 		install_plugin "$plugin"
 	done

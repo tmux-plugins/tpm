@@ -11,19 +11,19 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPTS_DIR="$CURRENT_DIR/../scripts"
 HELPERS_DIR="$SCRIPTS_DIR/helpers"
 
-source "$SCRIPTS_DIR/shared_functions.sh"
+source "$HELPERS_DIR/plugin_functions.sh"
 source "$HELPERS_DIR/tmux_echo_functions.sh"
 source "$HELPERS_DIR/tmux_utils.sh"
 
 display_plugin_update_list() {
-	local plugins="$(shared_get_tpm_plugins_list)"
+	local plugins="$(tpm_plugins_list_helper)"
 	tmux_echo "Installed plugins:"
 	tmux_echo ""
 
 	for plugin in $plugins; do
 		# displaying only installed plugins
 		if plugin_already_installed "$plugin"; then
-			local plugin_name="$(shared_plugin_name "$plugin")"
+			local plugin_name="$(plugin_name_helper "$plugin")"
 			tmux_echo "  $plugin_name"
 		fi
 	done

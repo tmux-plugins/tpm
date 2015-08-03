@@ -1,5 +1,3 @@
-# shared functions and constants
-
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
 tpm_plugins_variable_name="@tpm_plugins"
 
@@ -20,7 +18,7 @@ _tmux_conf_contents() {
 	cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null
 }
 
-shared_get_tpm_plugins_list() {
+tpm_plugins_list_helper() {
 	# DEPRECATED: lists plugins from @tpm_plugins option
 	echo "$(tmux start-server\; show-option -gqv "$tpm_plugins_variable_name")"
 
@@ -32,7 +30,7 @@ shared_get_tpm_plugins_list() {
 # Allowed plugin name formats:
 # 1. "git://github.com/user/plugin_name.git"
 # 2. "user/plugin_name"
-shared_plugin_name() {
+plugin_name_helper() {
 	local plugin="$1"
 	# get only the part after the last slash, e.g. "plugin_name.git"
 	local plugin_basename="$(basename "$plugin")"
@@ -41,34 +39,16 @@ shared_plugin_name() {
 	echo "$plugin_name"
 }
 
-shared_plugin_path() {
+plugin_path_helper() {
 	local plugin="$1"
-	local plugin_name="$(shared_plugin_name "$plugin")"
+	local plugin_name="$(plugin_name_helper "$plugin")"
 	echo "$(tpm_path)${plugin_name}/"
 }
 
 plugin_already_installed() {
 	local plugin="$1"
-	local plugin_path="$(shared_plugin_path "$plugin")"
+	local plugin_path="$(plugin_path_helper "$plugin")"
 	[ -d "$plugin_path" ] &&
 		cd "$plugin_path" &&
 		git remote >/dev/null 2>&1
-}
-
-ensure_tpm_path_exists() {
-	mkdir -p "$(tpm_path)"
-}
-
-fail_helper() {
-	local message="$1"
-	echo "$message" >&2
-	FAIL="true"
-}
-
-exit_value_helper() {
-	if [ "$FAIL" == "true" ]; then
-		exit 1
-	else
-		exit 0
-	fi
 }

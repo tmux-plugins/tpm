@@ -3,7 +3,8 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 HELPERS_DIR="$CURRENT_DIR/helpers"
 
-source "$CURRENT_DIR/shared_functions.sh"
+source "$HELPERS_DIR/plugin_functions.sh"
+source "$HELPERS_DIR/utility.sh"
 
 if [ "$1" == "--tmux-echo" ]; then # tmux-specific echo functions
 	source "$HELPERS_DIR/tmux_echo_functions.sh"
@@ -13,11 +14,11 @@ fi
 
 clean_plugins() {
 	local plugins plugin plugin_directory
-	plugins="$(shared_get_tpm_plugins_list)"
+	plugins="$(tpm_plugins_list_helper)"
 
 	for plugin_directory in "$(tpm_path)"/*; do
 		[ -d "${plugin_directory}" ] || continue
-		plugin="$(shared_plugin_name "${plugin_directory}")"
+		plugin="$(plugin_name_helper "${plugin_directory}")"
 		case "${plugins}" in
 			*"${plugin}"*) : ;;
 			*)

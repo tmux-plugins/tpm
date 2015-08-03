@@ -3,36 +3,18 @@
 # this script handles core logic of updating plugins
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+HELPERS_DIR="$CURRENT_DIR/helpers"
 
 source "$CURRENT_DIR/shared_functions.sh"
 
-TMUX_ECHO_FLAG="$1"
-shift
-
-# True if invoked as tmux mapping or tmux command,
-# false if invoked via command line wrapper from `bin/` directory.
-use_tmux_echo() {
-	[ "$TMUX_ECHO_FLAG" == "--tmux-echo" ]
-}
-
-if use_tmux_echo; then
-	# use tmux specific echo-ing
-	echo_ok() {
-		tmux_echo "$*"
-	}
-
-	echo_err() {
-		tmux_echo "$*"
-	}
-else
-	echo_ok() {
-		echo "$*"
-	}
-
-	echo_err() {
-		fail_helper "$*"
-	}
+if [ "$1" == "--tmux-echo" ]; then # tmux-specific echo functions
+	source "$HELPERS_DIR/tmux_echo_functions.sh"
+else # shell output functions
+	source "$HELPERS_DIR/shell_echo_functions.sh"
 fi
+
+# from now on ignore first script argument
+shift
 
 pull_changes() {
 	local plugin="$1"

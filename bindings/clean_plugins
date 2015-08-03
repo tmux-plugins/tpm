@@ -5,8 +5,10 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPTS_DIR="$CURRENT_DIR/../scripts"
+HELPERS_DIR="$SCRIPTS_DIR/helpers"
 
-source "$SCRIPTS_DIR/shared_functions.sh"
+source "$HELPERS_DIR/tmux_echo_functions.sh"
+source "$HELPERS_DIR/tmux_utils.sh"
 
 main() {
 	reload_tmux_environment

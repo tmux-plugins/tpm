@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- upgrade to new version of `tmux-test`
 
 ### v3.0.0, 2015-08-03
 - refactor `shared_set_tpm_path_constant` function

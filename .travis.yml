@@ -1,11 +1,14 @@
-# generic packages and latest Tmux 1.9a
+# generic packages and tmux
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y git-core expect
   - sudo apt-get install -y python-software-properties software-properties-common
-  - sudo add-apt-repository -y ppa:pi-rho/dev
-  - sudo apt-get update
-  - sudo apt-get install -y tmux=1.9a-1~ppa1~p
+  - sudo apt-get install -y libevent-dev libncurses-dev
+  - git clone https://github.com/tmux/tmux.git
+  - cd tmux
+  - git checkout 2.0
+  - sh autogen.sh
+  - ./configure && make && sudo make install
 
 install:
   - git fetch --unshallow --recurse-submodules || git fetch --recurse-submodules

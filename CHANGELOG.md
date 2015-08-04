@@ -2,6 +2,8 @@
 
 ### master
 - upgrade to new version of `tmux-test`
+- bug: when using `emacs` copy mode, Enter does not quit screen after tpm
+  installation/update. Fix by making `Escape` the key for emacs mode.
 
 ### v3.0.0, 2015-08-03
 - refactor `shared_set_tpm_path_constant` function

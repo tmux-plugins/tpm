@@ -11,6 +11,7 @@ source "$CURRENT_DIR/helpers/tpm.sh"
 
 test_plugin_installation_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @tpm_plugins "tmux-plugins/tmux-example-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -28,6 +29,7 @@ test_plugin_installation_via_tmux_key_binding() {
 
 test_legacy_and_new_syntax_for_plugin_installation_work_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @tpm_plugins "                   \
 		tmux-plugins/tmux-example-plugin    \
 	"
@@ -53,6 +55,7 @@ test_legacy_and_new_syntax_for_plugin_installation_work_via_tmux_key_binding() {
 
 test_plugin_installation_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @tpm_plugins "tmux-plugins/tmux-example-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -71,6 +74,7 @@ test_plugin_installation_via_script() {
 
 test_legacy_and_new_syntax_for_plugin_installation_work_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @tpm_plugins "                   \
 		tmux-plugins/tmux-example-plugin    \
 	"

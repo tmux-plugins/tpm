@@ -17,6 +17,7 @@ manually_install_the_plugin() {
 
 test_plugin_update_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -36,6 +37,7 @@ test_plugin_update_via_tmux_key_binding() {
 
 test_plugin_update_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE

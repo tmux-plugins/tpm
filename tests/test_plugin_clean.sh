@@ -18,6 +18,7 @@ manually_install_the_plugin() {
 
 test_plugin_uninstallation_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	run-shell "$TPM_DIR/tpm"
 	HERE
 
@@ -33,6 +34,7 @@ test_plugin_uninstallation_via_tmux_key_binding() {
 
 test_plugin_uninstallation_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	run-shell "$TPM_DIR/tpm"
 	HERE
 
@@ -46,6 +48,7 @@ test_plugin_uninstallation_via_script() {
 
 test_unsuccessful_plugin_uninstallation_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	run-shell "$TPM_DIR/tpm"
 	HERE
 

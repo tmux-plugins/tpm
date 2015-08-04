@@ -15,6 +15,7 @@ source "$CURRENT_DIR/helpers/tpm.sh"
 
 test_plugin_installation_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -30,6 +31,7 @@ test_plugin_installation_via_tmux_key_binding() {
 
 test_plugin_installation_custom_dir_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set-environment -g TMUX_PLUGIN_MANAGER_PATH '$CUSTOM_PLUGINS_DIR'
 
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
@@ -48,6 +50,7 @@ test_plugin_installation_custom_dir_via_tmux_key_binding() {
 
 test_non_existing_plugin_installation_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/non-existing-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -60,6 +63,7 @@ test_non_existing_plugin_installation_via_tmux_key_binding() {
 
 test_multiple_plugins_installation_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	\ \ set  -g    @plugin 'tmux-plugins/tmux-copycat'
 	run-shell "$TPM_DIR/tpm"
@@ -79,6 +83,7 @@ test_multiple_plugins_installation_via_tmux_key_binding() {
 
 test_plugins_installation_from_sourced_file_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	source '$ADDITIONAL_CONFIG_FILE_1'
 	set -g @plugin 'tmux-plugins/tmux-example-plugin'
 	run-shell "$TPM_DIR/tpm"
@@ -101,6 +106,7 @@ test_plugins_installation_from_sourced_file_via_tmux_key_binding() {
 
 test_plugins_installation_from_multiple_sourced_files_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	\ \ source    '$ADDITIONAL_CONFIG_FILE_1'
 	source-file '$ADDITIONAL_CONFIG_FILE_2'
 	run-shell "$TPM_DIR/tpm"
@@ -126,6 +132,7 @@ test_plugins_installation_from_multiple_sourced_files_via_tmux_key_binding() {
 
 test_plugin_installation_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -144,6 +151,7 @@ test_plugin_installation_via_script() {
 
 test_plugin_installation_custom_dir_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set-environment -g TMUX_PLUGIN_MANAGER_PATH '$CUSTOM_PLUGINS_DIR'
 
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
@@ -165,6 +173,7 @@ test_plugin_installation_custom_dir_via_script() {
 
 test_non_existing_plugin_installation_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/non-existing-plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -178,6 +187,7 @@ test_non_existing_plugin_installation_via_script() {
 
 test_multiple_plugins_installation_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "tmux-plugins/tmux-example-plugin"
 	\ \ set  -g    @plugin 'tmux-plugins/tmux-copycat'
 	run-shell "$TPM_DIR/tpm"
@@ -200,6 +210,7 @@ test_multiple_plugins_installation_via_script() {
 
 test_plugins_installation_from_sourced_file_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	source '$ADDITIONAL_CONFIG_FILE_1'
 	set -g @plugin 'tmux-plugins/tmux-example-plugin'
 	run-shell "$TPM_DIR/tpm"
@@ -225,6 +236,7 @@ test_plugins_installation_from_sourced_file_via_script() {
 
 test_plugins_installation_from_multiple_sourced_files_via_script() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	\ \ source    '$ADDITIONAL_CONFIG_FILE_1'
 	source-file '$ADDITIONAL_CONFIG_FILE_2'
 	set -g @plugin 'tmux-plugins/tmux-example-plugin'

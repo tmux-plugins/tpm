@@ -33,6 +33,7 @@ check_tpm_path() {
 
 test_plugin_sourcing() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set -g @plugin "doesnt_matter/tmux_test_plugin"
 	run-shell "$TPM_DIR/tpm"
 	HERE
@@ -51,6 +52,7 @@ test_plugin_sourcing() {
 
 test_default_tpm_path() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	run-shell "$TPM_DIR/tpm"
 	HERE
 
@@ -62,6 +64,7 @@ test_default_tpm_path() {
 
 test_custom_tpm_path() {
 	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
 	set-environment -g TMUX_PLUGIN_MANAGER_PATH '$CUSTOM_PLUGINS_DIR'
 	run-shell "$TPM_DIR/tpm"
 	HERE

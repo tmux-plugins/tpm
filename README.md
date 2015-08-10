@@ -69,6 +69,8 @@ For more plugins, check [here](https://github.com/tmux-plugins).
 
 ### Docs
 
+- [Help, tpm not working](docs/tpm_not_working.md) - problem solutions
+
 More advanced features and instructions, regular users probably do not need
 this:
 

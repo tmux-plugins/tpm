@@ -8,7 +8,7 @@ HELPERS_DIR="$CURRENT_DIR/helpers"
 source "$HELPERS_DIR/plugin_functions.sh"
 source "$HELPERS_DIR/utility.sh"
 
-if [ "$1" == "--tmux-echo" ]; then # tmux-specific echo functions
+if [[ "$1" == "--tmux-echo" ]]; then # tmux-specific echo functions
 	source "$HELPERS_DIR/tmux_echo_functions.sh"
 else # shell output functions
 	source "$HELPERS_DIR/shell_echo_functions.sh"
@@ -38,28 +38,36 @@ update_all() {
 	echo_ok ""
 	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
-		local plugin_name="$(plugin_name_helper "$plugin")"
-		# updating only installed plugins
-		if plugin_already_installed "$plugin_name"; then
-			update "$plugin_name"
-		fi
+		run_parallel_all() {
+			local plugin_name="$(plugin_name_helper "$plugin")"
+			# updating only installed plugins
+			if plugin_already_installed "$plugin_name"; then
+				update "$plugin_name"
+			fi
+		}
+		run_parallel_all &
 	done
+	wait
 }
 
 update_plugins() {
 	local plugins="$*"
 	for plugin in $plugins; do
-		local plugin_name="$(plugin_name_helper "$plugin")"
-		if plugin_already_installed "$plugin_name"; then
-			update "$plugin_name"
-		else
-			echo_err "$plugin_name not installed!"
-		fi
+		run_parallel() {
+			local plugin_name="$(plugin_name_helper "$plugin")"
+			if plugin_already_installed "$plugin_name"; then
+				update "$plugin_name"
+			else
+				echo_err "$plugin_name not installed!"
+			fi
+		}
+		run_parallel &
 	done
+	wait
 }
 
 main() {
-	if [ "$1" == "all" ]; then
+	if [[ "$1" == "all" ]]; then
 		update_all
 	else
 		update_plugins "$*"

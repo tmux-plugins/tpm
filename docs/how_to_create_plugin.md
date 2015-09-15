@@ -104,5 +104,5 @@ If the plugin is on Github, your users will be able to use the shorthand of
 
 Hopefully, that was easy. As you can see, it's mostly shell scripting.
 
-You can use other scripting languages (ruby, phyton etc) but plain old shell
+You can use other scripting languages (ruby, python etc) but plain old shell
 is preferred because of portability.

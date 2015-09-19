@@ -5,6 +5,8 @@
 - bug: when using `emacs` copy mode, Enter does not quit screen after tpm
   installation/update. Fix by making `Escape` the key for emacs mode.
 - add a doc with troubleshooting instructions
+- add `.gitattributes` file that forces linefeed characters (classic `\n`) as
+  line endings - helps with misconfigured git on windows/cygwin
 
 ### v3.0.0, 2015-08-03
 - refactor `shared_set_tpm_path_constant` function

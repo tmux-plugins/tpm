@@ -1,0 +1,9 @@
+# Force text files to have unix eols, so Windows/Cygwin does not break them
+*.* eol=lf
+
+# These files are unfortunately not recognized as text files so
+# explicitly listing them here
+tpm eol=lf
+bin/* eol=lf
+bindings/* eol=lf
+tests/* eol=lf

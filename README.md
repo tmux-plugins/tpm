@@ -46,7 +46,7 @@ You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 ### Uninstalling plugins
 
 1. remove (or comment out) plugin from the list
-2. hit `prefix + alt + u` (u as in **u**install) to remove the plugin
+2. hit `prefix + alt + u` (u as in **u**ninstall) to remove the plugin
 
 All the plugins are installed to `~/.tmux/plugins/` so alternatively you can
 find plugin directory there and remove it.

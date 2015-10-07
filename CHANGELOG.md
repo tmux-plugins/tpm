@@ -7,6 +7,7 @@
 - add a doc with troubleshooting instructions
 - add `.gitattributes` file that forces linefeed characters (classic `\n`) as
   line endings - helps with misconfigured git on windows/cygwin
+- readme update: announce Cygwin support
 
 ### v3.0.0, 2015-08-03
 - refactor `shared_set_tpm_path_constant` function

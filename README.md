@@ -4,6 +4,8 @@
 
 Installs and loads TMUX plugins.
 
+Tested and working on Linux, OSX and Cygwin.
+
 ### Installation
 
 Requirements: `tmux` version 1.9 (or higher), `git`, `bash`.

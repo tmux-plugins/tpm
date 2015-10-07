@@ -29,6 +29,22 @@ test_plugin_installation_via_tmux_key_binding() {
 	teardown_helper
 }
 
+test_plugin_installation_via_tmux_key_binding_set_option() {
+	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
+	set-option -g @plugin "tmux-plugins/tmux-example-plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	"$CURRENT_DIR/expect_successful_plugin_download" ||
+		fail_helper "[key-binding][set-option] plugin installation fails"
+
+	check_dir_exists_helper "$PLUGINS_DIR/tmux-example-plugin/" ||
+		fail_helper "[key-binding][set-option] plugin download fails"
+
+	teardown_helper
+}
+
 test_plugin_installation_custom_dir_via_tmux_key_binding() {
 	set_tmux_conf_helper <<- HERE
 	set -g mode-keys vi

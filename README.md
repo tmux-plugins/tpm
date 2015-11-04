@@ -4,7 +4,7 @@
 
 Installs and loads TMUX plugins.
 
-Tested and working on Linux, OSX and Cygwin.
+Tested and working on Linux, OSX, and Cygwin.
 
 ### Installation
 
@@ -36,19 +36,19 @@ Reload TMUX environment so TPM is sourced:
 That's it!
 
 (**Note:** using `set -g @tpm_plugins` is deprecated, but still works alongside
-new syntax)
+new syntax.)
 
 ### Installing plugins
 
-1. add new plugin to `.tmux.conf` with `set -g @plugin '...'`
-2. hit `prefix + I` (I as in **I**nstall) to fetch the plugin
+1. Add new plugin to `~/.tmux.conf` with `set -g @plugin '...'`
+2. Press `prefix + I` (capital I, as in **I**nstall) to fetch the plugin.
 
 You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 
 ### Uninstalling plugins
 
-1. remove (or comment out) plugin from the list
-2. hit `prefix + alt + u` (u as in **u**ninstall) to remove the plugin
+1. Remove (or comment out) plugin from the list.
+2. Press `prefix + alt + u` (lowercase u as in **u**ninstall) to remove the plugin.
 
 All the plugins are installed to `~/.tmux/plugins/` so alternatively you can
 find plugin directory there and remove it.
@@ -56,8 +56,8 @@ find plugin directory there and remove it.
 ### Key bindings
 
 `prefix + I`
-- installs new plugins from github or any other git repo
-- refreshes TMUX environment
+- Installs new plugins from GitHub or any other git repository
+- Refreshes TMUX environment
 
 `prefix + U`
 - updates plugin(s)

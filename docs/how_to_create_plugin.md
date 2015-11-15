@@ -27,7 +27,7 @@ directory. That's how plugins are run.
 Create a plugin run file in plugin directory:
 
     $ touch my_plugin.tmux
-    $ chmod +x my_plugin.tmux
+    $ chmod u+x my_plugin.tmux
 
 You can have more than one `*.tmux` file, and all will get executed. However, usually
 you'll need just one.
@@ -69,7 +69,7 @@ Now that we have the binding, let's create a script that's invoked with
 
     $ mkdir scripts
     $ touch scripts/tmux_list_plugins.sh
-    $ chmod +x scripts/tmux_list_plugins.sh
+    $ chmod u+x scripts/tmux_list_plugins.sh
 
 And here's the script content:
 

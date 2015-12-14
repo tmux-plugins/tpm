@@ -35,9 +35,6 @@ Reload TMUX environment so TPM is sourced:
 
 That's it!
 
-(**Note:** using `set -g @tpm_plugins` is deprecated, but still works alongside
-new syntax.)
-
 ### Installing plugins
 
 1. Add new plugin to `~/.tmux.conf` with `set -g @plugin '...'`

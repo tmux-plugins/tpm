@@ -14,14 +14,14 @@ Here's the list of issues users had with `tpm`:
 - ZSH tmux plugin might be causing issues.<br/>
   If you have it installed, try disabling it and see if `tpm` works then.
 
-> Help, I'm using `tmux -f /path/to/my_tmux.conf` option to start Tmux and for
-some reason plugins aren't loaded!?
+> Help, I'm using custom config file with `tmux -f /path/to/my_tmux.conf`
+to start Tmux and for some reason plugins aren't loaded!?
 
 [Issue #57](https://github.com/tmux-plugins/tpm/issues/57)
 
-`tpm` has a known issue when using alternative config file with `-f` option.
-The solution is to use alternative plugin definition. Here are the steps to
-make it work:
+`tpm` has a known issue when using custom config file with `-f` option.
+The solution is to use alternative plugin definition syntax. Here are the steps
+to make it work:
 
 1. remove all `set -g @plugin` lines from tmux config file
 2. in the config file define the plugins in the following way:

@@ -1,8 +1,8 @@
 # Tmux Plugin Manager
 
-[![Build Status](https://travis-ci.org/tmux-plugins/tpm.png?branch=master)](https://travis-ci.org/tmux-plugins/tpm)
+[![Build Status](https://travis-ci.org/tmux-plugins/tpm.svg?branch=master)](https://travis-ci.org/tmux-plugins/tpm)
 
-Installs and loads TMUX plugins.
+Installs and loads `tmux` plugins.
 
 Tested and working on Linux, OSX, and Cygwin.
 
@@ -12,54 +12,60 @@ Requirements: `tmux` version 1.9 (or higher), `git`, `bash`.
 
 Clone TPM:
 
-    $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```bash
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
 
 Put this at the bottom of `.tmux.conf`:
 
-    # List of plugins
-    set -g @plugin 'tmux-plugins/tpm'
-    set -g @plugin 'tmux-plugins/tmux-sensible'
+```bash
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
 
-    # Other examples:
-    # set -g @plugin 'github_username/plugin_name'
-    # set -g @plugin 'git@github.com/user/plugin'
-    # set -g @plugin 'git@bitbucket.com/user/plugin'
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'git@github.com/user/plugin'
+# set -g @plugin 'git@bitbucket.com/user/plugin'
 
-    # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-    run '~/.tmux/plugins/tpm/tpm'
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+```
 
 Reload TMUX environment so TPM is sourced:
 
-    # type this in terminal
-    $ tmux source ~/.tmux.conf
+```bash
+# type this in terminal
+$ tmux source ~/.tmux.conf
+```
 
 That's it!
 
 ### Installing plugins
 
 1. Add new plugin to `~/.tmux.conf` with `set -g @plugin '...'`
-2. Press `prefix + I` (capital I, as in **I**nstall) to fetch the plugin.
+2. Press `prefix` + <kbd>I</kbd> (capital I, as in **I**nstall) to fetch the plugin.
 
 You're good to go! The plugin was cloned to `~/.tmux/plugins/` dir and sourced.
 
 ### Uninstalling plugins
 
 1. Remove (or comment out) plugin from the list.
-2. Press `prefix + alt + u` (lowercase u as in **u**ninstall) to remove the plugin.
+2. Press `prefix` + <kbd>alt</kbd> + <kbd>u</kbd> (lowercase u as in **u**ninstall) to remove the plugin.
 
 All the plugins are installed to `~/.tmux/plugins/` so alternatively you can
 find plugin directory there and remove it.
 
 ### Key bindings
 
-`prefix + I`
+`prefix` + <kbd>I</kbd>
 - Installs new plugins from GitHub or any other git repository
 - Refreshes TMUX environment
 
-`prefix + U`
+`prefix` + <kbd>U</kbd>
 - updates plugin(s)
 
-`prefix + alt + u`
+`prefix` + <kbd>alt</kbd> + <kbd>u</kbd>
 - remove/uninstall plugins not on the plugin list
 
 ### More plugins
@@ -80,13 +86,15 @@ this:
 
 ### Tests
 
-Tests for this project run on [travis](https://travis-ci.org/tmux-plugins/tpm).
+Tests for this project run on [Travis CI](https://travis-ci.org/tmux-plugins/tpm).
 
 When run locally, [vagrant](https://www.vagrantup.com/) is required.
 Run tests with:
 
-    # within project directory
-    $ ./run_tests
+```bash
+# within project directory
+$ ./run_tests
+```
 
 ### Other goodies
 

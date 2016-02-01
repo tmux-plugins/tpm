@@ -28,7 +28,7 @@ _tmux_conf_contents() {
 # return files sourced from tmux config files
 _sourced_files() {
 	_tmux_conf_contents |
-		awk '/^ *source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
+		awk '/^[ \t]*source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
 }
 
 # PUBLIC FUNCTIONS BELOW
@@ -43,7 +43,7 @@ tpm_plugins_list_helper() {
 
 	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
 	_tmux_conf_contents "full" |
-		awk '/^ *set(-option)? +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
+		awk '/^[ \t]*set(-option)? +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
 }
 
 # Allowed plugin name formats:

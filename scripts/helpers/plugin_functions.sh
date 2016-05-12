@@ -38,7 +38,7 @@ tpm_path() {
 }
 
 tpm_plugins_list_helper() {
-	# DEPRECATED: lists plugins from @tpm_plugins option
+	# lists plugins from @tpm_plugins option
 	echo "$(tmux start-server\; show-option -gqv "$tpm_plugins_variable_name")"
 
 	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries

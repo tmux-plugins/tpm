@@ -8,6 +8,7 @@
 - add `.gitattributes` file that forces linefeed characters (classic `\n`) as
   line endings - helps with misconfigured git on windows/cygwin
 - readme update: announce Cygwin support
+- un-deprecate old plugin definition syntax: `set -g @tpm_plugins`
 
 ### v3.0.0, 2015-08-03
 - refactor `shared_set_tpm_path_constant` function

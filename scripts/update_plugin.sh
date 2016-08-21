@@ -25,12 +25,28 @@ pull_changes() {
 		GIT_TERMINAL_PROMPT=0 git submodule update --init --recursive
 }
 
+print_update_status() {
+	# Indent and format the output from the update command.
+	local plugin="$1"
+	local update_output=$(echo "$2" | awk '{print "     | "$0}')
+	local update_status=$3
+
+	if [ $update_status == "0" ]; then
+		echo_ok "$update_output\n  \"$plugin\" update success"
+		echo_ok
+	else
+		echo_err "$update_output\n  \"$plugin\" update fail"
+		echo_err
+	fi
+}
+
 update() {
 	local plugin="$1"
 	echo_ok "Updating \"$plugin\""
-	$(pull_changes "$plugin" > /dev/null 2>&1) &&
-		echo_ok "  \"$plugin\" update success" ||
-		echo_err "  \"$plugin\" update fail"
+	# Note, this cannot be a local variable, since that seems to supress the $? from being set.
+	update_output=$(pull_changes "$plugin" 2>&1);
+	local update_status="$?"
+	$(print_update_status "$plugin" "$update_output" "$update_status")
 }
 
 update_all() {

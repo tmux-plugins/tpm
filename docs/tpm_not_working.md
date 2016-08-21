@@ -60,3 +60,21 @@ Related: [issue #25](https://github.com/tmux-plugins/tpm/issues/25)
 Related: [issue #48](https://github.com/tmux-plugins/tpm/issues/48)
 
 - Make sure `tmux source ~/.tmux.conf` command is ran from inside `tmux`.
+
+<hr />
+
+> tpm not working: '~/.tmux/plugins/tpm/tpm' returned 2 (Windows / Cygwin)
+
+Related: [issue #81](https://github.com/tmux-plugins/tpm/issues/81)
+
+This issue is most likely caused by Windows line endings. For example, if you
+have git's `core.autocrlf` option set to `true`, git will automatically convert
+all the files to Windows line endings which might cause a problem.
+
+The solution is to convert all line ending to Unix newline characters. This
+command handles that for all files under `.tmux/` dir (skips `.git`
+subdirectories):
+
+```bash
+find ~/.tmux -type d -name '.git*' -prune -o -type f -print0 | xargs -0 dos2unix
+```

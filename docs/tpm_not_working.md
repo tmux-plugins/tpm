@@ -2,10 +2,12 @@
 
 Here's the list of issues users had with `tpm`:
 
+<hr />
+
 > Nothing works. `tpm` key bindings `prefix + I`, `prefix + U` not even
   defined.
 
-[Issue #22](https://github.com/tmux-plugins/tpm/issues/22)
+Related [issue #22](https://github.com/tmux-plugins/tpm/issues/22)
 
 - Do you have required `tmux` version to run `tpm`?<br/>
   Check `tmux` version with `$ tmux -V` command and make sure it's higher or
@@ -14,10 +16,12 @@ Here's the list of issues users had with `tpm`:
 - ZSH tmux plugin might be causing issues.<br/>
   If you have it installed, try disabling it and see if `tpm` works then.
 
+<hr />
+
 > Help, I'm using custom config file with `tmux -f /path/to/my_tmux.conf`
 to start Tmux and for some reason plugins aren't loaded!?
 
-[Issue #57](https://github.com/tmux-plugins/tpm/issues/57)
+Related [issue #57](https://github.com/tmux-plugins/tpm/issues/57)
 
 `tpm` has a known issue when using custom config file with `-f` option.
 The solution is to use alternative plugin definition syntax. Here are the steps
@@ -40,15 +44,19 @@ to make it work:
 
 The plugins should now be working.
 
+<hr />
+
 > Weird sequence of characters show up when installing or updating plugins
 
-[Issue #25](https://github.com/tmux-plugins/tpm/issues/25)
+Related: [issue #25](https://github.com/tmux-plugins/tpm/issues/25)
 
 - This could be caused by [tmuxline.vim](https://github.com/edkolev/tmuxline.vim)
   plugin. Uninstall it and see if things work.
 
+<hr />
+
 > "failed to connect to server" error when sourcing .tmux.conf
 
-[Issue #48](https://github.com/tmux-plugins/tpm/issues/48)
+Related: [issue #48](https://github.com/tmux-plugins/tpm/issues/48)
 
 - Make sure `tmux source ~/.tmux.conf` command is ran from inside `tmux`.

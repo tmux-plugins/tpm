@@ -60,6 +60,7 @@ update_plugins() {
 }
 
 main() {
+	ensure_tpm_path_exists
 	if [ "$1" == "all" ]; then
 		update_all
 	else

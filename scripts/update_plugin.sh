@@ -27,7 +27,6 @@ pull_changes() {
 
 update() {
 	local plugin="$1"
-	echo_ok "Updating \"$plugin\""
 	$(pull_changes "$plugin" > /dev/null 2>&1) &&
 		echo_ok "  \"$plugin\" update success" ||
 		echo_err "  \"$plugin\" update fail"
@@ -41,9 +40,10 @@ update_all() {
 		local plugin_name="$(plugin_name_helper "$plugin")"
 		# updating only installed plugins
 		if plugin_already_installed "$plugin_name"; then
-			update "$plugin_name"
+			update "$plugin_name" &
 		fi
 	done
+	wait
 }
 
 update_plugins() {
@@ -51,11 +51,12 @@ update_plugins() {
 	for plugin in $plugins; do
 		local plugin_name="$(plugin_name_helper "$plugin")"
 		if plugin_already_installed "$plugin_name"; then
-			update "$plugin_name"
+			update "$plugin_name" &
 		else
-			echo_err "$plugin_name not installed!"
+			echo_err "$plugin_name not installed!" &
 		fi
 	done
+	wait
 }
 
 main() {

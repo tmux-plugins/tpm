@@ -6,7 +6,9 @@ If you want to install `tpm` and plugins automatically when tmux is started, put
 
 ```
 if "test ! -d ~/.tmux/plugins/tpm" \
-   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm'; \
+    set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.tmux/plugins/'; \
+    run '~/.tmux/plugins/tpm/bin/install_plugins'"
 ```
 
 This useful tip was submitted by @acr4 and narfman0.

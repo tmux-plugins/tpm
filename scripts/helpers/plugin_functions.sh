@@ -28,12 +28,25 @@ _tmux_conf_contents() {
 # return files sourced from tmux config files
 _sourced_files() {
 	_tmux_conf_contents |
-		awk '/^ *source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
+		awk '/^[ \t]*source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
+}
+
+# Want to be able to abort in certain cases
+trap "exit 1" TERM
+export TOP_PID=$$
+
+_fatal_error_abort() {
+	echo >&2 "Aborting."
+	kill -s TERM $TOP_PID
 }
 
 # PUBLIC FUNCTIONS BELOW
 
 tpm_path() {
+	if [ "$_CACHED_TPM_PATH" == "/" ]; then
+		echo >&2 "FATAL: Tmux Plugin Manager not configured in tmux.conf"
+		_fatal_error_abort
+	fi
 	echo "$_CACHED_TPM_PATH"
 }
 
@@ -43,7 +56,7 @@ tpm_plugins_list_helper() {
 
 	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
 	_tmux_conf_contents "full" |
-		awk '/^ *set(-option)? +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
+		awk '/^[ \t]*set(-option)? +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
 }
 
 # Allowed plugin name formats:

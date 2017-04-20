@@ -5,7 +5,7 @@ tpm_plugins_variable_name="@tpm_plugins"
 _manual_expansion() {
 	local path="$1"
 	local expanded_tilde="${path/#\~/$HOME}"
-	echo "${expanded_tilde/#\$HOME/$HOME}"
+	echo $(echo $expanded_tilde | envsubst)
 }
 
 _tpm_path() {

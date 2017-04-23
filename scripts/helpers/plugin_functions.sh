@@ -57,6 +57,9 @@ tpm_plugins_list_helper() {
 	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
 	_tmux_conf_contents "full" |
 		awk '/^[ \t]*set(-option)? +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
+        # split to separate lines, sort, choose unique ones, put back to single line
+        sed 's/ /\n/g' | sort | uniq | tr "\n" " "
+
 }
 
 # Allowed plugin name formats:

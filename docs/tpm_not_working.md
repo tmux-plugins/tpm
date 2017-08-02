@@ -78,3 +78,19 @@ subdirectories):
 ```bash
 find ~/.tmux -type d -name '.git*' -prune -o -type f -print0 | xargs -0 dos2unix
 ```
+
+<hr />
+
+> '~/.tmux/plugins/tpm/tpm' returned 127 (on macOS, w/ tmux installed using brew)
+
+Related: [issue #67](https://github.com/tmux-plugins/tpm/issues/67)
+
+This problem is because tmux's `run-shell` command runs a shell which doesn't read from user configs, thus tmux installed in `/usr/local/bin` will not be found.
+
+The solution is to insert the following line:
+
+```
+set-environment -g PATH "/usr/local/bin:/bin:/usr/bin"
+```
+
+before any `run-shell`/`run` commands in `~/.tmux.conf`.

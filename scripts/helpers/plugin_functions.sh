@@ -13,10 +13,16 @@ _tpm_path() {
 	_manual_expansion "$string_path"
 }
 
+_tmux_extend_path() {
+	local conf_path="$(tmux start-server\; show-environment -g TMUX_EXTEND_PATH | cut -f2 -d=)"
+	_manual_expansion "$conf_path"
+}
+
 _CACHED_TPM_PATH="$(_tpm_path)"
+_CACHED_TMUX_EXTEND_PATH="$(_tmux_extend_path)"
 
 _tmux_conf_contents() {
-	cat /etc/tmux.conf ~/.tmux.conf 2>/dev/null
+	cat /etc/tmux.conf ~/.tmux.conf $_CACHED_TMUX_EXTEND_PATH 2>/dev/null
 	if [ "$1" == "full" ]; then # also output content from sourced files
 		local file
 		for file in $(_sourced_files); do

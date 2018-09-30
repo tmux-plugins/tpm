@@ -27,8 +27,12 @@ _tmux_conf_contents() {
 
 # return files sourced from tmux config files
 _sourced_files() {
-	_tmux_conf_contents |
-		awk '/^[ \t]*source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
+	for f in $(_tmux_conf_contents |
+		grep "tmux source .*" -v |
+		grep "source .*" -o |
+		awk '/^[ \t]*source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'); do
+			eval ls $f;  # eval is required as there could be `source *.conf` to exapnd globs
+	done
 }
 
 # Want to be able to abort in certain cases

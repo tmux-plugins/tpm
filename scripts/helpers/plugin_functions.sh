@@ -19,25 +19,25 @@ _CACHED_TPM_PATH="$(_tpm_path)"
 # This includes a prioritized search on different locations.
 #
 _get_user_tmux_conf() {
-  # Define the different possible locations.
-  custom_location="$TMUX_PLUGIN_MANAGER_CONFIG_LOCATION"
-  xdg_location="$XDG_CONFIG_HOME/tmux/tmux.conf"
-  default_location="$HOME/.tmux.conf"
+	# Define the different possible locations.
+	custom_location="$TMUX_PLUGIN_MANAGER_CONFIG_LOCATION"
+	xdg_location="$XDG_CONFIG_HOME/tmux/tmux.conf"
+	default_location="$HOME/.tmux.conf"
 
-  # Search for the correct configuration file by priority.
-  if [ -n "$custom_location" ]; then
-    echo "$custom_location"
+	# Search for the correct configuration file by priority.
+	if [ -n "$custom_location" ]; then
+		echo "$custom_location"
 
-  elif [ -f "$xdg_location" ]; then
-    echo "$xdg_location"
+	elif [ -f "$xdg_location" ]; then
+		echo "$xdg_location"
 
-  else
-    echo "$default_location"
-  fi
+	else
+		echo "$default_location"
+	fi
 }
 
 _tmux_conf_contents() {
-  user_config=$(_get_user_tmux_conf)
+	user_config=$(_get_user_tmux_conf)
 	cat /etc/tmux.conf "$user_config" 2>/dev/null
 	if [ "$1" == "full" ]; then # also output content from sourced files
 		local file

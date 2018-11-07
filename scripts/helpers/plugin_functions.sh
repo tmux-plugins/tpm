@@ -20,15 +20,11 @@ _CACHED_TPM_PATH="$(_tpm_path)"
 #
 _get_user_tmux_conf() {
 	# Define the different possible locations.
-	custom_location="$TMUX_PLUGIN_MANAGER_CONFIG_LOCATION"
 	xdg_location="$XDG_CONFIG_HOME/tmux/tmux.conf"
 	default_location="$HOME/.tmux.conf"
 
 	# Search for the correct configuration file by priority.
-	if [ -n "$custom_location" ]; then
-		echo "$custom_location"
-
-	elif [ -f "$xdg_location" ]; then
+	if [ -f "$xdg_location" ]; then
 		echo "$xdg_location"
 
 	else

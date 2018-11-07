@@ -16,7 +16,8 @@ Clone TPM:
 $ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-Put this at the bottom of `.tmux.conf`:
+Put this at the bottom of `~/.tmux.conf` (`$XDG_CONFIG_HOME/tmux/tmux.conf`
+works too):
 
 ```bash
 # List of plugins

@@ -16,6 +16,9 @@ Related [issue #22](https://github.com/tmux-plugins/tpm/issues/22)
 - ZSH tmux plugin might be causing issues.<br/>
   If you have it installed, try disabling it and see if `tpm` works then.
 
+- Have you installed `gawk`?<br/>
+  If you have, make sure it works. Try reinstalling it.
+
 <hr />
 
 > Help, I'm using custom config file with `tmux -f /path/to/my_tmux.conf`

@@ -1,20 +1,6 @@
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
 tpm_plugins_variable_name="@tpm_plugins"
 
-# manually expanding tilde char or `$HOME` variable.
-_manual_expansion() {
-	local path="$1"
-	local expanded_tilde="${path/#\~/$HOME}"
-	echo "${expanded_tilde/#\$HOME/$HOME}"
-}
-
-_tpm_path() {
-	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
-	_manual_expansion "$string_path"
-}
-
-_CACHED_TPM_PATH="$(_tpm_path)"
-
 # Get the absolute path to the users configuration file of TMux.
 # This includes a prioritized search on different locations.
 #
@@ -48,6 +34,20 @@ _sourced_files() {
 	_tmux_conf_contents |
 		awk '/^[ \t]*source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
 }
+
+# manually expanding tilde char or `$HOME` variable.
+_manual_expansion() {
+	local path="$1"
+	local expanded_tilde="${path/#\~/$HOME}"
+	echo "${expanded_tilde/#\$HOME/$HOME}"
+}
+
+_tpm_path() {
+	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
+	_manual_expansion "$string_path"
+}
+
+_CACHED_TPM_PATH="$(_tpm_path)"
 
 # Want to be able to abort in certain cases
 trap "exit 1" TERM

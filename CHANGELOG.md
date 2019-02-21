@@ -4,6 +4,11 @@
 - upgrade to new version of `tmux-test`
 - bug: when using `emacs` copy mode, Enter does not quit screen after tpm
   installation/update. Fix by making `Escape` the key for emacs mode.
+- add a doc with troubleshooting instructions
+- add `.gitattributes` file that forces linefeed characters (classic `\n`) as
+  line endings - helps with misconfigured git on windows/cygwin
+- readme update: announce Cygwin support
+- un-deprecate old plugin definition syntax: `set -g @tpm_plugins`
 
 ### v3.0.0, 2015-08-03
 - refactor `shared_set_tpm_path_constant` function
@@ -23,7 +28,7 @@
 - enable overriding default key bindings
 - start using `C-c` to clear screen
 - add uninstall/clean procedure and keybinding (prefix+alt+u) (@chilicuil)
-- add new `set @plugin 'repo'` plugin defintion syntax (@chilicuil)
+- add new `set @plugin 'repo'` plugin definition syntax (@chilicuil)
 - revert back to using `-g` flag in new plugin definition syntax
 - permit leading whitespace with new plugin definition syntax (thanks @chilicuil)
 - make sure `TMUX_PLUGIN_MANAGER_PATH` always has trailng slash

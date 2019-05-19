@@ -30,7 +30,8 @@ source_plugins() {
 	local plugin plugin_path
 	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
-		plugin_path="$(plugin_path_helper "$plugin")"
+		IFS='#' read -ra plugin <<< "$plugin"
+		plugin_path="$(plugin_path_helper "${plugin[0]}")"
 		silently_source_all_tmux_files "$plugin_path"
 	done
 }

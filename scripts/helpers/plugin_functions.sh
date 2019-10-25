@@ -20,11 +20,20 @@ _CACHED_TPM_PATH="$(_tpm_path)"
 #
 _get_user_tmux_conf() {
 	# Define the different possible locations.
+    #
+    # Allow user defined config file location
+    # Add the following to your config file
+    # set -g @tpm_conf_default_location '/path/to/tmux.conf.local' 
+
+    user_location="$(tmux show-options -gqv @tpm_conf_default_location)"
 	xdg_location="$XDG_CONFIG_HOME/tmux/tmux.conf"
 	default_location="$HOME/.tmux.conf"
 
 	# Search for the correct configuration file by priority.
-	if [ -f "$xdg_location" ]; then
+    if [ -f "$user_location" ]; then
+		echo "$user_location"
+
+	elif [ -f "$xdg_location" ]; then
 		echo "$xdg_location"
 
 	else

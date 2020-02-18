@@ -20,7 +20,7 @@ _CACHED_TPM_PATH="$(_tpm_path)"
 #
 _get_user_tmux_conf() {
 	# Define the different possible locations.
-	xdg_location="$XDG_CONFIG_HOME/tmux/tmux.conf"
+	xdg_location="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
 	default_location="$HOME/.tmux.conf"
 
 	# Search for the correct configuration file by priority.

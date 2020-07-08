@@ -1,20 +1,6 @@
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
 tpm_plugins_variable_name="@tpm_plugins"
 
-# manually expanding tilde char or `$HOME` variable.
-_manual_expansion() {
-	local path="$1"
-	local expanded_tilde="${path/#\~/$HOME}"
-	echo "${expanded_tilde/#\$HOME/$HOME}"
-}
-
-_tpm_path() {
-	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
-	_manual_expansion "$string_path"
-}
-
-_CACHED_TPM_PATH="$(_tpm_path)"
-
 # Get the absolute path to the users configuration file of TMux.
 # This includes a prioritized search on different locations.
 #
@@ -32,22 +18,28 @@ _get_user_tmux_conf() {
 	fi
 }
 
-_tmux_conf_contents() {
-	user_config=$(_get_user_tmux_conf)
-	cat /etc/tmux.conf "$user_config" 2>/dev/null
-	if [ "$1" == "full" ]; then # also output content from sourced files
-		local file
-		for file in $(_sourced_files); do
-			cat $(_manual_expansion "$file") 2>/dev/null
-		done
+_exec_tmux() {
+	local OPTS=()
+	if [[ -z "$TMUX" ]]; then
+		OPTS+=(-f "$(_get_user_tmux_conf)" start-server \;)
 	fi
+
+	tmux "${OPTS[@]}" "${@}"
 }
 
-# return files sourced from tmux config files
-_sourced_files() {
-	_tmux_conf_contents |
-		awk '/^[ \t]*source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
+# manually expanding tilde char or `$HOME` variable.
+_manual_expansion() {
+	local path="$1"
+	local expanded_tilde="${path/#\~/$HOME}"
+	echo "${expanded_tilde/#\$HOME/$HOME}"
 }
+
+_tpm_path() {
+	local string_path="$(_exec_tmux show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
+	_manual_expansion "$string_path"
+}
+
+_CACHED_TPM_PATH="$(_tpm_path)"
 
 # Want to be able to abort in certain cases
 trap "exit 1" TERM
@@ -69,12 +61,9 @@ tpm_path() {
 }
 
 tpm_plugins_list_helper() {
-	# lists plugins from @tpm_plugins option
-	echo "$(tmux start-server\; show-option -gqv "$tpm_plugins_variable_name")"
-
-	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
-	_tmux_conf_contents "full" |
-		awk '/^[ \t]*set(-option)? +-g +@plugin/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $4 }'
+	# lists plugins from @tpm_plugins option and @plugins
+	_exec_tmux show-option -gqv "$tpm_plugins_variable_name" \; \
+	           show-option -gqv "@plugin" \;
 }
 
 # Allowed plugin name formats:

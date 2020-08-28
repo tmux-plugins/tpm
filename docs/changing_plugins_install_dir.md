@@ -1,6 +1,8 @@
 # Changing plugins install dir
 
-By default, TPM installs plugins to `~/.tmux/plugins/`.
+By default, TPM installs plugins in a subfolder named `plugins/` inside
+`$XDG_CONFIG_HOME/tmux/` if a `tmux.conf` file was found at that location, or
+inside `~/.tmux/` otherwise.
 
 You can change the install path by putting this in `.tmux.conf`:
 

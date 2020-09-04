@@ -46,7 +46,7 @@ _tmux_conf_contents() {
 # return files sourced from tmux config files
 _sourced_files() {
 	_tmux_conf_contents |
-		awk '/^[ \t]*source(-file)? +/ { gsub(/'\''/,""); gsub(/'\"'/,""); print $2 }'
+		sed -E -n -e "s/^[[:space:]]*source(-file)?[[:space:]]+(-q+[[:space:]]+)?['\"]?([^'\"]+)['\"]?/\3/p"
 }
 
 # Want to be able to abort in certain cases

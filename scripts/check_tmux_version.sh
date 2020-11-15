@@ -3,6 +3,8 @@
 VERSION="$1"
 UNSUPPORTED_MSG="$2"
 
+export TMUX_CMD_PATH=$(realpath "/proc/$(tmux display -p '#{pid}')/exe" 2> /dev/null || echo "tmux" | sed -z '$ s/\n$//')
+
 get_tmux_option() {
 	local option=$1
 	local default_value=$2
@@ -30,13 +32,13 @@ display_message() {
 	local saved_display_time=$(get_tmux_option "display-time" "750")
 
 	# sets message display time to 5 seconds
-	tmux set-option -gq display-time "$display_duration"
+	$TMUX_CMD_PATH set-option -gq display-time "$display_duration"
 
 	# displays message
-	tmux display-message "$message"
+	$TMUX_CMD_PATH display-message "$message"
 
 	# restores original 'display-time' value
-	tmux set-option -gq display-time "$saved_display_time"
+	$TMUX_CMD_PATH set-option -gq display-time "$saved_display_time"
 }
 
 # this is used to get "clean" integer version number. Examples:

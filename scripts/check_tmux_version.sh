@@ -3,7 +3,8 @@
 VERSION="$1"
 UNSUPPORTED_MSG="$2"
 
-export TMUX_CMD_PATH=$(realpath "/proc/$(tmux display -p '#{pid}')/exe" 2> /dev/null || echo "tmux" | sed -z '$ s/\n$//')
+source "$SCRIPTS_DIR/tmux_cmd_path.sh"
+
 
 get_tmux_option() {
 	local option=$1

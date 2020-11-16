@@ -1,10 +1,12 @@
+source "$SCRIPTS_DIR/tmux_cmd_path.sh"
+
 _has_emacs_mode_keys() {
-	$(tmux show -gw mode-keys | grep -q emacs)
+	$($TMUX_CMD_PATH show -gw mode-keys | grep -q emacs)
 }
 
 tmux_echo() {
 	local message="$1"
-	tmux run-shell "echo '$message'"
+	$TMUX_CMD_PATH run-shell "echo '$message'"
 }
 
 echo_ok() {

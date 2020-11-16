@@ -11,7 +11,7 @@ source "$SCRIPTS_DIR/variables.sh"
 get_tmux_option() {
 	local option="$1"
 	local default_value="$2"
-	local option_value="$(tmux show-option -gqv "$option")"
+	local option_value="$($TMUX_CMD_PATH show-option -gqv "$option")"
 	if [ -z "$option_value" ]; then
 		echo "$default_value"
 	else
@@ -60,13 +60,13 @@ source_plugins() {
 # prefix + alt + u - remove unused TPM plugins and reloads TMUX environment
 set_tpm_key_bindings() {
 	local install_key="$(get_tmux_option "$install_key_option" "$default_install_key")"
-	tmux bind-key "$install_key" run-shell "$BINDINGS_DIR/install_plugins"
+	$TMUX_CMD_PATH bind-key "$install_key" run-shell "$BINDINGS_DIR/install_plugins"
 
 	local update_key="$(get_tmux_option "$update_key_option" "$default_update_key")"
-	tmux bind-key "$update_key" run-shell "$BINDINGS_DIR/update_plugins"
+	$TMUX_CMD_PATH bind-key "$update_key" run-shell "$BINDINGS_DIR/update_plugins"
 
 	local clean_key="$(get_tmux_option "$clean_key_option" "$default_clean_key")"
-	tmux bind-key "$clean_key" run-shell "$BINDINGS_DIR/clean_plugins"
+	$TMUX_CMD_PATH bind-key "$clean_key" run-shell "$BINDINGS_DIR/clean_plugins"
 }
 
 supported_tmux_version_ok() {

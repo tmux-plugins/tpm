@@ -1,6 +1,11 @@
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
 tpm_plugins_variable_name="@tpm_plugins"
 
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTS_DIR="$CURRENT_DIR/../../scripts"
+HELPERS_DIR="$SCRIPTS_DIR/helpers"
+source "$SCRIPTS_DIR/tmux_cmd_path.sh"
+
 # manually expanding tilde char or `$HOME` variable.
 _manual_expansion() {
 	local path="$1"
@@ -9,7 +14,7 @@ _manual_expansion() {
 }
 
 _tpm_path() {
-	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
+	local string_path="$($TMUX_CMD_PATH start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
 	_manual_expansion "$string_path"
 }
 

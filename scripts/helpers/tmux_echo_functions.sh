@@ -1,3 +1,6 @@
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTS_DIR="$CURRENT_DIR/../../scripts"
+HELPERS_DIR="$SCRIPTS_DIR/helpers"
 source "$SCRIPTS_DIR/tmux_cmd_path.sh"
 
 _has_emacs_mode_keys() {

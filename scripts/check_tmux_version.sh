@@ -3,6 +3,10 @@
 VERSION="$1"
 UNSUPPORTED_MSG="$2"
 
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTS_DIR="$CURRENT_DIR/../scripts"
+HELPERS_DIR="$SCRIPTS_DIR/helpers"
+
 source "$SCRIPTS_DIR/tmux_cmd_path.sh"
 
 

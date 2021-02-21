@@ -3,10 +3,17 @@
 VERSION="$1"
 UNSUPPORTED_MSG="$2"
 
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPTS_DIR="$CURRENT_DIR/../scripts"
+HELPERS_DIR="$SCRIPTS_DIR/helpers"
+
+source "$SCRIPTS_DIR/tmux_cmd_path.sh"
+
+
 get_tmux_option() {
 	local option=$1
 	local default_value=$2
-	local option_value=$(tmux show-option -gqv "$option")
+	local option_value=$($TMUX_CMD_PATH show-option -gqv "$option")
 	if [ -z "$option_value" ]; then
 		echo "$default_value"
 	else
@@ -30,13 +37,13 @@ display_message() {
 	local saved_display_time=$(get_tmux_option "display-time" "750")
 
 	# sets message display time to 5 seconds
-	tmux set-option -gq display-time "$display_duration"
+	$TMUX_CMD_PATH set-option -gq display-time "$display_duration"
 
 	# displays message
-	tmux display-message "$message"
+	$TMUX_CMD_PATH display-message "$message"
 
 	# restores original 'display-time' value
-	tmux set-option -gq display-time "$saved_display_time"
+	$TMUX_CMD_PATH set-option -gq display-time "$saved_display_time"
 }
 
 # this is used to get "clean" integer version number. Examples:
@@ -49,7 +56,7 @@ get_digits_from_string() {
 }
 
 tmux_version_int() {
-	local tmux_version_string=$(tmux -V)
+	local tmux_version_string=$($TMUX_CMD_PATH -V)
 	echo "$(get_digits_from_string "$tmux_version_string")"
 }
 

@@ -27,7 +27,7 @@ set_default_tpm_path() {
 	local xdg_tmux_path="${XDG_CONFIG_HOME:-$HOME/.config}/tmux"
 	local tpm_path="$DEFAULT_TPM_PATH"
 
-	if [ -f "$xdg_tmux_path/tmux.conf" ]; then
+	if [ -d "$xdg_tmux_path" ]; then
 		tpm_path="$xdg_tmux_path/plugins/"
 	fi
 

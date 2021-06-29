@@ -6,6 +6,8 @@ Installs and loads `tmux` plugins.
 
 Tested and working on Linux, OSX, and Cygwin.
 
+See list of plugins [here](https://github.com/tmux-plugins/list).
+
 ### Installation
 
 Requirements: `tmux` version 1.9 (or higher), `git`, `bash`.
@@ -27,11 +29,11 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 # Other examples:
 # set -g @plugin 'github_username/plugin_name'
 # set -g @plugin 'github_username/plugin_name#branch'
-# set -g @plugin 'git@github.com/user/plugin'
-# set -g @plugin 'git@bitbucket.com/user/plugin'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run -b '~/.tmux/plugins/tpm/tpm'
+run '~/.tmux/plugins/tpm/tpm'
 ```
 
 Reload TMUX environment so TPM is sourced:
@@ -70,10 +72,6 @@ find plugin directory there and remove it.
 `prefix` + <kbd>alt</kbd> + <kbd>u</kbd>
 - remove/uninstall plugins not on the plugin list
 
-### More plugins
-
-For more plugins, check [here](https://github.com/tmux-plugins).
-
 ### Docs
 
 - [Help, tpm not working](docs/tpm_not_working.md) - problem solutions
@@ -97,17 +95,6 @@ Run tests with:
 # within project directory
 $ ./run_tests
 ```
-
-### Other goodies
-
-- [tmux-copycat](https://github.com/tmux-plugins/tmux-copycat) - a plugin for
-  regex searches in tmux and fast match selection
-- [tmux-yank](https://github.com/tmux-plugins/tmux-yank) - enables copying
-  highlighted text to system clipboard
-- [tmux-open](https://github.com/tmux-plugins/tmux-open) - a plugin for quickly
-  opening highlighted file or a url
-- [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) - automatic
-  restoring and continuous saving of tmux env
 
 ### License
 

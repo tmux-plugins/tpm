@@ -28,6 +28,7 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # Other examples:
 # set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
 # set -g @plugin 'git@github.com:user/plugin'
 # set -g @plugin 'git@bitbucket.com:user/plugin'
 

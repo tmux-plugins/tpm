@@ -15,7 +15,7 @@ fi
 clone() {
 	local plugin="$1"
 	cd "$(tpm_path)" &&
-		GIT_TERMINAL_PROMPT=0 git clone --recursive "$plugin" >/dev/null 2>&1
+		GIT_TERMINAL_PROMPT=0 git clone -b "$branch" --single-branch --recursive "$plugin" >/dev/null 2>&1
 }
 
 # tries cloning:
@@ -23,20 +23,22 @@ clone() {
 # 2. expands the plugin name to point to a github repo and tries cloning again
 clone_plugin() {
 	local plugin="$1"
-	clone "$plugin" ||
-		clone "https://git::@github.com/$plugin"
+	local branch="$2"
+	clone "$plugin" "$branch" ||
+		clone "https://git::@github.com/$plugin" "$branch"
 }
 
 # clone plugin and produce output
 install_plugin() {
 	local plugin="$1"
+	local branch=`[ -z "$2" ] && echo "master" || echo "$2"`
 	local plugin_name="$(plugin_name_helper "$plugin")"
 
 	if plugin_already_installed "$plugin"; then
 		echo_ok "Already installed \"$plugin_name\""
 	else
 		echo_ok "Installing \"$plugin_name\""
-		clone_plugin "$plugin" &&
+		clone_plugin "$plugin" "$branch" &&
 			echo_ok "  \"$plugin_name\" download success" ||
 			echo_err "  \"$plugin_name\" download fail"
 	fi
@@ -45,7 +47,8 @@ install_plugin() {
 install_plugins() {
 	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
-		install_plugin "$plugin"
+		IFS='#' read -ra plugin <<< "$plugin"
+		install_plugin "${plugin[0]}" "${plugin[1]}"
 	done
 }
 

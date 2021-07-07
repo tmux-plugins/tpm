@@ -42,7 +42,7 @@ update_plugin_prompt() {
 }
 
 main() {
-	reload_tmux_environment
+	#reload_tmux_environment #This will cause tmux source-file ~/.tmux.conf twice and almost the same time
 	display_plugin_update_list
 	update_plugin_prompt
 }

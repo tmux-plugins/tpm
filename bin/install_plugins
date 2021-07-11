@@ -8,7 +8,10 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPTS_DIR="$CURRENT_DIR/../scripts"
 
+source "$SCRIPTS_DIR/helpers/tpm_path.sh"
+
 main() {
+	set_tpm_path
 	"$SCRIPTS_DIR/install_plugins.sh" # has correct exit code
 }
 main

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Tmux key-binding script.
+# Tmux command script.
 # Scripts intended to be used via the command line are in `bin/` directory.
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

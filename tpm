@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BINDINGS_DIR="$CURRENT_DIR/bindings"
+COMMANDS_DIR="$CURRENT_DIR/commands"
 SCRIPTS_DIR="$CURRENT_DIR/scripts"
 
 source "$SCRIPTS_DIR/variables.sh"
@@ -57,9 +57,9 @@ source_plugins() {
 # tpm-update - updates a plugin (or all of them) and reloads TMUX environment
 # tpm-clean - remove unused TPM plugins and reloads TMUX environment
 set_tpm_commands() {
-	tmux set-option -ag command-alias "tpm-install=run-shell $BINDINGS_DIR/install_plugins"
-	tmux set-option -ag command-alias "tpm-update=run-shell $BINDINGS_DIR/update_plugins"
-	tmux set-option -ag command-alias "tpm-clean=run-shell $BINDINGS_DIR/clean_plugins"
+	tmux set-option -ag command-alias "tpm-install=run-shell $COMMANDS_DIR/tpm-install"
+	tmux set-option -ag command-alias "tpm-update=run-shell $COMMANDS_DIR/tpm-update"
+	tmux set-option -ag command-alias "tpm-clean=run-shell $COMMANDS_DIR/tpm-clean"
 }
 
 # prefix + I - downloads TPM plugins and reloads TMUX environment

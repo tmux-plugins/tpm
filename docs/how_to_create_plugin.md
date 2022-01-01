@@ -92,12 +92,12 @@ That should set up the key binding. Now hit `prefix + T` and see if it works.
 ### 6. publish the plugin
 
 When everything is ready, push the plugin to an online git repository,
-preferably Github.
+preferably GitHub.
 
 Other users can install your plugin by just adding plugin git URL to the
 `@plugin` list in their `.tmux.conf`.
 
-If the plugin is on Github, your users will be able to use the shorthand of
+If the plugin is on GitHub, your users will be able to use the shorthand of
 `github_username/repository`.
 
 ### Conclusion

@@ -26,7 +26,7 @@ clone() {
 
 # tries cloning:
 # 1. plugin name directly - works if it's a valid git url
-# 2. expands the plugin name to point to a github repo and tries cloning again
+# 2. expands the plugin name to point to a GitHub repo and tries cloning again
 clone_plugin() {
 	local plugin="$1"
 	local branch="$2"

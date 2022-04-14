@@ -67,9 +67,11 @@ verify_tpm_path_permissions() {
 }
 
 main() {
+	set_long_tmux_display_time
 	ensure_tpm_path_exists
 	verify_tpm_path_permissions
 	install_plugins
+	tmux set-option -g display-time "$org_display_time" #  Restore display-time
 	exit_value_helper
 }
 main

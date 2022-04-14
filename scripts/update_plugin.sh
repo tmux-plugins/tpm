@@ -34,7 +34,6 @@ update() {
 
 update_all() {
 	echo_ok "Updating all plugins!"
-	echo_ok ""
 	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
 		IFS='#' read -ra plugin <<< "$plugin"

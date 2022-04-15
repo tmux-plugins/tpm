@@ -4,6 +4,7 @@ _has_emacs_mode_keys() {
 
 tmux_echo() {
 	local message="$1"
+	tmux display-message "$message"
 	tmux run-shell "echo '$message'"
 }
 
@@ -13,6 +14,7 @@ echo_ok() {
 
 echo_err() {
 	tmux_echo "$*"
+	sleep 3  #  Give some time for error message to be displayed in status bar
 }
 
 end_message() {

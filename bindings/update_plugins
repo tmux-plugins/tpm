@@ -18,7 +18,6 @@ source "$HELPERS_DIR/tmux_utils.sh"
 display_plugin_update_list() {
 	local plugins="$(tpm_plugins_list_helper)"
 	tmux_echo "Installed plugins:"
-	tmux_echo ""
 
 	for plugin in $plugins; do
 		# displaying only installed plugins

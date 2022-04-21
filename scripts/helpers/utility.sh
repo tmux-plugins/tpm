@@ -28,5 +28,5 @@ set_long_tmux_display_time() {
 	#   tmux set-option -g display-time "$org_display_time"
 	#
 	org_display_time="$(tmux show-options -g display-time | awk '{print $2}')"
-	tmux set-option -g display-time 120000
+	tmux set-option -g display-time 0
 }

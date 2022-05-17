@@ -6,6 +6,14 @@ SCRIPTS_DIR="$CURRENT_DIR/scripts"
 
 source "$SCRIPTS_DIR/variables.sh"
 
+
+is_tpm_running="$(test $(ps axu | grep tpm/scripts/source_plugins.sh | wc -l) -gt 1; echo $?)"
+
+if [ "$is_tpm_running" -eq 0 ]; then
+    tmux display "tpm is already running!"
+    exit 0
+fi
+
 get_tmux_option() {
 	local option="$1"
 	local default_value="$2"

@@ -15,7 +15,7 @@ Requirements: `tmux` version 1.9 (or higher), `git`, `bash`.
 Clone TPM:
 
 ```bash
-$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 Put this at the bottom of `~/.tmux.conf` (`$XDG_CONFIG_HOME/tmux/tmux.conf`
@@ -40,7 +40,7 @@ Reload TMUX environment so TPM is sourced:
 
 ```bash
 # type this in terminal if tmux is already running
-$ tmux source ~/.tmux.conf
+tmux source ~/.tmux.conf
 ```
 
 That's it!
@@ -93,7 +93,7 @@ Run tests with:
 
 ```bash
 # within project directory
-$ ./run_tests
+./run_tests
 ```
 
 ### License

@@ -9,4 +9,4 @@ if-shell "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 ```
 
-This useful tip was submitted by @acr4 and narfman0.
+This useful tip was submitted by [@acr4](https://github.com/acr4) and [@narfman0](https://github.com/narfman0).

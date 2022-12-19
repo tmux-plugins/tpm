@@ -29,6 +29,7 @@ set_default_tpm_path() {
 
 	if [ -f "$xdg_tmux_path/tmux.conf" ]; then
 		tpm_path="$xdg_tmux_path/plugins/"
+		BINDINGS_DIR="XDG_CONFIG_HOME=$XDG_CONFIG_HOME $BINDINGS_DIR"
 	fi
 
 	tmux set-environment -g "$DEFAULT_TPM_ENV_VAR_NAME" "$tpm_path"
@@ -57,6 +58,7 @@ source_plugins() {
 # prefix + U - updates a plugin (or all of them) and reloads TMUX environment
 # prefix + alt + u - remove unused TPM plugins and reloads TMUX environment
 set_tpm_key_bindings() {
+	set_default_tpm_path
 	local install_key="$(get_tmux_option "$install_key_option" "$default_install_key")"
 	tmux bind-key "$install_key" run-shell "$BINDINGS_DIR/install_plugins"
 

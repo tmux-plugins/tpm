@@ -26,10 +26,15 @@ pull_changes() {
 }
 
 update() {
-	local plugin="$1"
-	$(pull_changes "$plugin" > /dev/null 2>&1) &&
-		echo_ok "  \"$plugin\" update success" ||
+	local plugin="$1" output
+	output=$(pull_changes "$plugin" 2>&1)
+	if (( $? == 0 )); then
+		echo_ok "  \"$plugin\" update success"
+		echo_ok "$(echo "$output" | sed -e 's/^/    | /')"
+	else
 		echo_err "  \"$plugin\" update fail"
+		echo_err "$(echo "$output" | sed -e 's/^/    | /')"
+	fi
 }
 
 update_all() {

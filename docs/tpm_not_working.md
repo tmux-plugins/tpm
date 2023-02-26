@@ -94,7 +94,7 @@ The solution is to find your brew prefix
 /opt/homebrew/bin
 ```
 
-And prefix it to the `PATH` environment variable
+And prepend it to the `PATH` environment variable
 ```
 set-environment -g PATH "/opt/homebrew/bin:/bin:/usr/bin"
 ```

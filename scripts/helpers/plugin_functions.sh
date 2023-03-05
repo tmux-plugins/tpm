@@ -80,8 +80,15 @@ tpm_plugins_list_helper() {
 # Allowed plugin name formats:
 # 1. "git://github.com/user/plugin_name.git"
 # 2. "user/plugin_name"
+# 3. "plugin_name::git://github.com/user/plugin_name.git"
+# 4. "plugin_name::user/plugin"
 plugin_name_helper() {
 	local plugin="$1"
+	# if a plugin name is specified, use it
+	if [[ "$plugin" = *::* ]]; then
+		echo "${plugin%%::*}"
+		return
+	fi
 	# get only the part after the last slash, e.g. "plugin_name.git"
 	local plugin_basename="$(basename "$plugin")"
 	# remove ".git" extension (if it exists) to get only "plugin_name"

@@ -5,6 +5,9 @@ One of the first things we do on a new machine is cloning our dotfiles. Not ever
 If you want to install `tpm` and plugins automatically when tmux is started, put the following snippet in `.tmux.conf` before the final `run '~/.tmux/plugins/tpm/tpm'`:
 
 ```
+if "test -d ~/.tmux/plugins/tpm" \
+   "run 'cd ~/.tmux/plugins/tpm && git pull && ~/.tmux/plugins/tpm/bin/update_plugins'"
+
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 ```

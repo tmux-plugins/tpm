@@ -10,7 +10,7 @@ See list of plugins [here](https://github.com/tmux-plugins/list).
 
 ### Installation
 
-Requirements: `tmux` version 1.9 (or higher), `git`, `bash`.
+Requirements: `tmux` version 1.9 (or higher), `git`, `bash`. If you have installed `gawk`, make sure it works.
 
 Clone TPM:
 

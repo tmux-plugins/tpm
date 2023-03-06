@@ -5,7 +5,7 @@ tpm_plugins_variable_name="@tpm_plugins"
 _manual_expansion() {
 	local path="$1"
 	local expanded_tilde="${path/#\~/$HOME}"
-	echo "${expanded_tilde/#\$HOME/$HOME}"
+	tmux display-message -p "${expanded_tilde/#\$HOME/$HOME}"
 }
 
 _tpm_path() {
@@ -46,7 +46,7 @@ _tmux_conf_contents() {
 # return files sourced from tmux config files
 _sourced_files() {
 	_tmux_conf_contents |
-		sed -E -n -e "s/^[[:space:]]*source(-file)?[[:space:]]+(-q+[[:space:]]+)?['\"]?([^'\"]+)['\"]?/\3/p"
+		sed -E -n -e "s/^[[:space:]]*source(-file)?[[:space:]]+(-[qF]+[[:space:]]+)?['\"]?([^'\"]+)['\"]?/\3/p"
 }
 
 # Want to be able to abort in certain cases

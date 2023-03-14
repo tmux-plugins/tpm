@@ -1,5 +1,5 @@
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
-tpm_plugins_variable_name="plugin"
+tpm_plugins_variable_name="@plugin"
 
 # manually expanding tilde char or `$HOME` variable.
 _manual_expansion() {

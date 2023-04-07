@@ -69,9 +69,10 @@ tpm_path() {
 }
 
 tpm_plugins_list_helper() {
-	# lists plugins from @tpm_plugins option
 	local plugins
+	# lists plugins from @tpm_plugins option
 	plugins="$(tmux start-server\; show-option -gqv "$tpm_plugins_variable_name")"
+	# allow comma as a plugin separator
 	plugins="${plugins//,/ }"
 	echo "$plugins"
 

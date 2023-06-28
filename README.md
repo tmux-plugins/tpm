@@ -36,6 +36,13 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 run '~/.tmux/plugins/tpm/tpm'
 ```
 
+Homebrew users need to set PATH before the `run` command:
+```
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+set-environment -g PATH "/opt/homebrew/bin:/bin:/usr/bin"
+run '~/.tmux/plugins/tpm/tpm'
+```
+
 Reload TMUX environment so TPM is sourced:
 
 ```bash

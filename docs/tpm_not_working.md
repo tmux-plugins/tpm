@@ -85,12 +85,18 @@ find ~/.tmux -type d -name '.git*' -prune -o -type f -print0 | xargs -0 dos2unix
 
 Related: [issue #67](https://github.com/tmux-plugins/tpm/issues/67)
 
-This problem is because tmux's `run-shell` command runs a shell which doesn't read from user configs, thus tmux installed in `/usr/local/bin` will not be found.
+This problem is because tmux's `run-shell` command runs a shell which doesn't read from user configs, thus tmux installed in a brew prefix (e.g. `/usr/local/bin`) will not be found.
 
-The solution is to insert the following line:
+The solution is to find your brew prefix
 
+```sh
+> echo "$(brew --prefix)/bin"
+/opt/homebrew/bin
 ```
-set-environment -g PATH "/usr/local/bin:/bin:/usr/bin"
+
+And prepend it to the `PATH` environment variable
+```
+set-environment -g PATH "/opt/homebrew/bin:/bin:/usr/bin"
 ```
 
 before any `run-shell`/`run` commands in `~/.tmux.conf`.

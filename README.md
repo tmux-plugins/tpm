@@ -12,11 +12,24 @@ See list of plugins [here](https://github.com/tmux-plugins/list).
 
 Requirements: `tmux` version 1.9 (or higher), `git`, `bash`.
 
-Clone TPM:
+#### For `~/.tmux.conf` config
+
+If your tmux config is located at `~/.tmux.conf` clone `tpm` to the `~/.tmux/plugins/tpm` directory:
 
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
+
+#### For `~/.config/tmux/tmux.conf` config
+
+If your tmux config is located at `~/.config/tmux/tmux.conf` clone `tpm` to the `~/.config/tmux/plugins/tpm` directory:
+
+```bash
+mkdir ~/.config/tmux/plugins
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+```
+
+### Configuration
 
 Put this at the bottom of `~/.tmux.conf` (`$XDG_CONFIG_HOME/tmux/tmux.conf`
 works too):

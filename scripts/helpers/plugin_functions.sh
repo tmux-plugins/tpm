@@ -82,10 +82,11 @@ tpm_plugins_list_helper() {
 # 2. "user/plugin_name"
 plugin_name_helper() {
 	local plugin="$1"
-	# get only the part after the last slash, e.g. "plugin_name.git"
-	local plugin_basename="$(basename "$plugin")"
+	# get only the last part
+	IFS='/' read -ra plugin <<< "$plugin"
+	plugin="${plugin[-2]}/${plugin[-1]}"
 	# remove ".git" extension (if it exists) to get only "plugin_name"
-	local plugin_name="${plugin_basename%.git}"
+	local plugin_name="${plugin%.git}"
 	echo "$plugin_name"
 }
 
@@ -97,7 +98,8 @@ plugin_path_helper() {
 
 plugin_already_installed() {
 	local plugin="$1"
-	local plugin_path="$(plugin_path_helper "$plugin")"
+	IFS='#' read -ra plugin <<< "$plugin"
+	local plugin_path="$(plugin_path_helper "${plugin[0]}")"
 	[ -d "$plugin_path" ] &&
 		cd "$plugin_path" &&
 		git remote >/dev/null 2>&1

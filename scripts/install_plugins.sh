@@ -52,15 +52,8 @@ install_plugin() {
 install_plugins() {
 	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
-		if [[ "$plugin" == *#* ]]; then
-			IFS='#' read -ra plugin <<< "$plugin"
-			install_plugin "${plugin[0]}" "${plugin[1]}"
-		elif [[ "$plugin" == *@* ]]; then
-			IFS='@' read -ra plugin <<< "$plugin"
-			install_plugin "${plugin[0]}" "${plugin[1]}"
-		else
-			install_plugin ${plugin}
-		fi
+		IFS='#' read -ra plugin <<< "$plugin"
+		install_plugin "${plugin[0]}" "${plugin[1]}"
 	done
 }
 

@@ -98,7 +98,8 @@ plugin_path_helper() {
 
 plugin_already_installed() {
 	local plugin="$1"
-	local plugin_path="$(plugin_path_helper "$plugin")"
+	IFS='#' read -ra plugin <<< "$plugin"
+	local plugin_path="$(plugin_path_helper "${plugin[0]}")"
 	[ -d "$plugin_path" ] &&
 		cd "$plugin_path" &&
 		git remote >/dev/null 2>&1

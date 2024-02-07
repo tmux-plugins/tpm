@@ -14,19 +14,18 @@ fi
 
 clone() {
 	local plugin="$1"
-	local branch="$2"
-	if [ -n "$branch" ]; then
+	[[ -z "$2" ]] && local branch="" || local branch="--branch $2"
+	if [[ ! $plugin == *"https://"* ]]; then
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone -b "$branch" --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone $branch --single-branch --recursive "https://git::@github.com/$plugin" $plugin >/dev/null 2>&1
 	else
+		local basename_with_git="$(basename "$plugin")"
+		local basename="${basename_with_git%.git}"
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone $branch --single-branch --recursive "$basename" $basename >/dev/null 2>&1
 	fi
 }
 
-# tries cloning:
-# 1. plugin name directly - works if it's a valid git url
-# 2. expands the plugin name to point to a GitHub repo and tries cloning again
 clone_plugin() {
 	local plugin="$1"
 	local branch="$2"
@@ -53,8 +52,15 @@ install_plugin() {
 install_plugins() {
 	local plugins="$(tpm_plugins_list_helper)"
 	for plugin in $plugins; do
-		IFS='#' read -ra plugin <<< "$plugin"
-		install_plugin "${plugin[0]}" "${plugin[1]}"
+		if [[ "$plugin" == *#* ]]; then
+			IFS='#' read -ra plugin <<< "$plugin"
+			install_plugin "${plugin[0]}" "${plugin[1]}"
+		elif [[ "$plugin" == *@* ]]; then
+			IFS='@' read -ra plugin <<< "$plugin"
+			install_plugin "${plugin[0]}" "${plugin[1]}"
+		else
+			install_plugin ${plugin}
+		fi
 	done
 }
 

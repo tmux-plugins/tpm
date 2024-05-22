@@ -95,11 +95,11 @@ Run tests with:
 # within project directory
 ./run_tests
 ```
-### unattended install
-to do a unattended install (if  you already have a config)
+### Unattended Install
+To do an unattended install (if you already have a config)
 
 `~/.tmux/plugins/tpm/scripts/install_plugins.sh`
-
+fixes #277 and #193
 ### License
 
 [MIT](LICENSE.md)

@@ -95,7 +95,13 @@ Run tests with:
 # within project directory
 ./run_tests
 ```
+### Unattended Install
 
+To do an unattended install, for example if you already have a config:
+
+`~/.tmux/plugins/tpm/scripts/install_plugins.sh`
+
+Note this is also a good workaround if you have other issues with the automatic installation, such as known issues with MacOS (see [#277](https://github.com/tmux-plugins/tpm/issues/277) and [#193](https://github.com/tmux-plugins/tpm/issues/277))
 ### License
 
 [MIT](LICENSE.md)

@@ -34,7 +34,7 @@
 - add new `set @plugin 'repo'` plugin definition syntax (@chilicuil)
 - revert back to using `-g` flag in new plugin definition syntax
 - permit leading whitespace with new plugin definition syntax (thanks @chilicuil)
-- make sure `TMUX_PLUGIN_MANAGER_PATH` always has trailng slash
+- make sure `TMUX_PLUGIN_MANAGER_PATH` always has trailing slash
 - ensure old/deprecated plugin syntax `set -g @tpm_plugins` works alongside new
   `set -g @plugin` syntax
 

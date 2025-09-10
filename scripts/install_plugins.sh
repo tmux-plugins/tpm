@@ -14,15 +14,26 @@ fi
 
 clone() {
 	local plugin="$1"
-	[[ -z "$2" ]] && local branch="" || local branch="--branch $2"
-	if [[ ! $plugin == *"https://"* ]]; then
+	local ref="$2"
+	local clone_options=""
+	
+	# Handle both branches and tags
+	if [[ -n "$ref" ]]; then
+		clone_options="--branch $ref"
+	fi
+	
+	local plugin_name="$(plugin_name_helper "$plugin")"
+	local plugin_dir="$(tpm_path)${plugin_name}/"
+	
+	# Create the user directory if it doesn't exist
+	mkdir -p "$(dirname "$plugin_dir")"
+	
+	if [[ ! $plugin == *"https://"* ]] && [[ ! $plugin == *"git@"* ]]; then
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone $branch --single-branch --recursive "https://git::@github.com/$plugin" $plugin >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone $clone_options --single-branch --recursive "https://git::@github.com/$plugin" "$plugin_name" >/dev/null 2>&1
 	else
-		local basename_with_git="$(basename "$plugin")"
-		local basename="${basename_with_git%.git}"
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone $branch --single-branch --recursive "$basename" $basename >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone $clone_options --single-branch --recursive "$plugin" "$plugin_name" >/dev/null 2>&1
 	fi
 }
 

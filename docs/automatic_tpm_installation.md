@@ -1,4 +1,4 @@
-## Automatic tpm installation
+# Automatic tpm installation
 
 One of the first things we do on a new machine is cloning our dotfiles. Not everything comes with them though, so for example `tpm` most likely won't be installed.
 

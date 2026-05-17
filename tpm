@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BINDINGS_DIR="$CURRENT_DIR/bindings"
+COMMANDS_DIR="$CURRENT_DIR/commands"
 SCRIPTS_DIR="$CURRENT_DIR/scripts"
 
 source "$SCRIPTS_DIR/variables.sh"
@@ -53,18 +53,27 @@ source_plugins() {
 	"$SCRIPTS_DIR/source_plugins.sh" >/dev/null 2>&1
 }
 
+# tpm-install - downloads TPM plugins and reloads TMUX environment
+# tpm-update - updates a plugin (or all of them) and reloads TMUX environment
+# tpm-clean - remove unused TPM plugins and reloads TMUX environment
+set_tpm_commands() {
+	tmux set-option -ag command-alias "tpm-install=run-shell $COMMANDS_DIR/tpm-install"
+	tmux set-option -ag command-alias "tpm-update=run-shell $COMMANDS_DIR/tpm-update"
+	tmux set-option -ag command-alias "tpm-clean=run-shell $COMMANDS_DIR/tpm-clean"
+}
+
 # prefix + I - downloads TPM plugins and reloads TMUX environment
 # prefix + U - updates a plugin (or all of them) and reloads TMUX environment
 # prefix + alt + u - remove unused TPM plugins and reloads TMUX environment
 set_tpm_key_bindings() {
 	local install_key="$(get_tmux_option "$install_key_option" "$default_install_key")"
-	tmux bind-key "$install_key" run-shell "$BINDINGS_DIR/install_plugins"
+	tmux bind-key "$install_key" tpm-install
 
 	local update_key="$(get_tmux_option "$update_key_option" "$default_update_key")"
-	tmux bind-key "$update_key" run-shell "$BINDINGS_DIR/update_plugins"
+	tmux bind-key "$update_key" tpm-update
 
 	local clean_key="$(get_tmux_option "$clean_key_option" "$default_clean_key")"
-	tmux bind-key "$clean_key" run-shell "$BINDINGS_DIR/clean_plugins"
+	tmux bind-key "$clean_key" tpm-clean
 }
 
 supported_tmux_version_ok() {
@@ -74,6 +83,7 @@ supported_tmux_version_ok() {
 main() {
 	if supported_tmux_version_ok; then
 		set_tpm_path
+		set_tpm_commands
 		set_tpm_key_bindings
 		source_plugins
 	fi

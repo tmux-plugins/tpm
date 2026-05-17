@@ -17,17 +17,52 @@ fi
 # from now on ignore first script argument
 shift
 
+is_branch() {
+  git show-ref --quiet --branches "$1" 2> /dev/null
+  case "$?" in
+    129) git show-ref --quiet --heads "$1" 2> /dev/null ;;
+    *) return "$?" ;;
+  esac
+}
+
 pull_changes() {
 	local plugin="$1"
 	local plugin_path="$(plugin_path_helper "$plugin")"
-	cd "$plugin_path" &&
-		GIT_TERMINAL_PROMPT=0 git pull &&
-		GIT_TERMINAL_PROMPT=0 git submodule update --init --recursive
+	(
+		set -e
+
+		cd "$plugin_path"
+		export GIT_TERMINAL_PROMPT=0
+
+		local branch="${2:-"$(LC_ALL=en_US git remote show origin | sed -n '/HEAD branch/s/.*: //p')"}"
+		# Since `clone()` in *install_plugins.sh* uses `--single-branch`, the
+		# `remote.origin.fetch` is set to `+refs/tags/<BRANCH>:refs/tags/<BRANCH>`.
+		# Thus, no other branch could be used, but only the one that was used
+		# during the `clone()`.
+		#
+		# The following `git config` allows to use other branches that are
+		# available on remote.
+		git config --replace-all remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+		# Fetch recent branches/tags/commits.
+		# `--tags` ensures that tags from the remote are fetched.
+		# `--force` ensures that updated tags do not cause errors during fetch.
+		git fetch --force --tags
+		# `checkout` should be used after `fetch`.
+		git checkout "$branch"
+		# `merge` can only be used when HEAD points to a branch.
+		if is_branch "$branch"
+		then
+			git merge --ff-only
+		fi
+
+		git submodule update --init --recursive
+	)
 }
 
 update() {
 	local plugin="$1" output
-	output=$(pull_changes "$plugin" 2>&1)
+	local branch="$2"
+	output=$(pull_changes "$plugin" "$branch" 2>&1)
 	if (( $? == 0 )); then
 		echo_ok "  \"$plugin\" update success"
 		echo_ok "$(echo "$output" | sed -e 's/^/    | /')"
@@ -44,9 +79,10 @@ update_all() {
 	for plugin in $plugins; do
 		IFS='#' read -ra plugin <<< "$plugin"
 		local plugin_name="$(plugin_name_helper "${plugin[0]}")"
+		local branch="${plugin[1]}"
 		# updating only installed plugins
 		if plugin_already_installed "$plugin_name"; then
-			update "$plugin_name" &
+			update "$plugin_name" "$branch" &
 		fi
 	done
 	wait
@@ -57,8 +93,9 @@ update_plugins() {
 	for plugin in $plugins; do
 		IFS='#' read -ra plugin <<< "$plugin"
 		local plugin_name="$(plugin_name_helper "${plugin[0]}")"
+		local branch="${plugin[1]}"
 		if plugin_already_installed "$plugin_name"; then
-			update "$plugin_name" &
+			update "$plugin_name" "$branch" &
 		else
 			echo_err "$plugin_name not installed!" &
 		fi

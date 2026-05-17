@@ -15,13 +15,14 @@ fi
 clone() {
 	local plugin="$1"
 	local branch="$2"
-	if [ -n "$branch" ]; then
-		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone -b "$branch" --single-branch --recursive "$plugin" >/dev/null 2>&1
-	else
-		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone --single-branch --recursive "$plugin" >/dev/null 2>&1
-	fi
+	local alias="$3"
+  cd "$(tpm_path)" && {
+    local git_cmd=(git clone --single-branch --recursive)
+    [ -n "$branch" ] && git_cmd+=(-b "$branch")
+    git_cmd+=("$plugin" ${alias:+"$alias"})
+
+    GIT_TERMINAL_PROMPT=0 "${git_cmd[@]}" >/dev/null 2>&1
+  }
 }
 
 # tries cloning:
@@ -30,21 +31,25 @@ clone() {
 clone_plugin() {
 	local plugin="$1"
 	local branch="$2"
-	clone "$plugin" "$branch" ||
-		clone "https://git::@github.com/$plugin" "$branch"
+	local alias="$3"
+	clone "$plugin" "$branch" "$alias" ||
+		clone "https://git::@github.com/$plugin" "$branch" "$alias"
 }
 
 # clone plugin and produce output
 install_plugin() {
-	local plugin="$1"
-	local branch="$2"
+	local plugin="${1%%;*}"
+	local alias=$(echo $1$2 | sed -E 's/.*alias[[:space:]]*[:=][[:space:]]*//')
+	local branch="${2%%;*}"
 	local plugin_name="$(plugin_name_helper "$plugin")"
+
+  [[ "$alias" == "$1$2" ]] && alias=""
 
 	if plugin_already_installed "$plugin"; then
 		echo_ok "Already installed \"$plugin_name\""
 	else
 		echo_ok "Installing \"$plugin_name\""
-		clone_plugin "$plugin" "$branch" &&
+		clone_plugin "$plugin" "$branch" "$alias" &&
 			echo_ok "  \"$plugin_name\" download success" ||
 			echo_err "  \"$plugin_name\" download fail"
 	fi

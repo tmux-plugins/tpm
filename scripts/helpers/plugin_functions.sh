@@ -81,9 +81,13 @@ tpm_plugins_list_helper() {
 # 1. "git://github.com/user/plugin_name.git"
 # 2. "user/plugin_name"
 plugin_name_helper() {
-	local plugin="$1"
+	local plugin="${1%%;*}"
+	local alias=$(echo $1 | sed -E 's/.*alias[[:space:]]*[:=][[:space:]]*//')
+
+  [[ "$alias" == "$1" ]] && alias=""
+
 	# get only the part after the last slash, e.g. "plugin_name.git"
-	local plugin_basename="$(basename "$plugin")"
+	local plugin_basename=$([[ -n "$alias" ]] && echo "$alias" || basename "$plugin")
 	# remove ".git" extension (if it exists) to get only "plugin_name"
 	local plugin_name="${plugin_basename%.git}"
 	echo "$plugin_name"

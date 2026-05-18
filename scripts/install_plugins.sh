@@ -15,12 +15,13 @@ fi
 clone() {
 	local plugin="$1"
 	local branch="$2"
+	local plugin_name="$3"
 	if [ -n "$branch" ]; then
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone -b "$branch" --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone -b "$branch" --single-branch --recursive "$plugin" "$plugin_name" >/dev/null 2>&1
 	else
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone --single-branch --recursive "$plugin" "$plugin_name" >/dev/null 2>&1
 	fi
 }
 
@@ -28,10 +29,12 @@ clone() {
 # 1. plugin name directly - works if it's a valid git url
 # 2. expands the plugin name to point to a GitHub repo and tries cloning again
 clone_plugin() {
-	local plugin="$1"
+	# strip the eventual plugin name
+	local plugin="${1#*::}"
 	local branch="$2"
-	clone "$plugin" "$branch" ||
-		clone "https://git::@github.com/$plugin" "$branch"
+	local plugin_name="$3"
+	clone "$plugin" "$branch" "$plugin_name" ||
+		clone "https://git::@github.com/$plugin" "$branch" "$plugin_name"
 }
 
 # clone plugin and produce output
@@ -44,7 +47,7 @@ install_plugin() {
 		echo_ok "Already installed \"$plugin_name\""
 	else
 		echo_ok "Installing \"$plugin_name\""
-		clone_plugin "$plugin" "$branch" &&
+		clone_plugin "$plugin" "$branch" "$plugin_name" &&
 			echo_ok "  \"$plugin_name\" download success" ||
 			echo_err "  \"$plugin_name\" download fail"
 	fi

@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+- bug: delete `$tpm_plugins_variable_name` and using command,
+this show double output with `_tmux_conf_contents` function.
 
 ### v3.1.0, 2023-01-03
 - upgrade to new version of `tmux-test`

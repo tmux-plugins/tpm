@@ -14,19 +14,29 @@ fi
 
 clone() {
 	local plugin="$1"
-	local branch="$2"
-	if [ -n "$branch" ]; then
+	local ref="$2"
+	local clone_options=""
+	
+	# Handle both branches and tags
+	if [[ -n "$ref" ]]; then
+		clone_options="--branch $ref"
+	fi
+	
+	local plugin_name="$(plugin_name_helper "$plugin")"
+	local plugin_dir="$(tpm_path)${plugin_name}/"
+	
+	# Create the user directory if it doesn't exist
+	mkdir -p "$(dirname "$plugin_dir")"
+	
+	if [[ ! $plugin == *"https://"* ]] && [[ ! $plugin == *"git@"* ]]; then
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone -b "$branch" --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone $clone_options --single-branch --recursive "https://git::@github.com/$plugin" "$plugin_name" >/dev/null 2>&1
 	else
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 git clone $clone_options --single-branch --recursive "$plugin" "$plugin_name" >/dev/null 2>&1
 	fi
 }
 
-# tries cloning:
-# 1. plugin name directly - works if it's a valid git url
-# 2. expands the plugin name to point to a GitHub repo and tries cloning again
 clone_plugin() {
 	local plugin="$1"
 	local branch="$2"

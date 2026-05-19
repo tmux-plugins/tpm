@@ -82,10 +82,22 @@ tpm_plugins_list_helper() {
 # 2. "user/plugin_name"
 plugin_name_helper() {
 	local plugin="$1"
-	# get only the part after the last slash, e.g. "plugin_name.git"
-	local plugin_basename="$(basename "$plugin")"
-	# remove ".git" extension (if it exists) to get only "plugin_name"
-	local plugin_name="${plugin_basename%.git}"
+	# Extract user/repo from different URL formats
+	if [[ "$plugin" == "https://"* ]] || [[ "$plugin" == "git@"* ]]; then
+		# Handle full URLs
+		plugin=$(echo "$plugin" | sed -E 's/.*[\/:]([^\/]+\/[^\/]+)\.git?$/\1/')
+	else
+		# Handle user/repo format
+		IFS='/' read -ra plugin_parts <<< "$plugin"
+		if [[ ${#plugin_parts[@]} -eq 2 ]]; then
+			plugin="${plugin_parts[0]}/${plugin_parts[1]}"
+		else
+			# get only the last two parts for longer paths
+			plugin="${plugin_parts[-2]}/${plugin_parts[-1]}"
+		fi
+	fi
+	# remove ".git" extension (if it exists) to get only "user/repo"
+	local plugin_name="${plugin%.git}"
 	echo "$plugin_name"
 }
 
@@ -97,7 +109,8 @@ plugin_path_helper() {
 
 plugin_already_installed() {
 	local plugin="$1"
-	local plugin_path="$(plugin_path_helper "$plugin")"
+	IFS='#' read -ra plugin <<< "$plugin"
+	local plugin_path="$(plugin_path_helper "${plugin[0]}")"
 	[ -d "$plugin_path" ] &&
 		cd "$plugin_path" &&
 		git remote >/dev/null 2>&1

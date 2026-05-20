@@ -100,3 +100,39 @@ set-environment -g PATH "/opt/homebrew/bin:/bin:/usr/bin"
 ```
 
 before any `run-shell`/`run` commands in `~/.tmux.conf`.
+
+<hr />
+
+> '~/.tmux/plugins/tpm/tpm' returned error code 127 (on Linux, either WSL or any distro, with tmux installed via Homebrew or APT) 
+> or maybe Mac (don't have one to test)
+
+This issue may be caused by one of the following:
+1. You forgot to clone the repo so simply
+```.sh
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+2. Incorrect `.gitconfig` configuration. If your `.gitconfig` file contains the following:
+```.gitconfig 
+[core]
+    autocrlf = true
+```
+This setting may cause issues by changing line endings from LF to CRLF, which is not desirable in Linux/Mac Enviroments generally. To fix this,
+change it to `input`:
+Open the `.gitconfig` file by running:
+```.sh
+git config --global -e
+```
+If the above command doesn't work, set your preferred editor first:
+```.sh
+git config --global core.editor "nvim"  # or vim, or your preferred editor
+```
+Then, update the `.gitconfig` file:
+```.gitconfig 
+[core]
+	autocrlf = input #Keep it like that forever, Except if you are on Windows
+```
+Save the configuration, and then run:
+```.sh
+rm -rf ~/.tmux/plugins && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+After completing these steps, exit and restart tmux. Press `<leader>I` (uppercase `I` for Install) to reload and resolve the issue.

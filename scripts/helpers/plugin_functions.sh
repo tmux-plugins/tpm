@@ -1,5 +1,5 @@
 # using @tpm_plugins is now deprecated in favor of using @plugin syntax
-tpm_plugins_variable_name="@tpm_plugins"
+tpm_plugins_variable_name="@plugin"
 
 # manually expanding tilde char or `$HOME` variable.
 _manual_expansion() {
@@ -70,7 +70,7 @@ tpm_path() {
 
 tpm_plugins_list_helper() {
 	# lists plugins from @tpm_plugins option
-	echo "$(tmux start-server\; show-option -gqv "$tpm_plugins_variable_name")"
+	echo "$(tmux start-server;tmux show-option -gqv "$tpm_plugins_variable_name")"
 
 	# read set -g @plugin "tmux-plugins/tmux-example-plugin" entries
 	_tmux_conf_contents "full" |

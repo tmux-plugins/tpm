@@ -33,7 +33,13 @@ _get_user_tmux_conf() {
 }
 
 _tmux_conf_contents() {
-	user_config=$(_get_user_tmux_conf)
+
+        if [ -n "$TMUX_CONF_FILE" ]; then
+            user_config="$TMUX_CONF_FILE"
+        else
+            user_config=$(_get_user_tmux_conf)
+        fi
+
 	cat /etc/tmux.conf "$user_config" 2>/dev/null
 	if [ "$1" == "full" ]; then # also output content from sourced files
 		local file

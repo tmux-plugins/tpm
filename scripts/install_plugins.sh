@@ -17,10 +17,10 @@ clone() {
 	local branch="$2"
 	if [ -n "$branch" ]; then
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone -b "$branch" --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=yes' git clone -b "$branch" --single-branch --recursive "$plugin" >/dev/null 2>&1
 	else
 		cd "$(tpm_path)" &&
-			GIT_TERMINAL_PROMPT=0 git clone --single-branch --recursive "$plugin" >/dev/null 2>&1
+			GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=yes' git clone --single-branch --recursive "$plugin" >/dev/null 2>&1
 	fi
 }
 
@@ -31,7 +31,7 @@ clone_plugin() {
 	local plugin="$1"
 	local branch="$2"
 	clone "$plugin" "$branch" ||
-		clone "https://git::@github.com/$plugin" "$branch"
+		clone "https://github.com/$plugin" "$branch"
 }
 
 # clone plugin and produce output

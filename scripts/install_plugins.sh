@@ -58,14 +58,6 @@ install_plugins() {
 	done
 }
 
-verify_tpm_path_permissions() {
-	local path="$(tpm_path)"
-	# check the write permission flag for all users to ensure
-	# that we have proper access
-	[ -w "$path" ] ||
-		echo_err "$path is not writable!"
-}
-
 main() {
 	ensure_tpm_path_exists
 	verify_tpm_path_permissions

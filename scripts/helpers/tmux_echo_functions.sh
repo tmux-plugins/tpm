@@ -19,7 +19,7 @@ end_message() {
 	if _has_emacs_mode_keys; then
 		local continue_key="ESCAPE"
 	else
-		local continue_key="ENTER"
+		local continue_key="q"
 	fi
 	tmux_echo ""
 	tmux_echo "TMUX environment reloaded."

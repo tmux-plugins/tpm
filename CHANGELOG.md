@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+- bug: when using `vi` copy mode, Enter does not quit screen after tpm
+  installation/update. Fix by making `q` the key for vi mode.
 
 ### v3.1.0, 2023-01-03
 - upgrade to new version of `tmux-test`

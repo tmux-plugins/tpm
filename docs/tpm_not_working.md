@@ -100,3 +100,5 @@ set-environment -g PATH "/opt/homebrew/bin:/bin:/usr/bin"
 ```
 
 before any `run-shell`/`run` commands in `~/.tmux.conf`.
+
+Note that same error can also trigger a `~/.tmux/plugins/tpm/tpm' returned 1` error.

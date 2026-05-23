@@ -7,6 +7,11 @@
 # - shows a list of installed plugins
 # - starts a prompt to enter the name of the plugin that will be updated
 
+if command -v tput >/dev/null; then
+	yellow=$(tput setaf 3)
+	norm=$(tput sgr0)
+fi
+
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPTS_DIR="$CURRENT_DIR/../scripts"
 HELPERS_DIR="$SCRIPTS_DIR/helpers"
@@ -24,7 +29,7 @@ display_plugin_update_list() {
 		# displaying only installed plugins
 		if plugin_already_installed "$plugin"; then
 			local plugin_name="$(plugin_name_helper "$plugin")"
-			tmux_echo "  $plugin_name"
+			tmux_echo "  ${yellow}${plugin_name}${norm}"
 		fi
 	done
 

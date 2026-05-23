@@ -2,6 +2,13 @@
 
 # this script handles core logic of updating plugins
 
+if command -v tput >/dev/null; then
+	red=$(tput setaf 1)
+	green=$(tput setaf 2)
+	yellow=$(tput setaf 3)
+	norm=$(tput sgr0)
+fi
+
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 HELPERS_DIR="$CURRENT_DIR/helpers"
 
@@ -29,10 +36,10 @@ update() {
 	local plugin="$1" output
 	output=$(pull_changes "$plugin" 2>&1)
 	if (( $? == 0 )); then
-		echo_ok "  \"$plugin\" update success"
+		echo_ok "  \"${yellow}${plugin}${norm}\" ${green}update success${norm}"
 		echo_ok "$(echo "$output" | sed -e 's/^/    | /')"
 	else
-		echo_err "  \"$plugin\" update fail"
+		echo_err "  \"${yellow}${plugin}${norm}\" ${red}update fail${norm}"
 		echo_err "$(echo "$output" | sed -e 's/^/    | /')"
 	fi
 }

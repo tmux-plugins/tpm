@@ -4,7 +4,7 @@
 
 Installs and loads `tmux` plugins.
 
-Tested and working on Linux, OSX, and Cygwin.
+Tested and working on Linux, macOS, and Cygwin.
 
 See list of plugins [here](https://github.com/tmux-plugins/list).
 

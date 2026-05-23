@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ensure_tpm_path_exists() {
 	mkdir -p "$(tpm_path)"
 }

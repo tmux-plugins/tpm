@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- bug: add missing shebang in some files.
 
 ### v3.1.0, 2023-01-03
 - upgrade to new version of `tmux-test`

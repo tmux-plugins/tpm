@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 HELPERS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$HELPERS_DIR/plugin_functions.sh"
 

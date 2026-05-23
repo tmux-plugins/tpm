@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 _has_emacs_mode_keys() {
 	$(tmux show -gw mode-keys | grep -q emacs)
 }

@@ -2,6 +2,7 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BINDINGS_DIR="$CURRENT_DIR/bindings"
+BINDINGS_DIR=${BINDINGS_DIR// /\\ } 
 SCRIPTS_DIR="$CURRENT_DIR/scripts"
 
 source "$SCRIPTS_DIR/variables.sh"

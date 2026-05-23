@@ -38,7 +38,7 @@ _tmux_conf_contents() {
 	if [ "$1" == "full" ]; then # also output content from sourced files
 		local file
 		for file in $(_sourced_files); do
-			cat $(_manual_expansion "$file") 2>/dev/null
+			cat "$(eval echo "$(_manual_expansion "$file")")" 2>/dev/null
 		done
 	fi
 }

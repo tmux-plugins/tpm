@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- bug: fix the `clean_plugins` function and delete too many slashes, `TMUX_PLUGIN_MANAGER_PATH` default is set to `/` at the path end.
 
 ### v3.1.0, 2023-01-03
 - upgrade to new version of `tmux-test`

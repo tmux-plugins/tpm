@@ -9,7 +9,7 @@ _manual_expansion() {
 }
 
 _tpm_path() {
-	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)/"
+	local string_path="$(tmux start-server\; show-environment -g TMUX_PLUGIN_MANAGER_PATH | cut -f2 -d=)"
 	_manual_expansion "$string_path"
 }
 
@@ -26,7 +26,6 @@ _get_user_tmux_conf() {
 	# Search for the correct configuration file by priority.
 	if [ -f "$xdg_location" ]; then
 		echo "$xdg_location"
-
 	else
 		echo "$default_location"
 	fi

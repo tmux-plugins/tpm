@@ -16,7 +16,7 @@ clean_plugins() {
 	local plugins plugin plugin_directory
 	plugins="$(tpm_plugins_list_helper)"
 
-	for plugin_directory in "$(tpm_path)"/*; do
+	for plugin_directory in "$(tpm_path)"*; do
 		[ -d "${plugin_directory}" ] || continue
 		plugin="$(plugin_name_helper "${plugin_directory}")"
 		case "${plugins}" in

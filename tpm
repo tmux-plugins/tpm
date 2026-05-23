@@ -57,14 +57,16 @@ source_plugins() {
 # prefix + U - updates a plugin (or all of them) and reloads TMUX environment
 # prefix + alt + u - remove unused TPM plugins and reloads TMUX environment
 set_tpm_key_bindings() {
+	tmux set-environment -g TPM_BINDINGS_DIR "$BINDINGS_DIR"
+
 	local install_key="$(get_tmux_option "$install_key_option" "$default_install_key")"
-	tmux bind-key "$install_key" run-shell "$BINDINGS_DIR/install_plugins"
+	tmux bind-key "$install_key" run-shell "#{q:TPM_BINDINGS_DIR}/install_plugins"
 
 	local update_key="$(get_tmux_option "$update_key_option" "$default_update_key")"
-	tmux bind-key "$update_key" run-shell "$BINDINGS_DIR/update_plugins"
+	tmux bind-key "$update_key" run-shell "#{q:TPM_BINDINGS_DIR}/update_plugins"
 
 	local clean_key="$(get_tmux_option "$clean_key_option" "$default_clean_key")"
-	tmux bind-key "$clean_key" run-shell "$BINDINGS_DIR/clean_plugins"
+	tmux bind-key "$clean_key" run-shell "#{q:TPM_BINDINGS_DIR}/clean_plugins"
 }
 
 supported_tmux_version_ok() {

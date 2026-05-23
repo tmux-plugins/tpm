@@ -46,7 +46,8 @@ _tmux_conf_contents() {
 # return files sourced from tmux config files
 _sourced_files() {
 	_tmux_conf_contents |
-		sed -E -n -e "s/^[[:space:]]*source(-file)?[[:space:]]+(-q+[[:space:]]+)?['\"]?([^'\"]+)['\"]?/\3/p"
+		sed -E -n -e "s/^[[:space:]]*source(-file)?[[:space:]]+(-q+[[:space:]]+)?(['\"]?[^'\"]+['\"]?)/echo \3/p" |
+		/usr/bin/env bash
 }
 
 # Want to be able to abort in certain cases

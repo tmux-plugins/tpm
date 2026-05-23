@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- bug: in `bindings\install_plugins` when using `>/dev/null 2>&1` no output on screen. Fix delete the command.
 
 ### v3.1.0, 2023-01-03
 - upgrade to new version of `tmux-test`

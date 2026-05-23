@@ -250,6 +250,33 @@ test_plugins_installation_from_sourced_file_via_script() {
 	teardown_helper
 }
 
+test_plugins_installation_from_sourced_file_name_in_tmux_format_via_script() {
+	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
+	set -g ADDITIONAL_CONFIG_FILE "$ADDITIONAL_CONFIG_FILE_1"
+	source -F '#{ADDITIONAL_CONFIG_FILE}'
+	set -g @plugin 'tmux-plugins/tmux-example-plugin'
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	mkdir ~/.tmux
+	echo "set -g @plugin 'tmux-plugins/tmux-copycat'" > "$ADDITIONAL_CONFIG_FILE_1"
+
+	script_run_helper "$TPM_DIR/bin/install_plugins" '"tmux-copycat" download success' ||
+		fail_helper "[script][sourced file] plugins installation fails"
+
+	check_dir_exists_helper "$PLUGINS_DIR/tmux-example-plugin/" ||
+		fail_helper "[script][sourced file] plugin download fails (tmux-example-plugin)"
+
+	check_dir_exists_helper "$PLUGINS_DIR/tmux-copycat/" ||
+		fail_helper "[script][sourced file] plugin download fails (tmux-copycat)"
+
+	script_run_helper "$TPM_DIR/bin/install_plugins" 'Already installed "tmux-copycat"' ||
+		fail_helper "[script][sourced file] plugins already installed message fail"
+
+	teardown_helper
+}
+
 test_plugins_installation_from_multiple_sourced_files_via_script() {
 	set_tmux_conf_helper <<- HERE
 	set -g mode-keys vi

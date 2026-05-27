@@ -16,6 +16,16 @@ Related [issue #22](https://github.com/tmux-plugins/tpm/issues/22)
 - ZSH tmux plugin might be causing issues.<br/>
   If you have it installed, try disabling it and see if `tpm` works then.
 
+- Are you using `tmux` as a top level shell?<br/>
+  If `tmux` is the top level shell (not started from another shell) then the
+  environment during initialisation could be very minimal. For example, if your
+  `tmux` binary is under `/usr/local/bin` (as it is in macOS when installed with
+  Homebrew) then `tpm` will not find it since `/usr/local/bin` might not be in
+  the `$PATH`. A workaround would be to extend the `$PATH` manually in
+  `.tmux.conf` before loading `tpm`:
+
+        set-environment -g "PATH" "/usr/local/bin:$PATH"
+
 <hr />
 
 > Help, I'm using custom config file with `tmux -f /path/to/my_tmux.conf`

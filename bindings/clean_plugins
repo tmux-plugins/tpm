@@ -11,7 +11,7 @@ source "$HELPERS_DIR/tmux_echo_functions.sh"
 source "$HELPERS_DIR/tmux_utils.sh"
 
 main() {
-	reload_tmux_environment
+	#reload_tmux_environment #This will cause tmux source-file ~/.tmux.conf twice and almost the same time
 	"$SCRIPTS_DIR/clean_plugins.sh" --tmux-echo >/dev/null 2>&1
 	reload_tmux_environment
 	end_message

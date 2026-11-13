@@ -24,7 +24,10 @@ _get_user_tmux_conf() {
 	default_location="$HOME/.tmux.conf"
 
 	# Search for the correct configuration file by priority.
-	if [ -f "$xdg_location" ]; then
+	if [ -f "$default_location" ]; then
+		echo "$default_location"
+
+	elif [ -f "$xdg_location" ]; then
 		echo "$xdg_location"
 
 	else

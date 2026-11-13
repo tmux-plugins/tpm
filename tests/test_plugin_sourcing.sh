@@ -75,4 +75,57 @@ test_custom_tpm_path() {
 	teardown_helper
 }
 
+test_xdg_tmux_conf_sourcing() {
+	local xdg_dir="${XDG_CONFIG_HOME:-$HOME/.config}/tmux"
+	local xdg_conf="${xdg_dir}/tmux.conf"
+	local xdg_plugin_dir="${xdg_dir}/plugins/tmux_test_plugin"
+	rm -f ~/.tmux.conf
+	mkdir -p "$(dirname "$xdg_conf")" "$xdg_plugin_dir"
+	cat > "$xdg_conf" <<- HERE
+	set -g mode-keys vi
+	set -g @plugin "doesnt_matter/tmux_test_plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	printf 'tmux bind-key R run-shell foo_command\n' > "${xdg_plugin_dir}/test_plugin.tmux"
+	chmod +x "${xdg_plugin_dir}/test_plugin.tmux"
+
+	tmux new-session -d
+	check_tpm_path "${xdg_dir}/plugins/" ||
+		fail_helper "XDG TPM path not correct when only XDG tmux.conf exists"
+	tmux list-keys | grep -Eq "R[[:space:]]+run-shell foo_command" ||
+		fail_helper "XDG tmux.conf plugin sourcing fails"
+
+	rm -rf "$xdg_dir"
+	teardown_helper
+}
+
+test_legacy_tmux_conf_precedence_over_xdg() {
+	local xdg_dir="${XDG_CONFIG_HOME:-$HOME/.config}/tmux"
+	local xdg_conf="${xdg_dir}/tmux.conf"
+	mkdir -p "$xdg_dir"
+	cat > "$xdg_conf" <<- HERE
+	set -g mode-keys emacs
+	HERE
+
+	set_tmux_conf_helper <<- HERE
+	set -g mode-keys vi
+	set -g @plugin "doesnt_matter/tmux_test_plugin"
+	run-shell "$TPM_DIR/tpm"
+	HERE
+
+	create_test_plugin_helper <<- HERE
+	tmux bind-key R run-shell foo_command
+	HERE
+
+	tmux new-session -d
+	check_tpm_path "${PLUGINS_DIR}/" ||
+		fail_helper "Legacy ~/.tmux.conf should set default TPM path even when XDG tmux.conf exists"
+	tmux list-keys | grep -Eq "R[[:space:]]+run-shell foo_command" ||
+		fail_helper "Legacy ~/.tmux.conf should take precedence over XDG tmux.conf"
+
+	rm -rf "$xdg_dir"
+	teardown_helper
+}
+
 run_tests
